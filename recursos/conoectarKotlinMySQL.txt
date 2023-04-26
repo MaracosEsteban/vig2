@@ -1,0 +1,59 @@
+                                           OPCIONES PARA CONCTAR APP ANDROID-KOTLIN A MySQL
+                                           -----------------------------------------------
+
+
+
+How to Connect to MySQL Database from Kotlin using JDBC? =>httpswww.tutorialkart.comkotlinconnect-to-mysql-database-from-kotlin-using-jdbc
+
+
+
+
+
+
+// ESA PARECE LA OPCION POR DEFECTO PARA KOTLIN ANDRIOD
+https://developer.android.com/training/volley?hl=es-419
+https://www.youtube.com/watch?v=fafIrkO19oc
+
+
+
+
+https://www.programadornovato.com/android-studio-y-mysql/
+
+
+https://wiki.yowu.dev/es/Knowledge-base/Kotlin/kotlin-and-mysql-connecting-to-a-relational-database
+
+
+
+
+
+CRUD usando MySQL, Express.js, Retrofit, Kotlin y Android Studio Parte 1
+https://www.youtube.com/watch?v=9c-xHCtNeZk&t=19s
+https://www.youtube.com/watch?v=lUN0Ge6atz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

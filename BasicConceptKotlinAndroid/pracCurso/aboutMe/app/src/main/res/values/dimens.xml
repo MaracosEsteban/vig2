@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tex_size">20sp</dimen>
+    <dimen name="small_pad">50sp</dimen>
+    <dimen name="myMargin">20sp</dimen>
+    <dimen name="layout_margin">15dp</dimen>
+</resources>

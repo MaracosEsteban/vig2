@@ -1,0 +1,9 @@
+create table usuarios(
+	idUsuarios int primary key AUTO_INCREMENT,
+	nombre varchar(50) not null,
+	email varchar(50) not null
+);
+
+
+
+INSERT INTO usuarios (idUsuarios,email,nombre) VALUES (DEFAULT,"jose2000@hotmail","Jose Castro"),(DEFAULT,"Adrian2000@hotmail","Adrian Manasero");

@@ -1,0 +1,165 @@
+https://situm.com/es/ => direccion que dió Manuel
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                           IPS-(Indoor-positioning-Systenm)           (General)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Wikipedia =>        Leer hay una lista de lastecnologías que se pueden utulizar
+https://en.wikipedia.org/wiki/Indoor_positioning_system#:~:text=An%20indoor%20positioning%20system%20        (IPS,parking%20garages%2C%20and%20underground%20locations.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                           https://github.com/Navigine/Indoor-Navigation-Android-Mobile-SDK-2.0  
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-promete!!
+-Android Demo Application!!
+
+
+
+https://github.com/Navigine/Indoor-Navigation-Android-Mobile-SDK-2.0/wiki/Getting-Started
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                           TECNOLOGIA   ArcGIS IPS
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+ - es de pago 
+ -https://pro.arcgis.com/en/pro-app/latest/help/data/indoor-positioning/get-started-with-arcgis-ips.htm#ESRI_SECTION1_4CEE8A967A38407B91BE16F586684E6C
+ -APIS para iOS y Android
+ -Usa beacons Bluetooth
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                          https://estimote.com/
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-de pago
+-https://github.com/Estimote
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                           TECNOLOGIA   UWB
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+ESP32 UWB - Apple AirTag Like Indoor Location Tracking?
+https://www.youtube.com/watch?v=rd5qukiDjys
+
+
+
+https://www.youtube.com/watch?v=oz5tvjeYvnY
+Indoor Location Positioning System using ESP32 UWB (Ultra Wideband) Module
+
+
+https://blogthinkbig.com/ultra-wideband           => esta bien pero tiene dos años
+
+
+
+
+Ultra Wideband Realtime Location System using ESP32 and Unity                => muy bien explicado
+https://www.youtube.com/watch?v=-GNkobAxao0&t=10s
+
+
+
+
+Introduction to Ultra-wideband on Android                                   => Video oficial de android developers        muy bueno, muy util!!!!!!!!!!!!!!!!!!!
+https://www.youtube.com/watch?v=8X_9no-9tCg                                                                               Hay API para desarrollarlo en Android-Kotlin
+https://developer.android.com/guide/topics/connectivity/uwb
+https://developer.android.com/jetpack/androidx/releases/core-uwb?hl=es-419
+
+
+
+
+
+// how to develop a BLE indor position App => muy largo pero vale la pena leerlo
+https://www.matellio.com/blog/how-to-develop-a-ble-indoor-positioning-app/
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                      Best 22 Indoor Positioning Open Source Projects
+                                                     https://www.opensourceagenda.com/tags/indoor-positioning
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+búsqueda en google => opinion sdk indoor position system android
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+rehubicar => Android Bluetooth Low Energy Guide (Connect to a BLE sensor) - Android Studio Tutorial with Kotlin
+             https://www.youtube.com/watch?v=qyG-SDfYNBE
+
+
+Consumo de Servicios REST con Retrofit en Android 
+https://www.youtube.com/watch?v=VkAmaXCZDgY
+
+                                                    
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Articulos sobre las opciones de tecnologia IPS en 2023
+https://www.crowdconnected.com/blog/indoor-positioning-tech-update-2023/
+
+mas articulos
+https://locatify.com/blog/ble-beacons-vs-ultra-wideband-for-indoor-gps-proximity-rtls/
+https://locatify.com/blog/indoor-positioning-systems-ble-beacons/
+
+pryecto en java IPS usando BLE   
+https://github.com/hipstermartin/indoor-positioning-system
+
+
+
+ver"situ"
+
+
+
+Programs para interactuar con anclas/baicons en Kotlin
+https://github.com/topics/bluetooth-beacons?l=kotlin&o=desc&s=updated

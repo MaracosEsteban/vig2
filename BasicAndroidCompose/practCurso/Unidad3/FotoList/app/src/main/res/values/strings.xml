@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">FotoList</string>
+
+
+    <string name="descripcion_foto_1">Descripcion foto uno</string>
+    <string name="descripcion_foto_2">Descripcion foto dos</string>
+    <string name="descripcion_foto_3">Descripcion foto tres</string>
+    <string name="descripcion_foto_4">Descripcion foto cuatro</string>
+    <string name="descripcion_foto_5">Descripcion foto cinco</string>
+    <string name="descripcion_foto_6">Descripcion foto seis</string>
+    <string name="descripcion_foto_7">Descripcion foto siete</string>
+    <string name="descripcion_foto_8">Descripcion foto ocho</string>
+    <string name="descripcion_foto_9">Descripcion foto nueve</string>
+    <string name="descripcion_foto_10">Descripcion foto diez</string>
+    <string name="descripcion_foto_11">Descripcion foto once</string>
+    <string name="descripcion_foto_12">Descripcion foto doce</string>
+</resources>

@@ -1,0 +1,26 @@
+https://www.youtube.com/watch?v=BF7bqxWDnws  // serie de videos para sobre retrofit y consumo de servicios web
+
+
+
+
+
+
+https://www.youtube.com/watch?v=aQP-mUGWh1U // primer video
+https://www.youtube.com/watch?v=L3pM5YuxYp4 // segundo video
+
+
+
+
+
+
+
+Varios
+--------
+
+
+
+https://jsoneditoronline.org/  => transforma el json en diversos formatos
+
+https://www.youtube.com/watch?v=yE2Y2q4iWpU => video que enseña View-Binding que es la forma de enlazar las vistas al codigo
+
+

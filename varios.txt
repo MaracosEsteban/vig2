@@ -1,0 +1,7 @@
+en colorMayWiew como accede a box_three t_text en  R.id.red_button -> box_three_text.setBackgroundResource(R.color.my_red)
+
+
+
+// muy interesante sobre nodes js
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-web-server-in-node-js-with-the-http-module 
