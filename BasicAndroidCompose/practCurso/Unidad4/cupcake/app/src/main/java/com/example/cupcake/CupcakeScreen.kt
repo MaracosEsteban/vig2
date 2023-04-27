@@ -28,24 +28,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
 import com.example.cupcake.ui.OrderViewModel
 
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
  */
-
-
-
-enum class CupcakeScreen() {
-    Start,
-    Flavor,
-    Pickup,
-    Summary
-}
-
-
 @Composable
 fun CupcakeAppBar(
     canNavigateBack: Boolean,
@@ -71,7 +58,6 @@ fun CupcakeAppBar(
 @Composable
 fun CupcakeApp(modifier: Modifier = Modifier, viewModel: OrderViewModel = viewModel()){
     // TODO: Create NavController
-    val navController = rememberNavController()
 
     // TODO: Get current back stack entry
 
@@ -88,9 +74,6 @@ fun CupcakeApp(modifier: Modifier = Modifier, viewModel: OrderViewModel = viewMo
         val uiState by viewModel.uiState.collectAsState()
 
         // TODO: add NavHost
-        NavHost( navController = navController,
-            startDestination = CupcakeScreen.Start.name,
-            modifier = modifier.padding(innerPadding))
     }
 }
 

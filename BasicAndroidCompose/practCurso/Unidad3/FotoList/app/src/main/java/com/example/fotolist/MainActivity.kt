@@ -65,8 +65,6 @@ fun FotoList(fotoTituloList: List<FotoTitulo>, modifier: Modifier = Modifier) {
 
 
 
-
-
 @Composable
 fun fotoCard(fotoTitulo: FotoTitulo, modifier: Modifier = Modifier) {
     Card(modifier = Modifier.padding(8.dp), elevation = 4.dp) {
@@ -87,9 +85,6 @@ fun fotoCard(fotoTitulo: FotoTitulo, modifier: Modifier = Modifier) {
         }
     }
 }
-
-
-
 
 
 @Preview

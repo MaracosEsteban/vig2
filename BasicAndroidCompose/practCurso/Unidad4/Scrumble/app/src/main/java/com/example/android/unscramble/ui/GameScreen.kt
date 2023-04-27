@@ -16,23 +16,12 @@
 package com.example.android.unscramble.ui
 
 import android.app.Activity
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -52,7 +41,7 @@ import com.example.android.unscramble.ui.theme.UnscrambleTheme
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
-    gameViewModel: GameViewModel = viewModel()
+        gameViewModel: GameViewModel = viewModel()
 ) { //Segundo argumento de tipo ViewMoldel con valor predeterminado viewModel
     ////////////////////////////////////
     val gameUiState by gameViewModel.uiState.collectAsState()
@@ -117,9 +106,9 @@ fun GameStatus(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GameLayout(onUserGuessChanged: (String) -> Unit,
-               onKeyboardDone: () -> Unit,
-    currentScrambledWord: String,
+fun GameLayout( onUserGuessChanged: (String) -> Unit={ gameViewModel.updateUserGuess(it)},
+                onKeyboardDone: () -> Unit,
+    currentScrambledWord: String= gameUiState.currentScrambledWord,
     modifier: Modifier = Modifier,
 ) {
     Column(
