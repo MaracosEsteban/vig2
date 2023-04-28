@@ -84,7 +84,7 @@ fun TipTimeScreen() {
 
     Column(
         modifier = Modifier.padding(32.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(60.dp)
     ) {
         Text(
             text = stringResource(R.string.calculate_tip),
