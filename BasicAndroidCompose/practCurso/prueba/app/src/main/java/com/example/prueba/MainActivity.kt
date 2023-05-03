@@ -11,11 +11,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +23,9 @@ import androidx.compose.ui.unit.sp
 import com.example.prueba.data.DataSource
 import com.example.prueba.model.Estudiante
 import com.example.prueba.ui.theme.PruebaTheme
+import com.example.prueba.ui.theme.PruebaViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
@@ -45,15 +45,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
+fun Greeting(
+    modifier: Modifier = Modifier,
+    pruebaViewModel: PruebaViewModel = viewModel()
+) {
+    val pruebaUiState by pruebaViewModel.uiState.collectAsState()
 
-    var nombre by rememberSaveable { mutableStateOf("") }
-    var apellido by rememberSaveable { mutableStateOf("") }
-    var pantActual by rememberSaveable { mutableStateOf(1) }
-    var lastScreen: Int by rememberSaveable { mutableStateOf(1) }  //Guarda la útlima pantalla antes de entrar a set Up
+//    var nombre by rememberSaveable { mutableStateOf("") }
+//    var password by rememberSaveable { mutableStateOf("") }
+//    var pantActual by rememberSaveable { mutableStateOf(1) }
+//    var lastScreen: Int by rememberSaveable { mutableStateOf(1) }  //Guarda la útlima pantalla antes de entrar a set Up
 
 
-    when (pantActual) {
+    when (pruebaUiState.currentScreen) {
 
 
         1 -> {
@@ -75,19 +79,41 @@ fun Greeting(name: String) {
                         )
                         .padding(16.dp)
                 )
-                TextField(
-                    value = nombre,
-                    onValueChange = { nombre = it },
-                    label = { Text("Usuario") })
-                TextField(
-                    value = apellido,
-                    onValueChange = { apellido = it },
-                    label = { Text("Password") })
-                Button(onClick = { pantActual = 2 }) {
+                OutlinedTextField(
+                    singleLine = true,
+                    value = pruebaViewModel.nameEntry,
+                    onValueChange = { pruebaViewModel.actulizarNameEntry(it) },
+                    label = { Text("Nombre Usuario") },
+                    isError = pruebaUiState.userDataWrong,
+                )
+                OutlinedTextField(
+                    singleLine = true,
+                    value = pruebaViewModel.passEntry,
+                    onValueChange = { pruebaViewModel.actulizarPassEntry(it) },
+                    label = {
+                        Text("Ingrese su Password")
+                    },
+                    isError = pruebaUiState.userDataWrong,
+                )
+
+                Button(onClick = {
+                    if(pruebaViewModel.ChecquearDatos()){
+                        pruebaViewModel.CambiarPantalla(2)
+                    }else{ }
+
+
+//                    pruebaViewModel.ChecquearDatos()
+//                    if (pruebaUiState.userDataWrong) {
+//
+//                    } else {
+//                        pruebaViewModel.CambiarPantalla(2)
+//                    }
+
+
+                }) {
                     Text(text = "Login")
-                }
             }
-        }
+        }}
 
         2 -> {
             Column(
@@ -100,7 +126,7 @@ fun Greeting(name: String) {
 
 
                 Scaffold(bottomBar = {
-                //Scaffold(topBar = {
+                    //Scaffold(topBar = {
                     Row(
                         horizontalArrangement = Arrangement.SpaceAround,
                         modifier = Modifier
@@ -108,7 +134,7 @@ fun Greeting(name: String) {
 
                     ) {
                         Button(
-                            onClick = { pantActual = 3 },
+                            onClick = { pruebaViewModel.CambiarPantalla(3) },
                             //modifier = Modifier.padding(8.dp)
                         ) {
                             Text(text = "Setup")
@@ -116,7 +142,11 @@ fun Greeting(name: String) {
                         }
 
                         Button(
-                            onClick = { pantActual = 1 },
+                            onClick = {
+                                pruebaViewModel.BorrrNyP(); pruebaViewModel.CambiarPantalla(
+                                1
+                            )
+                            },
                             // modifier = Modifier.padding(8.dp)
                         ) {
                             Text(text = "Logout")
@@ -138,8 +168,6 @@ fun Greeting(name: String) {
                         }
                     }
                 }
-
-
             }
         }
         3 -> {
@@ -152,7 +180,7 @@ fun Greeting(name: String) {
             ) {
                 Text(text = "SetUp")
                 Button(
-                    onClick = { pantActual = 2 },
+                    onClick = { pruebaViewModel.CambiarPantalla(2) },
                     modifier = Modifier.padding(8.dp)
                 ) {
                     Text(text = "Volver")
@@ -239,6 +267,6 @@ fun TarjetaEstudiante(estudiante: Estudiante, modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     PruebaTheme {
-        Greeting("Android")
+        Greeting(modifier = Modifier)
     }
 }
