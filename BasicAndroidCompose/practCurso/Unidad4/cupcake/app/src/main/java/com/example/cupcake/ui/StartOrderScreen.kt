@@ -15,7 +15,7 @@
  */
 package com.example.cupcake.ui
 
-import androidx.annotation.StringRes
+import  androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -45,9 +45,14 @@ import com.example.cupcake.data.DataSource.quantityOptions
 @Composable
 fun StartOrderScreen(
     quantityOptions: List<Pair<Int, Int>>,
-    // TODO: add onNextButtonClicked
-    modifier: Modifier = Modifier
-){
+    onNextButtonClicked: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+)
+
+
+
+
+{
     Column(
         modifier = modifier.padding(16.dp).fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -65,11 +70,12 @@ fun StartOrderScreen(
         quantityOptions.forEach { item ->
             SelectQuantityButton(
                 labelResourceId = item.first,
-                onClick = { /* TODO: handle next button */ }
+                onClick = { onNextButtonClicked(item.second) }
             )
         }
     }
 }
+
 
 /**
  * Customizable button composable that displays the [labelResourceId]
@@ -89,8 +95,8 @@ fun SelectQuantityButton(
     }
 }
 
-@Preview
-@Composable
-fun StartOrderPreview(){
-    StartOrderScreen(quantityOptions = quantityOptions)
-}
+//@Preview
+//@Composable
+//fun StartOrderPreview(){
+//    StartOrderScreen(quantityOptions = quantityOptions)
+//}
