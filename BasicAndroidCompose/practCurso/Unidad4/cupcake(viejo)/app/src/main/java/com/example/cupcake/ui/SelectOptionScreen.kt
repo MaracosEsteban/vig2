@@ -52,8 +52,8 @@ fun SelectOptionScreen(
     onSelectionChanged: (String) -> Unit = {},
     // TODO: add onCancelButtonClicked
     onCancelButtonClicked: () -> Unit = {},
-    onNextButtonClicked: () -> Unit = {},
     // TODO: add onNextButtonClicked
+    onNextButtonClicked: () -> Unit = {},
     modifier: Modifier = Modifier
 ){
     var selectedValue by rememberSaveable { mutableStateOf("") }
@@ -91,7 +91,7 @@ fun SelectOptionScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ){
-            OutlinedButton(modifier = Modifier.weight(1f), onClick = onCancelButtonClicked) {
+            OutlinedButton(modifier = Modifier.weight(1f), onClick = { onCancelButtonClicked }) {
                 Text(stringResource(R.string.cancel))
             }
             Button(

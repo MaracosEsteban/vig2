@@ -13,30 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.cupcake.ui.components
+package com.example.cupcake.ui.theme
 
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.example.cupcake.R
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Shapes
+import androidx.compose.ui.unit.dp
 
-/**
- * Composable that displays formatted [price] that will be formatted and displayed on screen
- */
-@Composable
-fun FormattedPriceLabel(subtotal: String, modifier: Modifier = Modifier) {
-    Text(
-        text = stringResource(R.string.subtotal_price, subtotal),
-        modifier = modifier
-    )
-}
-
-
-
-
-
-
-
-
-
+val Shapes = Shapes(
+    small = RoundedCornerShape(4.dp),
+    medium = RoundedCornerShape(4.dp),
+    large = RoundedCornerShape(0.dp)
+)

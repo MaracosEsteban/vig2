@@ -13,30 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.cupcake.ui.components
+package com.example.cupcake
 
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.example.cupcake.R
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import com.example.cupcake.ui.theme.CupcakeTheme
 
 /**
- * Composable that displays formatted [price] that will be formatted and displayed on screen
+ * Activity for cupcake order flow.
  */
-@Composable
-fun FormattedPriceLabel(subtotal: String, modifier: Modifier = Modifier) {
-    Text(
-        text = stringResource(R.string.subtotal_price, subtotal),
-        modifier = modifier
-    )
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            CupcakeTheme {
+                CupcakeApp()
+            }
+        }
+    }
 }
-
-
-
-
-
-
-
-
-

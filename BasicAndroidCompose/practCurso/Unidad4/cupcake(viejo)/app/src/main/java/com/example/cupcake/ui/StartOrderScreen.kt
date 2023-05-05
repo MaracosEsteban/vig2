@@ -15,7 +15,7 @@
  */
 package com.example.cupcake.ui
 
-import androidx.annotation.StringRes
+import  androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -45,10 +45,14 @@ import com.example.cupcake.data.DataSource.quantityOptions
 @Composable
 fun StartOrderScreen(
     quantityOptions: List<Pair<Int, Int>>,
-    // TODO: add onNextButtonClicked
-    onNextButtonClicked: (Int) -> Unit,//  parámetro de tipo de función al que se llama cuando se presiona uno de los botones de cantidad en la primera pantalla
-    modifier: Modifier = Modifier
-){
+    onNextButtonClicked: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+)
+
+
+
+
+{
     Column(
         modifier = modifier.padding(16.dp).fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,11 +70,12 @@ fun StartOrderScreen(
         quantityOptions.forEach { item ->
             SelectQuantityButton(
                 labelResourceId = item.first,
-                onClick = {  onNextButtonClicked(item.second) }
+                onClick = { onNextButtonClicked(item.second) }
             )
         }
     }
 }
+
 
 /**
  * Customizable button composable that displays the [labelResourceId]
@@ -89,9 +94,6 @@ fun SelectQuantityButton(
         Text(stringResource(labelResourceId))
     }
 }
-
-
-
 
 //@Preview
 //@Composable

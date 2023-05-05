@@ -31,12 +31,3 @@ fun FormattedPriceLabel(subtotal: String, modifier: Modifier = Modifier) {
         modifier = modifier
     )
 }
-
-
-
-
-
-
-
-
-

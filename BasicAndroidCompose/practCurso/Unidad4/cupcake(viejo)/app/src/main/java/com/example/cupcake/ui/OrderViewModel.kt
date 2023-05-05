@@ -116,5 +116,3 @@ class OrderViewModel : ViewModel() {
         return dateOptions
     }
 }
-
-
