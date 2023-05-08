@@ -22,3 +22,7 @@ fun comp(valor:Int,funcion:(Int)->Int):Int{
 
 
 
+
+
+
+

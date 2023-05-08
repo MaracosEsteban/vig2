@@ -25,11 +25,7 @@ fun main(args: Array<String>) {
         return suma
 
     }
-
-
-
 }
-
 
 
 
@@ -45,9 +41,6 @@ fun Valores.Promedio():Int{
 /**
  * According to the theory of extension functions, this is not possible since you can only add the extension functions but not properties, but there is a workaround which can solve the purpose.
  *    https://agrawalsuneet.github.io/blogs/kotlin-extension-property/
- *
- *
- *
  */
 
 
