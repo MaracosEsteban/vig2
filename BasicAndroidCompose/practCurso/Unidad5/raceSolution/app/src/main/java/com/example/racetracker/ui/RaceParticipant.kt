@@ -16,16 +16,13 @@
 
 package com.example.racetracker.ui
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.delay
-import kotlin.coroutines.cancellation.CancellationException
 
 /**
- * This class represents a state holder for race participant.  //    Se genera una instancia por cada participante
- * instancia por cada participante
+ * This class represents a state holder for race participant.
  */
 class RaceParticipant(
     val name: String,
@@ -35,10 +32,9 @@ class RaceParticipant(
     private val initialProgress: Int = 0
 ) {
     init {
-        require(maxProgress > 0) { "maxProgress=$maxProgress; must be > 0" }       // require lanza "argument exception"  si no se cumple la condición
+        require(maxProgress > 0) { "maxProgress=$maxProgress; must be > 0" }
         require(progressIncrement > 0) { "progressIncrement=$progressIncrement; must be > 0" }
     }
-
 
     /**
      * Indicates the race participant's current progress
@@ -46,19 +42,16 @@ class RaceParticipant(
     var currentProgress by mutableStateOf(initialProgress)
         private set
 
+    /**
+     * Updates the value of [currentProgress] by value [progressIncrement] until it reaches
+     * [maxProgress]. There is a delay of [progressDelayMillis] between each update.
+     */
     suspend fun run() {
-        try {
-            while (currentProgress < maxProgress) {
-                delay(progressDelayMillis)
-                currentProgress += progressIncrement
-            }
-        } catch (e: CancellationException) {
-            Log.e("RaceParticipant", "$name: ${e.message}")
-            throw e // Always re-throw CancellationException.
+        while (currentProgress < maxProgress) {
+            delay(progressDelayMillis)
+            currentProgress += progressIncrement
         }
     }
-
-
 
     /**
      * Regardless of the value of [initialProgress] the reset function will reset the
@@ -68,8 +61,6 @@ class RaceParticipant(
         currentProgress = 0
     }
 }
-
-
 
 /**
  * The Linear progress indicator expects progress value in the range of 0-1. This property

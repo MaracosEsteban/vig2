@@ -69,20 +69,14 @@ fun RaceTrackerApp() {
     var raceInProgress by remember { mutableStateOf(false) }
 
     if (raceInProgress) {
-        LaunchedEffect(
-            playerOne,
-            playerTwo
-        ) {                               //Funcion componible para llamar funciones de suspensión de forma segura
+        LaunchedEffect(playerOne, playerTwo) {
             coroutineScope {
                 launch { playerOne.run() }
                 launch { playerTwo.run() }
             }
-            raceInProgress =
-                false  // hasta que no se terminan las dos carreras no se ejecuta esta sentencia
-
+            raceInProgress = false
         }
     }
-
     RaceTrackerScreen(
         playerOne = playerOne,
         playerTwo = playerTwo,
@@ -90,7 +84,6 @@ fun RaceTrackerApp() {
         onRunStateChange = { raceInProgress = it }
     )
 }
-
 
 @Composable
 private fun RaceTrackerScreen(
@@ -154,7 +147,6 @@ private fun RaceTrackerScreen(
     }
 }
 
-
 @Composable
 private fun StatusIndicator(
     participantName: String,
@@ -197,7 +189,6 @@ private fun StatusIndicator(
         }
     }
 }
-
 
 @Composable
 private fun RaceControls(
