@@ -7,8 +7,6 @@
 fun main(args: Array<String>) {
 
     //var marsUiState:MarsUiState=MarsUiState().Success("la foto")
-
-
     var marsUiState: UiState = UiState.Loading()
 
 

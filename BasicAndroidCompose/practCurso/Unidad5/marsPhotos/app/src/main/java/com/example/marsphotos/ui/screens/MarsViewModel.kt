@@ -35,6 +35,7 @@ sealed interface MarsUiState {
 }
 
 
+
 class MarsViewModel : ViewModel() {
     /** The mutable State that stores the status of the most recent request */
     var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
