@@ -14,6 +14,20 @@
   ~ limitations under the License.
   -->
 <resources>
+
+    <!--
+    StartOrder(title = "lunch Tray"),
+
+    ChooseEntree(title = "Choose Entree"),
+
+    ChooseSideDish(title = "Choose Side Dish"),
+    ChooseAcompaniment(title = "Choose Accconpaniment"),
+    OrderCheckout(title ="Order Checkout"),
+
+  -->
+
+
+
     <string name="app_name">Lunch Tray</string>
     <string name="back_button">Back</string>
     <string name="cancel">Cancel</string>
@@ -21,6 +35,7 @@
     <string name="choose_entree">Choose Entree</string>
     <string name="choose_side_dish">Choose Side Dish</string>
     <string name="next">Next</string>
+
     <string name="order_checkout">Order Checkout</string>
     <string name="start_order">Start Order</string>
     <string name="order_summary">Order Summary</string>

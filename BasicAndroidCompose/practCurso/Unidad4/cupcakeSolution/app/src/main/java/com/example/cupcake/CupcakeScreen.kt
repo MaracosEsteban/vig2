@@ -63,6 +63,8 @@ enum class CupcakeScreen(@StringRes val title: Int) {
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
  */
+
+
 @Composable
 fun CupcakeAppBar(
     currentScreen: CupcakeScreen,
