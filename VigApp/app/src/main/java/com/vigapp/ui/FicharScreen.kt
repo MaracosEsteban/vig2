@@ -15,13 +15,13 @@ import com.vigapp.R
 
 @Composable
 fun FicharScreen(
-    onNextButtonClicked: () -> Unit,
+    onFichartButtonClicked: () -> Unit,
     onCancelButtonClicked: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier.fillMaxSize()
 ) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.SpaceAround
+    Column( modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
 
         Text(
@@ -41,7 +41,7 @@ fun FicharScreen(
             }
             Button(
                 modifier = Modifier.weight(1f),
-                onClick = onNextButtonClicked
+                onClick = onFichartButtonClicked
             ) {
                 Text(stringResource(R.string.fichar).uppercase())
             }
@@ -56,7 +56,7 @@ fun FicharScreen(
 @Composable
 fun FicharScreenPreview() {
     FicharScreen(
-        onNextButtonClicked = {},
+        onFichartButtonClicked = {},
         onCancelButtonClicked = {},
         modifier = Modifier
             .padding(dimensionResource(R.dimen.padding_medium))

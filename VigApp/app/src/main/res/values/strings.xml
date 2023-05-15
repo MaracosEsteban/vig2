@@ -5,6 +5,7 @@
 
 <resources>
 
+
    <string name="app_name">VigApp</string>
 
 <!--    Login Screen-->
@@ -19,26 +20,47 @@
     <string name="cancel">Cancelar</string>
     <string name="selec_center">Seleccionar centro</string>
 
-    <!--    Fichar Screen-->
+ <!--    Fichar Screen-->
  <string name="observaciones">Observaciones</string>
  <string name="cancel_fichar">Cancelar</string>
  <string name="fichar">Fichar</string>
+
+<!--     Ajustes Screen   -->
+ <string name="volver">Volver</string>
+
+
+<!--     Registros Screen -->
+ <string name="hecho">Hecho</string>
+
+
+
+
 
 
 
 
 <!--  Screen titles Enum class -->
-
  <string name="login_inst">Login</string>
  <string name="menu_inst">Menu</string>
  <string name="selec_centro_inst">Seleccionar Centro</string>
  <string name="fichar_inst">Fichar</string>
+ <string name="ajustes">Ajustes</string>
+ <string name="registros">Registros</string>
 
 
-<!-- -->
 
 
+
+
+
+
+
+<!--   App Bar -->
  <string name="volver_atras">Volver</string>
+
+
+
+
 
 
 
