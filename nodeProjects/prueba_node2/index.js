@@ -43,7 +43,7 @@ conexion.connect(error => {
 
 //console.log(ip.address()) // Finding the IP address is Node.js / https://stackoverflow.com/questions/67778717/how-to-get-the-ip-address-in-node-js-express
 const cmd = `curl -s http://checkip.amazonaws.com || printf "0.0.0.0"`;
-const pubIp = execSync(cmd).toString().trim();
+const pubIp = execSync(cmd).toString().trim();  
 console.log(`My public IP address is: ${pubIp}`);
 
 
