@@ -1,14 +1,15 @@
+-- ------------------------------------------------------- CREACION DE TABLAS---------------------------------------------------------------------
+
 create table usuarios(
 	id int primary key AUTO_INCREMENT,
-	nombre usuario varchar(50) not null,
-	clave varchar(20) not null
+	nombre varchar(50) not null unique,  
+	clave varchar(100) not null,
+	email varchar(100) not null
 );
 
 
 
-
-
-CREATE TABLE `centro` (
+CREATE TABLE `centros` (
 	`ID` INT(10) NOT NULL AUTO_INCREMENT,
 	`NOMBRE` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
 	`EMAIL` VARCHAR(200) NULL DEFAULT '0' COLLATE 'utf8_unicode_ci',
@@ -48,7 +49,11 @@ AUTO_INCREMENT=628
 
 
 
+-- ------------------------------------------------------- CARGA DE DATOS ------------------------------------------------------------------------
 
 
+INSERT INTO usuarios (id,nombre,clave,email) VALUES 
+(DEFAULT,"Melchor","Melchor","Melchor2000@hotmail.com"),
+(DEFAULT,"Gaspar","Gaspar","Gaspar2000@hotmail.com"),
+(DEFAULT,"Baltasar","Baltasar","Baltasar2000@hotmail.com");
 
-INSERT INTO usuarios (idUsuarios,email,nombre) VALUES (DEFAULT,"jose2000@hotmail","Jose Castro"),(DEFAULT,"Adrian2000@hotmail","Adrian Manasero");
