@@ -68,9 +68,8 @@ app.get('/usuarios', (req, res) => {
 })
 
 
-
 app.get('/usuario/:user', (req, res) => {
-    const query = 'SELECT * FROM usuarios WHERE nombre = '+ user +  ' ;'
+    const query = 'SELECT * FROM usuarios WHERE nombre = '+ user + ' ;'
     conexion.query(query, (error, resultado) => {
         if (error) return console.error(error.message)
         const obj = {}
