@@ -1,0 +1,142 @@
+INSERT INTO aficion VALUES (1, 'lectura');
+INSERT INTO aficion VALUES (2, 'baile');
+INSERT INTO aficion VALUES (3, 'running');
+INSERT INTO aficion VALUES (4, 'natacion');
+INSERT INTO aficion VALUES (5, 'pintura');
+INSERT INTO aficion VALUES (6, 'musica');
+INSERT INTO aficion VALUES (7, 'equitacion');
+
+INSERT INTO cita VALUES (1, '2017-09-03', 'Madrid'),
+							VALUES (2, '2017-10-10', 'Madrid')
+							VALUES (3, '2017-10-15', 'Valladolid')
+							VALUES (4, '2017-08-02', 'Madrid')
+							VALUES (5, '2017-09-24', 'Toledo')
+							VALUES (6, '2017-07-13', 'Avila')
+							VALUES (7, '2017-10-08', 'Segovia')
+							VALUES (8, '2017-04-06', 'Valladolid')
+							VALUES (9, '2017-05-26', 'Madrid');
+
+INSERT INTO encuesta VALUES (2, 'emgonzalez', 1);
+INSERT INTO encuesta VALUES (3, 'mrreyes', 1);
+INSERT INTO encuesta VALUES (5, 'emgonzalez', 2);
+INSERT INTO encuesta VALUES (4, 'sbortega', 2);
+INSERT INTO encuesta VALUES (3, 'djrodrigo', 3);
+INSERT INTO encuesta VALUES (3, 'rmsalazar', 3);
+INSERT INTO encuesta VALUES (5, 'jgbermudez', 4);
+INSERT INTO encuesta VALUES (5, 'stmedina', 4);
+INSERT INTO encuesta VALUES (2, 'esfigueroa', 5);
+INSERT INTO encuesta VALUES (4, 'apruiz', 6);
+INSERT INTO encuesta VALUES (5, 'vgmartinez', 6);
+INSERT INTO encuesta VALUES (5, 'apruiz', 7);
+INSERT INTO encuesta VALUES (5, 'vgmartinez', 7);
+INSERT INTO encuesta VALUES (4, 'vprodriguez', 8);
+INSERT INTO encuesta VALUES (4, 'cgramos', 8);
+INSERT INTO encuesta VALUES (4, 'vprodriguez', 9);
+INSERT INTO encuesta VALUES (5, 'cgramos', 9);
+
+
+INSERT INTO formacion VALUES ('emgonzalez', 'Magisterio');
+								('mrreyes', 'Graduado en Medicina'),
+								('djrodrigo', 'Graduado en Historia'),
+								('cgramos', 'Graduado en Filosofia'),
+								('jgbermudez', 'Ingeniero Industrial'),
+								('sbortega', 'Matemáticas'),
+								('rshernandez', 'Graduado en Enfermería'),
+								('esfigueroa', 'FP Sup Administrativo'),
+								('rvquiroga', 'Graduado en Medicina'),
+								('apruiz', 'Bachillerato'),
+								('stmedina', 'Ingeniero Informática'),
+								('avmiranda', 'FP Sup Administrativo'),
+								('sggarcia', 'Bachillerato'),
+								('lpmedina', 'Graduado en Geografia'),
+								('vgmartinez', 'FP Sup Estetica'),
+								('rmsalazar', 'FP Sup Estetica'),
+								('vprodriguez', 'FP Sup Fotografia');
+
+
+INSERT INTO gusta VALUES ('emgonzalez', 'mrreyes');
+INSERT INTO gusta VALUES ('emgonzalez', 'cgramos');
+INSERT INTO gusta VALUES ('emgonzalez', 'sbortega');
+INSERT INTO gusta VALUES ('djrodrigo', 'avmiranda');
+INSERT INTO gusta VALUES ('djrodrigo', 'lpmedina');
+INSERT INTO gusta VALUES ('djrodrigo', 'vgmartinez');
+INSERT INTO gusta VALUES ('djrodrigo', 'rmsalazar');
+INSERT INTO gusta VALUES ('jgbermudez', 'esfigueroa');
+INSERT INTO gusta VALUES ('jgbermudez', 'stmedina');
+INSERT INTO gusta VALUES ('rvquiroga', 'sbortega');
+INSERT INTO gusta VALUES ('rvquiroga', 'rshernandez');
+INSERT INTO gusta VALUES ('rvquiroga', 'esfigueroa');
+INSERT INTO gusta VALUES ('apruiz', 'lpmedina');
+INSERT INTO gusta VALUES ('apruiz', 'vgmartinez');
+INSERT INTO gusta VALUES ('sggarcia', 'cgramos');
+INSERT INTO gusta VALUES ('vprodriguez', 'mrreyes');
+INSERT INTO gusta VALUES ('vprodriguez', 'cgramos');
+INSERT INTO gusta VALUES ('vprodriguez', 'vgmartinez');
+INSERT INTO gusta VALUES ('vprodriguez', 'rmsalazar');
+
+INSERT INTO perfil VALUES ('emgonzalez', 'emgonzalez@webcitas.com', 'img/M/emgonzalez.jpg', '1990-04-20', 'M', 'Profesor', 'Cristianismo');
+INSERT INTO perfil VALUES ('mrreyes', 'mrreyes@webcitas.com', 'img/F/mrreyes.jpg', '1987-11-03', 'F', 'Medico', 'Cristianismo');
+INSERT INTO perfil VALUES ('djrodrigo', 'djrodrigo@webcitas.com', 'img/M/djrodrigo.jpg', '1992-02-06', 'M', 'Camarero', 'Ateo');
+INSERT INTO perfil VALUES ('cgramos', 'cgramos@webcitas.com', 'img/F/cgramos.jpg', '1989-04-05', 'F', NULL, 'Ateo');
+INSERT INTO perfil VALUES ('jgbermudez', 'jgbermudez@webcitas.com', 'img/M/jgbermudez.jpg', '1990-08-24', 'M', 'Ingeniero', 'Ateo');
+INSERT INTO perfil VALUES ('sbortega', 'sbortega@webcitas.com', 'img/F/sbortega.jpg', '1990-05-15', 'F', 'Profesor', 'Cristianismo');
+INSERT INTO perfil VALUES ('rshernandez', 'rshernandez@webcitas.com', 'img/F/rshernandez.jpg', '1988-06-02', 'F', 'Enfermera', 'Cristianismo');
+INSERT INTO perfil VALUES ('esfigueroa', 'esfigueroa@webcitas.com', 'img/F/esfigueroa.jpg', '1990-11-17', 'F', 'Administrativo', 'Islam');
+INSERT INTO perfil VALUES ('rvquiroga', 'rvquiroga@webcitas.com', 'img/M/rvquiroga.jpg', '1988-12-28', 'M', 'Medico', 'Islam');
+INSERT INTO perfil VALUES ('apruiz', 'apruiz@webcitas.com', 'img/M/apruiz.jpg', '1987-05-29', 'M', 'Policia', 'Islam');
+INSERT INTO perfil VALUES ('stmedina', 'stmedina@webcitas.com', 'img/F/stmedina.jpg', '1987-01-10', 'F', 'Policia', 'Cristianismo');
+INSERT INTO perfil VALUES ('avmiranda', 'avmiranda@webcitas.com', 'img/F/avmiranda.jpg', '1990-06-14', 'F', 'Administrativo', 'Cristianismo');
+INSERT INTO perfil VALUES ('sggarcia', 'sggarcia@webcitas.com', 'img/M/sggarcia.jpg', '1991-06-02', 'M', NULL, 'Ateo');
+INSERT INTO perfil VALUES ('lpmedina', 'lpmedina@webcitas.com', 'img/F/lpmedina.jpg', '1986-07-13', 'F', NULL, 'Ateo');
+INSERT INTO perfil VALUES ('vgmartinez', 'vgmartinez@webcitas.com', 'img/F/vgmartinez.jpg', '1986-02-24', 'F', 'Peluquera', 'Ateo');
+INSERT INTO perfil VALUES ('rmsalazar', 'rmsalazar@webcitas.com', 'img/F/rmsalazar.jpg', '1984-09-25', 'F', 'Peluquera', 'Cristianismo');
+INSERT INTO perfil VALUES ('vprodriguez', 'vprodriguez@webcitas.com', 'img/M/vprodriguez.jpg', '1993-11-06', 'M', 'Fotografo', 'Ateo');
+
+INSERT practica VALUES ('emgonzalez', 1, 'todos los meses'),
+							('emgonzalez', 2, 'todas las semanas'),
+							('emgonzalez', 3, 'a diario'),
+							('mrreyes', 3, 'a diario')
+							('djrodrigo', 2, 'todas las semanas'),
+							('djrodrigo', 4, 'todos los meses'),
+							('cgramos', 4, 'a diario'),
+							('jgbermudez', 2, 'a diario'),
+							('jgbermudez', 4, 'a diario'),
+							('jgbermudez', 1, 'a diario'),
+							('sbortega', 3, 'a diario'),
+							('rshernandez', 1, 'todas las semanas'),
+							('esfigueroa', 1, 'a diario'),
+							('esfigueroa', 4, 'a diario'),
+							('rvquiroga', 5, 'todos los meses'),
+							('rvquiroga', 6, 'todas las semanas'),
+							('rvquiroga', 2, 'todas las semanas'),
+							('apruiz', 7, 'todos los meses'),
+							('stmedina', 7, 'todas las semanas'),
+							('avmiranda', 7, 'todas las semans'),
+							('sggarcia', 7, 'a diario'),
+							('sggarcia', 2, 'todos los meses'),
+							('lpmedina', 3, 'a diario'),
+							('lpmedina', 1, 'todas las semanas'),
+							('vgmartinez', 5, 'todas las semanas'),
+							('rmsalazar', 6, 'todos los meses'),
+							('rmsalazar', 2, 'todas las semanas'),
+							('rmsalazar', 7, 'todas las semanas'),
+							('vprodriguez', 3, 'todas las semanas');
+
+INSERT INTO usuario VALUES ('78563401C', 'emgonzalez', 'ggPtcs7I', 675889203, 'Eduardo Martin Gonzalez'),
+									('54389210D', 'mrreyes', 'M27GYCVU', 679304123, 'Maria Rodriguez Reyes'),
+									('56703214D', 'djrodrigo', 'BD6XJbuf', 630928379, 'David Jimenez Rodrigo'),
+									('78932434F', 'cgramos' 'myuDRHBx', 601829464, 'Claudia Garcia Ramos'),
+									('90067312F', 'jgbermudez', '7ZLte16L', 650220132, 'Jose Gutierrez Bermudez'),
+									('56323453G', 'sbortega', '4YCmJKFZ', 680098033, 'Sandra Blanco Ortega'),
+									('67863211G','rshernandez', 'hmkghHl7', 665783375, 'Rocio Suarez Hernandez'),
+									('67895435H', 'esfigueroa', 'OrRAdwQx', 652939003, 'Elisa Sanchez Figueroa'),
+									('43214352H', 'rvquiroga', 'L9HKbr08', 610328956, 'Roberto Vega Quiroga'),
+									('65473823J', 'apruiz', '5knUQaSh', 600892163, 'Alberto Parra Ruiz'),
+									('56743284K', 'stmedina', 'j6MEus4h', 665110890, 'Sonia Torres Medina'),
+									('65473877K', 'avmiranda', 'a7KyiUFF', 613252307, 'Adriana Vazquez Miranda'),
+									('22314780L', 'sggarcia', 'yrE7b679', 608700931, 'Saul Gomez Garcia'),
+									('23145236L', 'lpmedina', 'GUkuV5rD', 670897834, 'Lucia Perez Medina'),
+									('55400892G', 'vgmartinez', 'T6obZiQa', 689932045, 'Veronica Gonzalo Martinez'),
+									('54430287J', 'rmsalazar', 'paVuW9lC', 673940331, 'Ruth Morales Salazar'),
+									('45362734P', 'vprodriguez', 'eoJTry5f', 659434491, 'Victor Perez Rodriguez');
+

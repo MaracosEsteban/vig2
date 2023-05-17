@@ -1,0 +1,44 @@
+[
+	{
+		"codigo": 100,
+		"descricion": "MotoGP 21",
+		"precio": 69.95,
+		"stock": 5,
+		"plataformas": [
+			"PS5",
+			"PS4"
+		],
+		"desarrollador": {
+			"nombre": "Milestone",
+			"Sede": "Italia"
+		}
+	},
+
+	{
+		"codigo": 200,
+		"descricion": "Jugment",
+		"precio": 39.95,
+		"stock": 2,
+		"plataformas": "PS5"
+
+	},
+
+
+	{
+		"codigo": 300,
+		"descricion": "Hitman 3",
+		"precio": 69.95,
+		"stock": 3,
+		"plataformas": [
+			"PC",
+			"PS4",
+			"PS5"
+		],
+		"desarrollador": {
+			"nombre": "IO Interactive",
+			"Sede": "Dinamarca"
+		}
+	}
+
+]
+

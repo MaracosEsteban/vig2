@@ -1,0 +1,33 @@
+ 
+// para conectarme a la base de datos
+//CONNECT + usuario @ servidor : 3306
+
+
+
+\connect root@localhost:3306
+
+CREATE DATABASE parte1;
+
+
+USE PARTE1; // selecciono la base de dato con la que voy a trabajar
+
+
+CREATE TABLE acon_historico(id INTEGER,fecha DATE,descripcion VARCHAR(50));    // creo la tabla dentro de parte1
+
+CREATE TABLE cliente(dni INTEGER,nombre VARCHAR(30),apellido VARCHAR(30));    // creo otro tabla dentro de parte1
+
+CREATE TABLE alumno(dni INTEGER,NOMBRE VARCHAR(30),telefono VARCHAR(30));      //creada
+
+CREATE TABLE articulo(id INTEGER,nombre VARCHAR(50),precio DECIMAL(8,2) DEFAULT 20.95);     //creada
+
+CREATE TABLE libro(isbn char(13),titulo varchar(50),genero VARCHAR(20) DEFAULT 'narrativa', anyo_publicacion INTEGER DEFAULT 2020,num_paginas INTEGER); // creada
+
+
+
+
+
+
+
+
+
+                                    BORRAR LA BASES DE DATOS QUE CREE ESTA MAÑANA COMO PRUEBA

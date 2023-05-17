@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS jugadores;
+DROP TABLE IF EXISTS niveles;
+
+CREATE TABLE niveles (
+	id SERIAL PRIMARY KEY,
+	descripcion VARCHAR(100)
+);
+
+CREATE TABLE jugadores (
+	id SERIAL PRIMARY KEY,
+	nombre VARCHAR(50),
+	nacionalidad VARCHAR(3),
+	elo NUMERIC,
+	nivel INTEGER REFERENCES niveles (id)
+);
+
+INSERT INTO jugadores VALUES
+	(DEFAULT, 'Carlsen, Magnus', 'NOR', 2863),
+	(DEFAULT, 'Caruana, Fabiano', 'USA', 2835),
+	(DEFAULT, 'Ding, Liren', 'CHN', 2791),
+	(DEFAULT, 'Nepomniachtchi, Ian', 'RUS', 2784),
+	(DEFAULT, 'Vachier-Lagrave, Maxime', 'FRA', 2778),
+	(DEFAULT, 'Grischuk, Alexander', 'RUS', 2777),
+	(DEFAULT, 'Vallejo Pons, Francisco', 'ESP', 2710),
+	(DEFAULT, 'Swiercz, Dariusz', 'USA', 2649),
+	(DEFAULT, 'Abdumalik, Zhansaya', 'KAZ', 2478);
+
+INSERT INTO niveles VALUES
+	(1, 'Candidato a Maestro'), 
+	(2, 'Maestro'), 
+	(3, 'Maestro Internacional'), 
+	(4, 'Gran Maestro'), 
+	(5, 'Super Gran Maestro'), 
+	(6, 'Candidato a Campeón del Mundo'), 
+	(7, 'Campeón del mundo');

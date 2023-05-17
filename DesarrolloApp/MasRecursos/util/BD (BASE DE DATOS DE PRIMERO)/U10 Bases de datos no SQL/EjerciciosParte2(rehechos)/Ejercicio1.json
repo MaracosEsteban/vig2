@@ -1,0 +1,96 @@
+[
+  {
+    "codigo": 100,
+    "descripcion": "MotoGp21",
+    "precio": 69.95,
+    "stock": 5,
+    "plataformas": [ "Ps5", "Ps4" ],
+    "desarrollador": {
+      "nombre": "Milestone",
+      "sede": "Italia"
+    }
+  },
+  {
+    "codigo": 200,
+    "descripcion": "Judgment",
+    "precio": 39.955,
+    "stock": 2,
+    "plataformas": "Ps5"
+  },
+  {
+    "codigo": 300,
+    "descripcion": "HitmanIII",
+    "precio": 69.95,
+    "stock": 3,
+    "plataformas": [ "PC", "Ps4", "Ps5" ],
+    "desarrollador": {
+      "nombre": "IOInteractive",
+      "sede": "Dinamarca"
+    }
+  }
+]
+
+
+/*1) insercion (funcionó)
+
+db.videojuegos.insertMany( [
+  {
+    "codigo": 100,
+    "descripcion": "MotoGp21",
+    "precio": 69.95,
+    "stock": 5,
+    "plataformas": [ "Ps5", "Ps4" ],
+    "desarrollador": {
+      "nombre": "Milestone",
+      "sede": "Italia"
+    }
+  },
+  {
+    "codigo": 200,
+    "descripcion": "Judgment",
+    "precio": 39.955,
+    "stock": 2,
+    "plataformas": "Ps5"
+  },
+  {
+    "codigo": 300,
+    "descripcion": "HitmanIII",
+    "precio": 69.95,
+    "stock": 3,
+    "plataformas": [ "PC", "Ps4", "Ps5" ],
+    "desarrollador": {
+      "nombre": "IOInteractive",
+      "sede": "Dinamarca"
+    }
+  }
+]) */
+
+
+
+/*db.videojuegos.updateMany({"codigo":100},{$set:{"precio":59.95}})    */
+
+
+
+
+/*c. Modifica el artículo con código 200 para añadirle los datos del desarrollador Sega con sede en Japón.*/
+
+
+
+/*   db.videojuegos.updateMany({"codigo":200},{$set:{"desarellador":{
+      "nombre": "Sega",
+      "sede": "Japan"
+    }}})    */
+
+
+/* d. Elimina el artículo con código 300.
+  
+ 
+  db.videojuegos.deleteMany({"codigo":300})
+
+
+
+*/
+
+
+
+

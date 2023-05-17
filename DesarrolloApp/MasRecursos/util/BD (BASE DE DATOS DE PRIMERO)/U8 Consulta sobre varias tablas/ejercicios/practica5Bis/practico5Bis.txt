@@ -1,0 +1,19 @@
+-- CONSULTA 1
+
+-- CONSULTA 2
+select t.codigo
+from ticket t join linea_ticket l on t.codigo=l.ticket where t.cliente is not null
+group by t.codigo having sum(l.cant*l.precio)>50;
+
+-- CONSULTA 3
+
+
+-- CONSULTA 4
+select nombre
+from usuario u left join gusta g on u.nom_usuario = g.nom_usuario_1  where g.nom_usuario_1 is null;
+
+-- CONSULTA 5
+select a.nombre as NombreAlumno,max(nota)-min(nota) as DiferenciaMaxYMin
+from matricula m join alumno a on m.alumno=a.dni
+group by m.alumno;
+

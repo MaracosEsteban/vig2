@@ -1,0 +1,89 @@
+
+CREATE DATABASE parte2;
+
+
+
+
+
+CREATE TABLE asignatura(
+			codigo INTEGER PRIMARY KEY,
+			nombre VARCHAR(40)
+);
+
+
+
+
+
+
+CREATE TABLE matricula(
+			asignatura INTEGER,
+			estudiante CHAR(9),
+			nota DECIMAL(2,0),
+			CONSTRAINT matricula_asignatura_fk FORING KEY(ASIGNATURA)
+			REFERENCES asignatura(codigo),
+			CONSTRAINT matricula_estudiante_fk FORING KEY(estudiante)
+			REFERENCES estudiante(dni)
+			
+);
+
+
+
+
+CREATE TABLE estudiante(
+			dni char(9),
+			nombre varchar(40),
+			edad DECIMAL(2,0),
+			ciudad VARCHAR(40) DEFAULT 'Alicante',
+			CONSTRAINT estudiante_edad_ck 
+			CHECK (edad > 18),
+			CONSTRAINT estudiante_nota_ck
+			CHECK (nota >=0 AND nota <= 10)
+);
+			
+									
+
+
+
+
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------borrar-----------------------------------
+Autor (código , nombre,Libro)
+
+
+Libro (código ,titulo)
+
+
+CREATE DATABASE bibloteca;
+
+
+
+
+CREATE TABLE autor (
+			codigo INTEGER PRIMARY KEY,
+			nombre VARCHAR(50),
+			libro INTEGER,
+			CONSTRAINT autor_libro_fk FOREIGN KEY (libro)
+			REFERENCES libro (codigo)
+);
+
+
+CREATE TABLE libro(
+			codigo INTEGER PRIMARY KEY,
+			nombre VARCHAR(50)
+);
+

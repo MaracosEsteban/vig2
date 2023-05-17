@@ -1,0 +1,17 @@
+﻿-- EJERCICIO 1
+
+DROP DATABASE IF EXISTS exament3;
+CREATE DATABASE exament3;
+USE exament3;
+
+CREATE TABLE productos (
+    id INT PRIMARY KEY,
+    descripcion VARCHAR(255),
+    precio DECIMAL(10,2)
+);
+
+-- Escribe/pega tu trigger aquí
+
+-- EJERCICIO 2
+
+-- Escribe/pega tu función aquí

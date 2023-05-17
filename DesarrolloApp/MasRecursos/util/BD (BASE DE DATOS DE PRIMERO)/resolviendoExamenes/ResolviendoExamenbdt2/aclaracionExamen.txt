@@ -1,0 +1,3 @@
+﻿Atención! En el grafo relacional del ejercicio 1 hay un error. En la tabla video hay una columna llamada youtuber 
+que es una clave ajena (FK). El grafo indica que la columna es NN y no debería serlo, por tanto, 
+ignorad la restricción NN de esa columna.

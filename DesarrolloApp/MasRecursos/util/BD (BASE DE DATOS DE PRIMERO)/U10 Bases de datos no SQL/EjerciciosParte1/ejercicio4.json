@@ -1,0 +1,19 @@
+//4. Detecta los errores en el siguiente objeto JSON:
+
+
+{
+  "titulo": "Este es un artículo",
+  "visitas": 345,
+  "publicado": true,
+  "categoria": null,
+  "comentarios": [
+    {
+      "autor": "Luisa López",
+      "mensaje": "Muy buén artículo"
+    },
+    {
+      "autor": "Carlos Pérez",
+      "mensaje": "Artículo muy malo"
+    }
+  ]
+}

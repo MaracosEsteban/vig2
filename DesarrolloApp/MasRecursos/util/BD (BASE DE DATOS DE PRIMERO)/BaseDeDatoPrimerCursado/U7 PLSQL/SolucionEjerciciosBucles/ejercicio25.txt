@@ -1,0 +1,12 @@
+CREATE OR REPLACE FUNCTION ejercicio25 (n1 NUMERIC, n2 NUMERIC) RETURNS VOID AS $$
+DECLARE
+	res NUMERIC;
+BEGIN
+	FOR i IN n1 .. n2 LOOP
+		FOR j IN n1 .. n2 LOOP
+			res = i * j;
+			RAISE NOTICE '% x % = %', i, j, res;
+		END LOOP;
+	END LOOP;
+END
+$$ language plpgsql;
