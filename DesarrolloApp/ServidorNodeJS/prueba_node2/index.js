@@ -51,7 +51,25 @@ app.get('/', (req, res) => {
     res.send('API')
 })
 
+//modificdo
+app.get('/usuarios', (req, res) => {
+    const query = 'SELECT * FROM usuarios;'
+    conexion.query(query, (error, resultado) => {
+        if (error) return console.error(error.message)
+        let obj = {}
+        if (resultado.length > 0) {
+            //obj.listaUsuarios = resultado
+            obj=resultado
+            res.json(obj)
+        } else {
+            res.json('No hay registros')
+        }
+    })
+})
 
+
+/*
+antes de modificarlo
 app.get('/usuarios', (req, res) => {
     const query = 'SELECT * FROM usuarios;'
     conexion.query(query, (error, resultado) => {
@@ -66,7 +84,7 @@ app.get('/usuarios', (req, res) => {
         }
     })
 })
-
+*/
 
 app.get('/usuario/:user', (req, res) => {
     const query = 'SELECT * FROM usuarios WHERE nombre = '+ user + ' ;'

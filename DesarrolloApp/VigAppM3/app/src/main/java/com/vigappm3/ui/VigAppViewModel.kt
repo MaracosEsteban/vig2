@@ -8,11 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vigappm3.network.VigApi
-//import com.example.lunchtray.model.MenuItem
-//import com.example.lunchtray.model.MenuItem.AccompanimentItem
-//import com.example.lunchtray.model.MenuItem.EntreeItem
-//import com.example.lunchtray.model.MenuItem.SideDishItem
-//import com.example.lunchtray.model.OrderUiState
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,6 +17,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import java.text.NumberFormat
+import com.vigappm3.model.*
 
 
 
@@ -34,9 +31,6 @@ sealed interface ReadingState {
     object Error : ReadingState
     object Loading : ReadingState
 }
-
-
-
 
 
 
@@ -103,7 +97,7 @@ class VigAppViewModel : ViewModel() {
     private fun getListaUsuarios() {
         viewModelScope.launch {
             readingState = try {
-                val listResult = VigApi.retrofitService.getGetUsuarios()
+                val listResult = VigApi.retrofitService.getUsuarios()
                 ReadingState.Success("Success. ${listResult.size} Mars photos retrieved")
             } catch (e: IOException) {
                 ReadingState.Error
