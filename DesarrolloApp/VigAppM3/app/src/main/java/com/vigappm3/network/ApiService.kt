@@ -33,8 +33,8 @@ interface MarsApiService {
     @GET("usuarios")
     suspend fun getUsuarios():List<Usuario>
 
-//    @GET("usuario")
-//    suspend fun getGetUsuario():Usuario
+    @GET("usuario")
+    suspend fun getGetUsuario():Usuario
 }
 
 

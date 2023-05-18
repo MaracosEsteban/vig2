@@ -21,13 +21,11 @@ import com.vigappm3.model.*
 
 
 
-
-
 /**
  * UI state for the Home screen
  */
 sealed interface ReadingState {
-    data class Success(val photos: String) : ReadingState
+    data class Success(val usuarios: List<Usuario>) : ReadingState
     object Error : ReadingState
     object Loading : ReadingState
 }
@@ -42,6 +40,8 @@ sealed interface ReadingState {
 
 
 class VigAppViewModel : ViewModel() {
+
+    lateinit var listaResultados: List<Usuario>
 
 
     private val _uiState = MutableStateFlow(AppUiState())
@@ -62,7 +62,7 @@ class VigAppViewModel : ViewModel() {
 
 
     init {
-        getListaUsuarios()
+        // getListaUsuarios()
     }
 
 
@@ -80,25 +80,26 @@ class VigAppViewModel : ViewModel() {
 
 
 
-    fun login(){
+    fun login():Boolean{
         // conectarme a la BBDD y ver si considen nombre y passs....
-
-
+        getListaUsuarios()
+        return listaResultados[0].nombre.equals(enteredName)
     }
 
 
 
     fun logout() {
-        // poner a cero todas las variables que representan  al trabajador y al cantro........
+        // poner a cero todas las variables que representan  al trabajador y al centro........
     }
-
 
 
     private fun getListaUsuarios() {
         viewModelScope.launch {
             readingState = try {
                 val listResult = VigApi.retrofitService.getUsuarios()
-                ReadingState.Success("Success. ${listResult.size} Mars photos retrieved")
+                listaResultados =listResult
+                //updateEnteredName(listResult[2].nombre)
+                ReadingState.Success(listResult)
             } catch (e: IOException) {
                 ReadingState.Error
             } catch (e: HttpException) {
@@ -113,12 +114,6 @@ class VigAppViewModel : ViewModel() {
 
 
 }
-
-
-
-
-
-
 
 
 

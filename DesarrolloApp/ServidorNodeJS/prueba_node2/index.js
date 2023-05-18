@@ -69,7 +69,7 @@ app.get('/usuarios', (req, res) => {
 
 
 /*
-antes de modificarlo
+//antes de modificarlo
 app.get('/usuarios', (req, res) => {
     const query = 'SELECT * FROM usuarios;'
     conexion.query(query, (error, resultado) => {
@@ -86,13 +86,18 @@ app.get('/usuarios', (req, res) => {
 })
 */
 
-app.get('/usuario/:user', (req, res) => {
-    const query = 'SELECT * FROM usuarios WHERE nombre = '+ user + ' ;'
+//app.get('/usuario/:user', (req, res) => {
+
+app.get('/usuario/:id', (req, res) => { 
+    const { id } = req.params
+    console.log(id)
+    const query = `SELECT * FROM usuarios WHERE id ='${id}' ;`
     conexion.query(query, (error, resultado) => {
         if (error) return console.error(error.message)
-        const obj = {}
+        let obj = {}
         if (resultado.length > 0) {
-            obj.listaUsuarios = resultado
+            //obj.listaUsuarios = resultado
+            obj=resultado
             res.json(obj)
         } else {
             res.json('No hay registros')

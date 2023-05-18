@@ -15,6 +15,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -105,11 +106,17 @@ fun VigApp() {
                     nameEntered = viewModel.enteredName,
                     onNameChange = { viewModel.updateEnteredName(it) },
 
+                    onLoginButtonClicked = {
 
-                    onLoginButtonClicked = { navController.navigate(VigAppScreen.Menu.name) },
+                        viewModel.login()
+
+                            navController.navigate(VigAppScreen.Menu.name)
+                    },
+
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(dimensionResource(R.dimen.padding_medium),
+                        .padding(
+                            dimensionResource(R.dimen.padding_medium),
                         ),
 
                     )
@@ -123,7 +130,12 @@ fun VigApp() {
                         navController.navigate(VigAppScreen.SelecCentro.name)
                     },
                     onCheckRecordsClicked = { navController.navigate(VigAppScreen.Registros.name) },
-                    onLogoutCliked = { navController.navigate(VigAppScreen.Login.name) },
+                    onLogoutCliked = {
+                        navController.popBackStack(
+                            VigAppScreen.Login.name,
+                            inclusive = false
+                        )
+                    },// todo
                     modifier = Modifier
                         .padding(dimensionResource(R.dimen.padding_medium))
                         .fillMaxSize()
