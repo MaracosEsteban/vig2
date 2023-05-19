@@ -105,10 +105,10 @@ app.get('/usuarios', (req, res) => {
 
 //app.get('/usuario/:user', (req, res) => {
 
-app.get('/usuario/:id', (req, res) => { 
-    const { id } = req.params
-    console.log(id)
-    const query = `SELECT * FROM usuarios WHERE id ='${id}' ;`
+app.get('/usuario/:nombre', (req, res) => { 
+    const { nombre } = req.params
+    console.log(nombre)
+    const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
     conexion.query(query, (error, resultado) => {
         if (error) return console.error(error.message)
         let obj = {}

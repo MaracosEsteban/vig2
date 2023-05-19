@@ -13,3 +13,9 @@ https://www.youtube.com/watch?v=BX3sJbBEdjE
 
 CÓMO crear un SERVIDOR en Node.JS 🌐 Principios de HTTP 🟢 Curso de Node.JS             => MUY BUENO !!!  ( ES COMO UN CURSO)
 https://www.youtube.com/watch?v=52XZhmLWJzY&t=62s
+
+
+
+
+Cómo conectar tu aplicación de Android a una API con Retrofit y Kotlin
+https://devexperto.com/retrofit-android-kotlin/

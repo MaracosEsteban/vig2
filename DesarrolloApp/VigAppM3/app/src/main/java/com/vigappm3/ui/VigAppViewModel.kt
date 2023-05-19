@@ -1,7 +1,6 @@
 package com.vigappm3.ui
 
 
-
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -20,23 +19,14 @@ import java.text.NumberFormat
 import com.vigappm3.model.*
 
 
-
 /**
  * UI state for the Home screen
  */
 sealed interface ReadingState {
-    data class Success(val usuarios: List<Usuario>) : ReadingState
+    data class Success(val usuarios: Usuario) : ReadingState
     object Error : ReadingState
     object Loading : ReadingState
 }
-
-
-
-
-
-
-
-
 
 
 class VigAppViewModel : ViewModel() {
@@ -48,12 +38,12 @@ class VigAppViewModel : ViewModel() {
     val uiState: StateFlow<AppUiState> = _uiState.asStateFlow()
 
 
-
     var readingState: ReadingState by mutableStateOf(ReadingState.Loading)
         private set
 
 
-    var nombreLeido:String  by mutableStateOf("")
+    var resulNom:String by mutableStateOf("asdfasdfñksf*sdfs")
+    var resulPass: String by mutableStateOf("asfasdfasd5fa2s4fa98'¡'")
 
 
     var enteredName by mutableStateOf("")
@@ -67,27 +57,22 @@ class VigAppViewModel : ViewModel() {
     }
 
 
-
-
-    fun updateEnteredName(nameEntered: String){
+    fun updateEnteredName(nameEntered: String) {
         this.enteredName = nameEntered
     }
 
-    fun updateEnteredPass(passwordEntered: String){
-        this.enteredPassword= passwordEntered
+    fun updateEnteredPass(passwordEntered: String) {
+        this.enteredPassword = passwordEntered
     }
 
 
+    fun login(): Boolean {
+         getListaUsuarios()
+        // return enteredPassword.equals(resultado.CLAVE)
+        return true
 
 
-fun login():Boolean{
-    getListaUsuarios()
-    return enteredName.equals(nombreLeido)
-
-
-
-}
-
+    }
 
 
     fun logout() {
@@ -98,11 +83,12 @@ fun login():Boolean{
     private fun getListaUsuarios() {
         viewModelScope.launch {
             readingState = try {
-                val listResult = VigApi.retrofitService.getUsuarios()
-               // listaResultados =listResult
-               // updateEnteredName(listResult[0].NOMBRE)
-                nombreLeido=listResult[0].NOMBRE
-                ReadingState.Success(listResult)
+                var resultado = VigApi.retrofitService.getUsuario("Melchor")
+                resulNom=resultado.NOMBRE
+                resulPass=resultado.CLAVE
+                // updateEnteredName(listResult[0].NOMBRE)
+                //nombreLeido=listResult[0].NOMBRE
+                ReadingState.Success(resultado)
             } catch (e: IOException) {
                 ReadingState.Error
             } catch (e: HttpException) {
@@ -110,14 +96,6 @@ fun login():Boolean{
             }
         }
     }
-
-
-
-
-
-
-
-
 
 
 }

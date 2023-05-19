@@ -109,9 +109,6 @@ fun VigApp() {
                     onLoginButtonClicked = {
                         if(viewModel.login()){navController.navigate(VigAppScreen.Menu.name)}
 
-
-
-
                     },
 
                     modifier = Modifier
@@ -119,7 +116,6 @@ fun VigApp() {
                         .padding(
                             dimensionResource(R.dimen.padding_medium),
                         ),
-
                     )
             }
 
