@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Usuario(
-    val id: Int, val nombre: String, val clave: String, val email: String
+    val ID: Int, val NOMBRE: String, val CLAVE: String, val EMAIL: String
 )
 
 //@Serializable

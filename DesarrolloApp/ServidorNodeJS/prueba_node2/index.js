@@ -51,6 +51,23 @@ app.get('/', (req, res) => {
     res.send('API')
 })
 
+
+
+
+
+/*  servicios que necesito
+
+get
+
+
+
+
+*/
+
+
+
+
+
 //modificdo
 app.get('/usuarios', (req, res) => {
     const query = 'SELECT * FROM usuarios;'

@@ -107,10 +107,11 @@ fun VigApp() {
                     onNameChange = { viewModel.updateEnteredName(it) },
 
                     onLoginButtonClicked = {
+                        if(viewModel.login()){navController.navigate(VigAppScreen.Menu.name)}
 
-                        viewModel.login()
 
-                            navController.navigate(VigAppScreen.Menu.name)
+
+
                     },
 
                     modifier = Modifier

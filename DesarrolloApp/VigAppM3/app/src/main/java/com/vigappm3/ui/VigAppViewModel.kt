@@ -53,6 +53,7 @@ class VigAppViewModel : ViewModel() {
         private set
 
 
+    var nombreLeido:String  by mutableStateOf("")
 
 
     var enteredName by mutableStateOf("")
@@ -79,12 +80,13 @@ class VigAppViewModel : ViewModel() {
 
 
 
+fun login():Boolean{
+    getListaUsuarios()
+    return enteredName.equals(nombreLeido)
 
-    fun login():Boolean{
-        // conectarme a la BBDD y ver si considen nombre y passs....
-        getListaUsuarios()
-        return listaResultados[0].nombre.equals(enteredName)
-    }
+
+
+}
 
 
 
@@ -97,8 +99,9 @@ class VigAppViewModel : ViewModel() {
         viewModelScope.launch {
             readingState = try {
                 val listResult = VigApi.retrofitService.getUsuarios()
-                listaResultados =listResult
-                //updateEnteredName(listResult[2].nombre)
+               // listaResultados =listResult
+               // updateEnteredName(listResult[0].NOMBRE)
+                nombreLeido=listResult[0].NOMBRE
                 ReadingState.Success(listResult)
             } catch (e: IOException) {
                 ReadingState.Error
@@ -107,6 +110,10 @@ class VigAppViewModel : ViewModel() {
             }
         }
     }
+
+
+
+
 
 
 
