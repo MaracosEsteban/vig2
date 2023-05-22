@@ -43,7 +43,7 @@ conexion.connect(error => {
 
 //console.log(ip.address()) // Finding the IP address is Node.js / https://stackoverflow.com/questions/67778717/how-to-get-the-ip-address-in-node-js-express
 const cmd = `curl -s http://checkip.amazonaws.com || printf "0.0.0.0"`;
-const pubIp = execSync(cmd).toString().trim();  
+const pubIp = execSync(cmd).toString().trim();
 console.log(`My public IP address is: ${pubIp}`);
 
 
@@ -59,9 +59,6 @@ app.get('/', (req, res) => {
 
 get
 
-
-
-
 */
 
 
@@ -76,13 +73,54 @@ app.get('/usuarios', (req, res) => {
         let obj = {}
         if (resultado.length > 0) {
             //obj.listaUsuarios = resultado
-            obj=resultado
+            obj = resultado
             res.json(obj)
         } else {
             res.json('No hay registros')
         }
     })
 })
+
+
+    //S1: Leer un usuario en base a su nombre(pueden no existir)
+
+app.get('/usuario/:nombre', (req, res) => {
+    const { nombre } = req.params
+    const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
+    conexion.query(query, (error, resultado) => {
+        var result = [{
+            ok: false,
+            mensaje: "",
+            usuarios: [{}],
+        }]
+        if (error) {
+            result[0].ok = false
+            result[0].mensaje = "Error de coneccion"
+            result[0].usuarios = [{}]
+            res.json(result)
+        }
+        else {
+            const obj = {}
+            if (resultado.length > 0) {
+                result[0].ok = true
+                result[0].mensaje = "Todo bien"
+                result[0].usuarios = resultado
+                res.json(result)
+            } else {
+                result[0].ok = false
+                result[0].mensaje = "No hay registros"
+                result[0].usuarios = [{}]
+                res.json(result)
+               
+            }
+        }
+    })
+})
+
+
+//let result = {ok: false, error: "Error validating user"};
+//res.send(result);
+
 
 
 /*
@@ -104,8 +142,8 @@ app.get('/usuarios', (req, res) => {
 */
 
 //app.get('/usuario/:user', (req, res) => {
-
-app.get('/usuario/:nombre', (req, res) => { 
+/*
+app.get('/usuario/:nombre', (req, res) => {
     const { nombre } = req.params
     console.log(nombre)
     const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
@@ -114,7 +152,7 @@ app.get('/usuario/:nombre', (req, res) => {
         let obj = {}
         if (resultado.length > 0) {
             //obj.listaUsuarios = resultado
-            obj=resultado
+            obj = resultado
             res.json(obj)
         } else {
             res.json('No hay registros')
@@ -122,7 +160,7 @@ app.get('/usuario/:nombre', (req, res) => {
     })
 })
 
-
+*/
 
 
 
@@ -172,8 +210,8 @@ app.delete('/usuario/delete/:id', (req, res) => {
     //console.log(id)
     const query = `DELETE FROM usuarios WHERE idUsuarios=${id};`
     conexion.query(query, (error) => {
-        if (error)  console.error(error.message);
-        res.json("Se eliminó correctamente el usuario") 
+        if (error) console.error(error.message);
+        res.json("Se eliminó correctamente el usuario")
     })
 })
 

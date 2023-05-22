@@ -2,7 +2,6 @@
 
 package com.vigappm3
 
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -29,11 +28,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.vigappm3.ui.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import com.vigappm3.ui.LoginScreen
 
 enum class VigAppScreen(@StringRes val title: Int) {
     Login(title = R.string.login_inst),
@@ -113,23 +107,7 @@ fun VigApp() {
                     onNameChange = { viewModel.updateEnteredName(it) },
 
                     onLoginButtonClicked = {
-
-                        if (viewModel.login()) {
-                            navController.navigate(VigAppScreen.Menu.name)
-                        } else {
-                            Toast.makeText(this@LoginScreen, "hola", Toast.LENGTH_SHORT).show()
-                        }
-
-
-//                        GlobalScope.launch(Dispatchers.Main) {
-//                            withContext(Dispatchers.IO) {
-//                                viewModel.getListaUsuarios()
-//                            }
-//
-//                            if (viewModel.login()) {
-//                                navController.navigate(VigAppScreen.Menu.name)
-//                            }
-//                        }
+                        if(viewModel.login()){navController.navigate(VigAppScreen.Menu.name)}
 
                     },
 
@@ -138,7 +116,7 @@ fun VigApp() {
                         .padding(
                             dimensionResource(R.dimen.padding_medium),
                         ),
-                )
+                    )
             }
 
 
@@ -150,7 +128,6 @@ fun VigApp() {
                     },
                     onCheckRecordsClicked = { navController.navigate(VigAppScreen.Registros.name) },
                     onLogoutCliked = {
-                        viewModel.logout()
                         navController.popBackStack(
                             VigAppScreen.Login.name,
                             inclusive = false
@@ -169,13 +146,11 @@ fun VigApp() {
 
             composable(route = VigAppScreen.SelecCentro.name) {
                 SelecCentroScreen(
-                    onCancelButtonClicked = {
-                        viewModel.logout()
-                        navController.navigate(VigAppScreen.Menu.name)
-                    },
+                    onCancelButtonClicked = { navController.navigate(VigAppScreen.Menu.name) },
                     onSelecCenterClicked = { navController.navigate(VigAppScreen.Fichar.name) })
 
             }
+
 
 
 
@@ -188,13 +163,13 @@ fun VigApp() {
                         )
                     },
                     onCancelButtonClicked = {
-                        viewModel.logout()
                         navController.popBackStack(
                             VigAppScreen.Menu.name,
                             inclusive = false
                         )
                     })
             }
+
 
 
 

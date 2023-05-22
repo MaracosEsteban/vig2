@@ -19,3 +19,9 @@ https://www.youtube.com/watch?v=52XZhmLWJzY&t=62s
 
 Cómo conectar tu aplicación de Android a una API con Retrofit y Kotlin
 https://devexperto.com/retrofit-android-kotlin/
+
+
+MySQL 8.0 - Client does not support authentication protocol requested by server; consider upgrading MySQL client
+https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server
+
+
