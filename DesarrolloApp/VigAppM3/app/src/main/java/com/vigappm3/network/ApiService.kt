@@ -3,6 +3,7 @@ package com.vigappm3.network
 
 import com.vigappm3.model.Usuario
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.vigappm3.model.ConsCentros
 import com.vigappm3.model.ConsUsuarios
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -39,11 +40,19 @@ interface MarsApiService {
     suspend fun getUsers(): List<ConsUsuarios>
 
 
-    //S1: Leer un usuario en base a su nombre(pueden no existir)
+    /**
+     * S1: Leer un usuario en base a su nombre(pueden no existir)
+     */
     @GET("usuario/{nombre}")
     suspend fun getUsuario(@Path("nombre") nombre: String):  List<ConsUsuarios>
 
-    //S2: Leer todos los centros
+
+    /**
+     * S2: Recupera la informacion de todos los centros
+     */
+    @GET("centros")
+    suspend fun getCenros(): List<ConsCentros>
+
 
     //S3: Generar un nuevo registro en la tabla  lecturas
 

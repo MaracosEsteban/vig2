@@ -91,7 +91,10 @@ fun VigApp() {
             VigAppBar(
                 currentScreenTitle = currentScreen.title,
                 canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = { navController.navigateUp() }
+                navigateUp = {
+                    viewModel.logout()
+                    navController.navigateUp()
+                }
             )
         }
     ) { innerPadding ->
@@ -117,7 +120,7 @@ fun VigApp() {
                         if (viewModel.login()) {
                             navController.navigate(VigAppScreen.Menu.name)
                         } else {
-                            Toast.makeText(this@LoginScreen, "hola", Toast.LENGTH_SHORT).show()
+                            // todo Toast.makeText(this@LoginScreen, "hola", Toast.LENGTH_SHORT).show()
                         }
 
 
@@ -146,6 +149,7 @@ fun VigApp() {
             composable(route = VigAppScreen.Menu.name) {
                 MenuScreen(
                     onCenterCliked = {
+                      //  viewModel.getListaCentrosToUiState()
                         navController.navigate(VigAppScreen.SelecCentro.name)
                     },
                     onCheckRecordsClicked = { navController.navigate(VigAppScreen.Registros.name) },
@@ -165,13 +169,15 @@ fun VigApp() {
 
 
 
-
-
             composable(route = VigAppScreen.SelecCentro.name) {
                 SelecCentroScreen(
+                    viewM = viewModel,
                     onCancelButtonClicked = {
-                        viewModel.logout()
-                        navController.navigate(VigAppScreen.Menu.name)
+                       // viewModel.logout()
+                        navController.popBackStack(
+                            VigAppScreen.Menu.name,
+                            inclusive = false
+                        )
                     },
                     onSelecCenterClicked = { navController.navigate(VigAppScreen.Fichar.name) })
 
@@ -205,8 +211,9 @@ fun VigApp() {
                         inclusive = false
                     )
                 })
-
             }
+
+
 
             composable(route = VigAppScreen.Ajustes.name) {
             }

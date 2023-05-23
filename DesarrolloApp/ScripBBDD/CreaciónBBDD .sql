@@ -1,9 +1,15 @@
 -- ---------------------------------- BORRAR BBDD ---------------------------------------------------------------------------
 -- drop database if exists vigapp_database;
 
+
+
 -- ---------------------------------- CREACION DE LA BBDD -------------------------------------------------------------------
 -- create database vigapp_database;
 -- use vigapp_database;
+
+   -- create database prueba;
+   -- use prueba;
+
 
 -- ---------------------------------- DEFINIR USUARIOS Y PERMISOS  ----------------------------------------------------------
 -- CREATE USER 'vigapp'@'localhost' IDENTIFIED BY '1234';
@@ -11,6 +17,8 @@
 
 
 -- ---------------------------------- CREACION DE TABLAS---------------------------------------------------------------------
+
+
 
 CREATE TABLE `usuarios` (
 	`ID` INT(10) PRIMARY KEY AUTO_INCREMENT,
@@ -74,17 +82,17 @@ AUTO_INCREMENT=628
 
 
 INSERT INTO usuarios (id,nombre,clave,email) VALUES 
-(DEFAULT,"Melchor","Melchor","Melchor2000@hotmail.com"),
-(DEFAULT,"Gaspar","Gaspar","Gaspar2000@hotmail.com"),
-(DEFAULT,"Baltasar","Baltasar","Baltasar2000@hotmail.com");
+(DEFAULT,"Melchor","1111","Melchor2000@hotmail.com"),
+(DEFAULT,"Gaspar","2222","Gaspar2000@hotmail.com"),
+(DEFAULT,"Baltasar","3333","Baltasar2000@hotmail.com");
 
 
 
 INSERT INTO centros (ID,NOMBRE,EMAIL,PASS,CIF,PAIS,CIUDAD,DIRECCION,COD_POSTAL,TEL) VALUES 
-(DEFAULT,"Krunchy-Krunchy","Krunchy@hotmail.com","SecretPass","B-76345879","España","Barcelona","Av de Mayo 55","35100",default),
-(DEFAULT,"LifeStyle Dogs","LifeStyleDogs@hotmail.com","SecretPass","B-76000000","España","Madrid","Av  Costa Blanca 20","32123",default),
-(DEFAULT,"Versace","Versace@hotmail.com","SecretPass","B-76111111","España","Valencia","Calle de la Reconquista 1","312345",default),
-(DEFAULT,"Supra System","SupraSystem@hotmail.com","SecretPass","B-76222222","España","Alicante","Av Primero de mayo","32345",default);
+(DEFAULT,"Krunchy-Krunchy","Krunchy@hotmail.com","SecretPass","B-76345879","España","Barcelona","Av de Mayo 55","35100",603272055),
+(DEFAULT,"LifeStyle Dogs","LifeStyleDogs@hotmail.com","SecretPass","B-76000000","España","Madrid","Av  Costa Blanca 20","32123",928123456),
+(DEFAULT,"Versace","Versace@hotmail.com","SecretPass","B-76111111","España","Valencia","Calle de la Reconquista 1","312345",920234566),
+(DEFAULT,"Supra System","SupraSystem@hotmail.com","SecretPass","B-76222222","España","Alicante","Av Primero de mayo","32345",601275098);
 
 
 
@@ -92,8 +100,6 @@ INSERT INTO centros (ID,NOMBRE,EMAIL,PASS,CIF,PAIS,CIUDAD,DIRECCION,COD_POSTAL,T
 INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID) VALUES 
 (DEFAULT,"2223-05-20 23:00:15","19° 25′ 42″ N","99° 7′ 39″ O",1,629),
 (DEFAULT,"2223-05-21 07:00:00","19° 25′ 42″ N","99° 7′ 39″ O",1,629),
-
-
 (DEFAULT,"2223-05-15 08:05:00","20° 25′ 42″ N","60° 7′ 39″ O",2,630),
 (DEFAULT,"2223-05-16 17:01:15","20° 25′ 42″ N","60° 7′ 39″ O",2,630);
 
@@ -132,7 +138,7 @@ select * from centros;
 -- para insertar una lectura
 
 
-INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID) VALUES (DEFAULT,now(),"19° 25′ 42″ N","99° 7′ 39″ O",1,629);
+-- INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID) VALUES (DEFAULT,now(),"19° 25′ 42″ N","99° 7′ 39″ O",1,629);
 
 
 
@@ -142,7 +148,7 @@ INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID) VALUES (
 
 -- ------------------------------------------------------- CONSULTAS VARIAS ------------------------------------------------------------------------ 
 
-select * FROM usuarios;
+select * FROM  usuarios;
 
 select * from centros;
 

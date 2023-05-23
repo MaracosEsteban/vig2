@@ -11,10 +11,4 @@ data class Usuario(
     val ID: Int=0, val NOMBRE: String="", val CLAVE: String="", val EMAIL: String=""
 )
 
-//@Serializable
-//data class Response(
-//
-//    val listaUsuarios: List<Usuario>
-//)
-
 

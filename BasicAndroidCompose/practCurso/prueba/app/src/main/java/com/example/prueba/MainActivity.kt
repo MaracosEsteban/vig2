@@ -198,7 +198,8 @@ fun TarjetaEstudiante(estudiante: Estudiante, modifier: Modifier = Modifier) {
     Card(
         modifier = Modifier
             .padding(8.dp)
-            .fillMaxWidth(), elevation = 4.dp
+            .fillMaxWidth(),
+        elevation = 4.dp
     ) {
         Column {
 

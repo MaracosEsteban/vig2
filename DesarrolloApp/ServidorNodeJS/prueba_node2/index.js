@@ -1,5 +1,5 @@
 const express = require('express')
-const mysql = require('mysql')
+const mysql = require('mysql2')
 const bodyParser = require('body-parser')
 
 //const ip = require('ip') // Finding the IP address is Node.js/ https://stackoverflow.com/questions/67778717/how-to-get-the-ip-address-in-node-js-express
@@ -15,12 +15,26 @@ const PUERTO = 3000
 
 
 const conexion = mysql.createConnection(
-    {
 
-        host: 'localhost',
+    {
+        //Para ejecutarlo en Vigilant
+        
+                host: 'localhost',
         database: 'prueba',
         user: 'root',
         password: ''
+        
+
+        /*
+        // Para ejecutarlo en mi ordenador
+        host: 'localhost',
+        database: 'vigapp_database',
+        user: 'root',
+        password: 'Mc+25156'
+*/
+
+
+
     }
 
 )
@@ -43,7 +57,7 @@ conexion.connect(error => {
 
 //console.log(ip.address()) // Finding the IP address is Node.js / https://stackoverflow.com/questions/67778717/how-to-get-the-ip-address-in-node-js-express
 const cmd = `curl -s http://checkip.amazonaws.com || printf "0.0.0.0"`;
-const pubIp = execSync(cmd).toString().trim();
+const pubIp = execSync(cmd).toString().trim();  
 console.log(`My public IP address is: ${pubIp}`);
 
 
@@ -59,11 +73,14 @@ app.get('/', (req, res) => {
 
 get
 
+
+
+
 */
 
 
 
-
+/*
 
 //modificdo
 app.get('/usuarios', (req, res) => {
@@ -73,7 +90,7 @@ app.get('/usuarios', (req, res) => {
         let obj = {}
         if (resultado.length > 0) {
             //obj.listaUsuarios = resultado
-            obj = resultado
+            obj=resultado
             res.json(obj)
         } else {
             res.json('No hay registros')
@@ -82,8 +99,29 @@ app.get('/usuarios', (req, res) => {
 })
 
 
-    //S1: Leer un usuario en base a su nombre(pueden no existir)
+*/
 
+
+//antes de modificarlo
+/*
+app.get('/usuarios', (req, res) => {
+    const query = 'SELECT * FROM usuarios;'
+    conexion.query(query, (error, resultado) => {
+        if (error) return console.error(error.message)
+
+        const obj = {}
+        if (resultado.length > 0) {
+            obj.listaUsuarios = resultado
+            res.json(obj)
+        } else {
+            res.json('No hay registros')
+        }
+    })
+})
+*/
+
+
+//S1:-----------------Leer un usuario en base a su nombre(pueden no existir)------------------------------
 app.get('/usuario/:nombre', (req, res) => {
     const { nombre } = req.params
     const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
@@ -103,7 +141,7 @@ app.get('/usuario/:nombre', (req, res) => {
             const obj = {}
             if (resultado.length > 0) {
                 result[0].ok = true
-                result[0].mensaje = "Todo bien"
+                result[0].mensaje = "Consulta correcta"
                 result[0].usuarios = resultado
                 res.json(result)
             } else {
@@ -117,50 +155,48 @@ app.get('/usuario/:nombre', (req, res) => {
     })
 })
 
-
-//let result = {ok: false, error: "Error validating user"};
-//res.send(result);
-
-
-
-/*
-//antes de modificarlo
-app.get('/usuarios', (req, res) => {
-    const query = 'SELECT * FROM usuarios;'
+//S2: ------------------------------------------Leer todos los centros--------------------------------------
+app.get('/centros', (req, res) => {
+    const query = 'SELECT * FROM centros;'
     conexion.query(query, (error, resultado) => {
-        if (error) return console.error(error.message)
-
-        const obj = {}
-        if (resultado.length > 0) {
-            obj.listaUsuarios = resultado
-            res.json(obj)
-        } else {
-            res.json('No hay registros')
+        var result = [{
+            ok: false,
+            mensaje: "",
+            centros: [{}],
+        }]
+        if (error) {
+            result[0].ok = false
+            result[0].mensaje = "Error de coneccion"
+            result[0].centros = [{}]
+            res.json(result)
         }
-    })
-})
-*/
-
-//app.get('/usuario/:user', (req, res) => {
-/*
-app.get('/usuario/:nombre', (req, res) => {
-    const { nombre } = req.params
-    console.log(nombre)
-    const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
-    conexion.query(query, (error, resultado) => {
-        if (error) return console.error(error.message)
-        let obj = {}
-        if (resultado.length > 0) {
-            //obj.listaUsuarios = resultado
-            obj = resultado
-            res.json(obj)
-        } else {
-            res.json('No hay registros')
+        else {
+            const obj = {}
+            if (resultado.length > 0) {
+                result[0].ok = true
+                result[0].mensaje = "Consulta correcta"
+                result[0].centros = resultado
+                res.json(result)
+            } else {
+                result[0].ok = false
+                result[0].mensaje = "No hay registros"
+                result[0].centros = [{}]
+                res.json(result)
+               
+            }
         }
     })
 })
 
-*/
+
+//S3: ------------------------------------------Leer todos los centros--------------------------------------
+
+
+
+
+
+//S3: ------------------------------------------Leer todos los centros--------------------------------------
+
 
 
 
@@ -210,8 +246,8 @@ app.delete('/usuario/delete/:id', (req, res) => {
     //console.log(id)
     const query = `DELETE FROM usuarios WHERE idUsuarios=${id};`
     conexion.query(query, (error) => {
-        if (error) console.error(error.message);
-        res.json("Se eliminó correctamente el usuario")
+        if (error)  console.error(error.message);
+        res.json("Se eliminó correctamente el usuario") 
     })
 })
 

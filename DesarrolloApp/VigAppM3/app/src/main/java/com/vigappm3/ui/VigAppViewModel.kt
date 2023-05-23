@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import com.vigappm3.model.*
+import kotlinx.coroutines.flow.update
 
 
 /**
@@ -42,19 +43,19 @@ class VigAppViewModel : ViewModel() {
         private set
 
 
-    var nombreLeido: String=""
-    var claveLeida: String =""
-    var ok:Boolean= false
-    var mensaje:String=""
-
-
-
-
+    var nombreLeido: String = ""
+    var claveLeida: String = ""
+    var ok: Boolean = false
+    var mensaje: String = ""
+    var idUsuarios: Int = -1
+    var idCentros: Int = -1
 
 
     init {
         //getListaUsuarios()
-        getConsUsuarios()
+        // getConsUsuarios()
+        //getConsCentros()
+        getListaCentrosToUiState()
     }
 
 
@@ -71,47 +72,83 @@ class VigAppViewModel : ViewModel() {
     fun login(): Boolean {
         //https://www.youtube.com/watch?v=KqLtW8d8PXY
         getConsUsuarios()
-
-
-
-
-        return enteredPassword.equals(claveLeida) && !enteredPassword.equals("")
-
-
+        var result = if (ok) {
+            enteredPassword.equals(claveLeida)
+        } else {
+            false
+        }
+        return result
     }
 
     /**
-     *  Pone a cero todas la varibles que utilizo para realizar el login
+     *  Elimina toda la información referete a un usuario incluhida la informacin en pantalla
      */
     fun logout() {
-        // "Poner a cero"" todas las variable que se utilizan para realizar le login
         enteredName = ""
         enteredPassword = ""
         nombreLeido = ""
         claveLeida = ""
-        ok=false
-        mensaje=""
-    }
+        ok = false
+        mensaje = ""
+        idUsuarios = -1
+        idCentros = -1
 
+    }
 
     fun getConsUsuarios() {
         viewModelScope.launch {
             try {
-                var res = VigApi.retrofitService.getUsuario(enteredName)
-                nombreLeido = res[0].usuarios[0].NOMBRE
-                claveLeida = res[0].usuarios[0].CLAVE
-                ok=res[0].ok
-                mensaje=res[0].mensaje
-
+                var resp = VigApi.retrofitService.getUsuario(enteredName)
+                nombreLeido = resp[0].usuarios[0].NOMBRE
+                claveLeida = resp[0].usuarios[0].CLAVE
+                idCentros = resp[0].usuarios[0].ID
+                ok = resp[0].ok
+                mensaje = resp[0].mensaje
+                updateEnteredName(resp[0].usuarios[0].NOMBRE)
             } catch (e: IOException) {
-                ok=false
-                mensaje="IO Exception"
+                ok = false
+                mensaje = "IO Exception"
             } catch (e: HttpException) {
-                ok=false
-                mensaje="Http Exception"
+                ok = false
+                mensaje = "Http Exception"
             }
         }
 
+    }
+
+
+    fun getListaCentrosToUiState() {
+        // todo hay que guardar el   idCentros
+        // todo no estoy teniendo en cuenta erores
+
+        var lista = listOf<Centro>()
+
+        viewModelScope.launch {
+            try {
+                var res = VigApi.retrofitService.getCenros()[0].centros
+//                updateEnteredName(
+//                    res.count().toString()
+//                )
+                lista=res
+
+                // todo   Uso las mismas variables?
+//                ok = res[0].ok
+//                mensaje = res[0].mensaje
+       //         lista=res[0].usuarios.toMutableList()
+            } catch (e: IOException) {
+                ok = false
+                mensaje = "IO Exception"
+            } catch (e: HttpException) {
+                ok = false
+                mensaje = "Http Exception"
+            }
+        }
+        _uiState.update { currentState ->
+            currentState.copy(listaCentros = lista)
+
+        }
+        //todo  Aqui no llega la lista de centros
+        updateEnteredName(this.uiState.value.listaCentros.count().toString())
     }
 }
 
