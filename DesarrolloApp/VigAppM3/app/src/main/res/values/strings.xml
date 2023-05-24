@@ -18,6 +18,7 @@
     <string name="selec_center">Seleccionar centro</string>
 
     <!--    Fichar Screen-->
+    <string name="cenro_seleccionado">Cenro seleccionado</string>
     <string name="observaciones">Observaciones</string>
     <string name="cancel_fichar">Cancelar</string>
     <string name="fichar">Fichar</string>
@@ -28,6 +29,11 @@
 
     <!--     Registros Screen -->
     <string name="hecho">Hecho</string>
+
+
+
+
+
 
 
     <!--  Screen titles Enum class -->

@@ -16,53 +16,40 @@ import com.vigappm3.model.*
 import kotlinx.coroutines.flow.update
 
 
-/**
- * UI state for the Home screen
- */
-
-
-//sealed interface ReadingState {
-//    data class Success(val usuarios: Usuario) : ReadingState
-//    object Error : ReadingState
-//    object Loading : ReadingState
-//}
-
-
 class VigAppViewModel : ViewModel() {
-
-    lateinit var listaResultados: List<Usuario>
-
 
     private val _uiState = MutableStateFlow(AppUiState())
     val uiState: StateFlow<AppUiState> = _uiState.asStateFlow()
-
 
     var enteredName by mutableStateOf("")
         private set
     var enteredPassword by mutableStateOf("")
         private set
 
+    //para guardar los datos del usuario logeado
+    var usuarioActual: Usuario = Usuario()
+    var okUsuario: Boolean = false
+    var mensajeUsuario: String = ""
 
-    var nombreLeido: String = ""
-    var claveLeida: String = ""
-    var ok: Boolean = false
-    var mensaje: String = ""
-    var idUsuarios: Int = -1
-    var idCentros: Int = -1
+    //para guardar los dato del centro en uso
+    var centroActual: Centro = Centro()
+
+    // para saber si la lectura de los centros fué exitosa
+    var okCentros: Boolean = false
+    var mensajeCentros: String = ""
 
 
     init {
         //getListaUsuarios()
         // getConsUsuarios()
         //getConsCentros()
-        getListaCentrosToUiState()
+        //getListaCentrosToUiState()
     }
 
 
     fun updateEnteredName(nameEntered: String) {
         this.enteredName = nameEntered
     }
-
 
     fun updateEnteredPass(passwordEntered: String) {
         this.enteredPassword = passwordEntered
@@ -71,9 +58,10 @@ class VigAppViewModel : ViewModel() {
 
     fun login(): Boolean {
         //https://www.youtube.com/watch?v=KqLtW8d8PXY
+        //todo solucionar  que hay que precionar dos veces login
         getConsUsuarios()
-        var result = if (ok) {
-            enteredPassword.equals(claveLeida)
+        var result = if (okUsuario) {
+            enteredPassword.equals(usuarioActual.CLAVE)
         } else {
             false
         }
@@ -81,76 +69,86 @@ class VigAppViewModel : ViewModel() {
     }
 
     /**
-     *  Elimina toda la información referete a un usuario incluhida la informacin en pantalla
+     *  Elimina toda la información de la sesion usuario, centro , datos en pantalla
      */
     fun logout() {
         enteredName = ""
         enteredPassword = ""
-        nombreLeido = ""
-        claveLeida = ""
-        ok = false
-        mensaje = ""
-        idUsuarios = -1
-        idCentros = -1
 
+        usuarioActual = Usuario()
+        okUsuario = false
+        mensajeUsuario = ""
+
+        actualizarCentro(Centro())
+
+
+        okCentros = false
+        mensajeCentros = ""
     }
+
+
+    fun actualizarCentro(centroActual:Centro){
+        _uiState.update { currentState ->
+            currentState.copy(centroSelec = centroActual)
+        }
+    }
+
+
+
+
+
+
+    //------------------------ Los cuatro servicios para acceder a  la BBDD
+
 
     fun getConsUsuarios() {
         viewModelScope.launch {
             try {
                 var resp = VigApi.retrofitService.getUsuario(enteredName)
-                nombreLeido = resp[0].usuarios[0].NOMBRE
-                claveLeida = resp[0].usuarios[0].CLAVE
-                idCentros = resp[0].usuarios[0].ID
-                ok = resp[0].ok
-                mensaje = resp[0].mensaje
-                updateEnteredName(resp[0].usuarios[0].NOMBRE)
+                usuarioActual = resp[0].usuarios[0]
+                okUsuario = resp[0].ok
+                mensajeUsuario = resp[0].mensaje
             } catch (e: IOException) {
-                ok = false
-                mensaje = "IO Exception"
+                okUsuario = false
+                mensajeUsuario = "IO Exception"
             } catch (e: HttpException) {
-                ok = false
-                mensaje = "Http Exception"
+                okUsuario = false
+                mensajeUsuario = "Http Exception"
             }
         }
-
     }
 
 
+    /**
+     *
+     * todo recordar guardar el id del centro seleccionado
+     * todo la consulta me devuelve error pero no la estoy usuando
+     *
+     */
     fun getListaCentrosToUiState() {
-        // todo hay que guardar el   idCentros
-        // todo no estoy teniendo en cuenta erores
-
-        var lista = listOf<Centro>()
-
+        var lista = mutableListOf<Centro>()
         viewModelScope.launch {
             try {
                 var res = VigApi.retrofitService.getCenros()[0].centros
-//                updateEnteredName(
-//                    res.count().toString()
-//                )
-                lista=res
-
-                // todo   Uso las mismas variables?
-//                ok = res[0].ok
-//                mensaje = res[0].mensaje
-       //         lista=res[0].usuarios.toMutableList()
+                lista = res.toMutableList()
+                _uiState.update { currentState ->
+                    currentState.copy(listaCentros = lista)
+                }
             } catch (e: IOException) {
-                ok = false
-                mensaje = "IO Exception"
+                okCentros = false
+                mensajeCentros = "IO Exception"
             } catch (e: HttpException) {
-                ok = false
-                mensaje = "Http Exception"
+                okCentros = false
+                mensajeCentros = "Http Exception"
             }
         }
-        _uiState.update { currentState ->
-            currentState.copy(listaCentros = lista)
-
-        }
-        //todo  Aqui no llega la lista de centros
-        updateEnteredName(this.uiState.value.listaCentros.count().toString())
     }
+
+
+
+
 }
+
 
 
 

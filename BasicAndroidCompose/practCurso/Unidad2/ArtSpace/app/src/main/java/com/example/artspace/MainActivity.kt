@@ -217,9 +217,7 @@ class MainActivity : ComponentActivity() {
                             .wrapContentSize()
                         //.padding(start = 16.dp, end = 16.dp)
                     )
-
                 }
-
             }
 
 

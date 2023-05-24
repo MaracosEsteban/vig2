@@ -92,7 +92,13 @@ INSERT INTO centros (ID,NOMBRE,EMAIL,PASS,CIF,PAIS,CIUDAD,DIRECCION,COD_POSTAL,T
 (DEFAULT,"Krunchy-Krunchy","Krunchy@hotmail.com","SecretPass","B-76345879","España","Barcelona","Av de Mayo 55","35100",603272055),
 (DEFAULT,"LifeStyle Dogs","LifeStyleDogs@hotmail.com","SecretPass","B-76000000","España","Madrid","Av  Costa Blanca 20","32123",928123456),
 (DEFAULT,"Versace","Versace@hotmail.com","SecretPass","B-76111111","España","Valencia","Calle de la Reconquista 1","312345",920234566),
-(DEFAULT,"Supra System","SupraSystem@hotmail.com","SecretPass","B-76222222","España","Alicante","Av Primero de mayo","32345",601275098);
+(DEFAULT,"Supra System","SupraSystem@hotmail.com","SecretPass","B-76222222","España","Alicante","Av Primero de mayo","32345",601275098)
+
+
+(DEFAULT,"Donar","Donar@hotmail.com","SecretPass","D-86111122","Argentina","Rosario","Aenida Costa Blanca 25","52345",601275000),
+(DEFAULT,"Lotus","Lotus@hotmail.com","SecretPass","B-76222200","España","Alicante","Avenida Estocolmo 1","39345",601271234),
+(DEFAULT,"Ikea","Ikea@hotmail.com","SecretPass","B-762888222","España","Alicante","Av Primero de mayo","62345",601274232),
+(DEFAULT,"Ford Madrid","SuperFord@hotmail.com","SecretPass","B-76222222","España","Madrid","Av Primero de mayo","32345",601211111);
 
 
 

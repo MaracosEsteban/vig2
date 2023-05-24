@@ -1,5 +1,6 @@
 package com.vigappm3.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.OutlinedButton
@@ -18,15 +19,18 @@ import com.vigappm3.model.Centro
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardElevation
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.font.FontWeight
 
 
 @Composable
 fun SelecCentroScreen(
     onCancelButtonClicked: () -> Unit,
-    onSelecCenterClicked: () -> Unit,
+    onSelecCenterClicked: (cen: Centro) -> Unit,
     modifier: Modifier = Modifier,
     viewM: VigAppViewModel,
-
 ) {
 
     val uiState by viewM.uiState.collectAsState()
@@ -36,95 +40,100 @@ fun SelecCentroScreen(
 
     Column(
 //                verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
+        verticalArrangement = Arrangement.Center, modifier = Modifier
             .fillMaxSize()
             .fillMaxWidth()
+            .padding(16.dp)
 
     ) {
 
-        LazyColumn {
-            // todo obtener la informacion de AppUiState
 
-            items(uiState.listaCentros) { centro ->
-                TarjetaCentro(centro)
+        Row(modifier = Modifier.weight(8f)) {
+            LazyColumn {
+                // todo obtener la informacion de AppUiState
+
+                items(uiState.listaCentros) { centro ->
+                    TarjetaCentro(centro,onSelecCenterClicked= onSelecCenterClicked)
+                }
+
             }
 
         }
 
-
+        Row(
+            modifier = Modifier.weight(2f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        )
+        {
             OutlinedButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentWidth(),
-                onClick = onCancelButtonClicked
+                    .wrapContentWidth(), onClick = onCancelButtonClicked
+
             ) {
                 Text(stringResource(R.string.cancel))
             }
+
         }
+
+
     }
+}
 
 
 
 
 
 
-    @Composable
-    fun TarjetaCentro(centro: Centro, modifier: Modifier = Modifier) {
 
-        Card(
-//            elevation = CardElevation(4.dp),
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
-        ) {
-            Column() {
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TarjetaCentro(centro: Centro,
+                  modifier: Modifier = Modifier,
+                  onSelecCenterClicked: (cen: Centro) -> Unit) {
 
+    Card(
+        onClick = { onSelecCenterClicked(centro) },
+        //  elevation = CardElevation(4.dp),
+
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+
+
+    ) {
+        Column(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+
+            ) {
+
+            Text(
+                text = centro.NOMBRE,
+                modifier = Modifier.padding(30.dp),
+
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.bodySmall
+            )
+
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(
-                    text = centro.NOMBRE,
-                    modifier = Modifier.padding(16.dp),
-//                    style = MaterialTheme.typography.h6
+                    fontSize = 15.sp,
+                    text = centro.PAIS,
+                    modifier = Modifier.padding(12.dp),
+                    style = MaterialTheme.typography.bodySmall
                 )
-
-                Row(horizontalArrangement = Arrangement.SpaceAround) {
-                    Text(
-                        fontSize = 15.sp,
-                        text = centro.CIUDAD,
-                        modifier = Modifier.padding(12.dp),
-//                        style = MaterialTheme.typography.h6
-                    )
-
-
-                    Text(
-                        fontSize = 15.sp,
-                        text = centro.CIUDAD,
-                        modifier = Modifier.padding(12.dp),
-//                        style = MaterialTheme.typography.h6
-                    )
-                }
+                Text(
+                    fontSize = 15.sp,
+                    text = centro.CIUDAD,
+                    modifier = Modifier.padding(12.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 

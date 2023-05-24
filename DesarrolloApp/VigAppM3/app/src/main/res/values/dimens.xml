@@ -15,9 +15,10 @@
   ~ limitations under the License.
   -->
 <resources>
-    <dimen name="padding_big">32dp</dimen>
+
 
     <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_big">32dp</dimen>
     <dimen name="padding_small">8dp</dimen>
 
     <dimen name="thickness_divider">1dp</dimen>

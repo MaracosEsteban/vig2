@@ -3,10 +3,9 @@ package com.vigappm3.ui
 import com.vigappm3.model.Centro
 
 
-data class AppUiState(var listaCentros:List<Centro> = mutableListOf<Centro>()
-
-
-
+data class AppUiState(
+    var listaCentros: MutableList<Centro> = mutableListOf<Centro>(),
+    var centroSelec: Centro=Centro()
 
 
 // revisar

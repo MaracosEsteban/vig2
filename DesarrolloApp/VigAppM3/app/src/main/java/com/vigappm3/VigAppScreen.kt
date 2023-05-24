@@ -117,6 +117,8 @@ fun VigApp() {
 
                     onLoginButtonClicked = {
 
+                       // viewModel.getListaCentrosToUiState()
+                       // navController.navigate(VigAppScreen.Menu.name)
                         if (viewModel.login()) {
                             navController.navigate(VigAppScreen.Menu.name)
                         } else {
@@ -149,7 +151,9 @@ fun VigApp() {
             composable(route = VigAppScreen.Menu.name) {
                 MenuScreen(
                     onCenterCliked = {
-                      //  viewModel.getListaCentrosToUiState()
+
+                        viewModel.getListaCentrosToUiState()
+
                         navController.navigate(VigAppScreen.SelecCentro.name)
                     },
                     onCheckRecordsClicked = { navController.navigate(VigAppScreen.Registros.name) },
@@ -179,7 +183,8 @@ fun VigApp() {
                             inclusive = false
                         )
                     },
-                    onSelecCenterClicked = { navController.navigate(VigAppScreen.Fichar.name) })
+                    onSelecCenterClicked = { viewModel.actualizarCentro(it)
+                        navController.navigate(VigAppScreen.Fichar.name) })
 
             }
 
@@ -187,6 +192,7 @@ fun VigApp() {
 
             composable(route = VigAppScreen.Fichar.name) {
                 FicharScreen(
+                    viewM = viewModel,
                     onFichartButtonClicked = {
                         navController.popBackStack(
                             VigAppScreen.Menu.name,
