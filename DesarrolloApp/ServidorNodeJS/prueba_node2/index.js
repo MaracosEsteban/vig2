@@ -18,12 +18,12 @@ const conexion = mysql.createConnection(
 
     {
         //Para ejecutarlo en Vigilant
-        
-                host: 'localhost',
+
+        host: 'localhost',
         database: 'prueba',
         user: 'root',
         password: ''
-        
+
 
         /*
         // Para ejecutarlo en mi ordenador
@@ -57,7 +57,7 @@ conexion.connect(error => {
 
 //console.log(ip.address()) // Finding the IP address is Node.js / https://stackoverflow.com/questions/67778717/how-to-get-the-ip-address-in-node-js-express
 const cmd = `curl -s http://checkip.amazonaws.com || printf "0.0.0.0"`;
-const pubIp = execSync(cmd).toString().trim();  
+const pubIp = execSync(cmd).toString().trim();
 console.log(`My public IP address is: ${pubIp}`);
 
 
@@ -121,6 +121,11 @@ app.get('/usuarios', (req, res) => {
 */
 
 
+
+
+
+
+
 //S1:-----------------Leer un usuario en base a su nombre(pueden no existir)------------------------------
 app.get('/usuario/:nombre', (req, res) => {
     const { nombre } = req.params
@@ -149,11 +154,13 @@ app.get('/usuario/:nombre', (req, res) => {
                 result[0].mensaje = "No hay registros"
                 result[0].usuarios = [{}]
                 res.json(result)
-               
+
             }
         }
     })
 })
+
+
 
 //S2: ------------------------------------------Leer todos los centros--------------------------------------
 app.get('/centros', (req, res) => {
@@ -182,14 +189,67 @@ app.get('/centros', (req, res) => {
                 result[0].mensaje = "No hay registros"
                 result[0].centros = [{}]
                 res.json(result)
-               
+
             }
         }
     })
 })
 
 
+
+
+
 //S3: ------------------------------------------Generar un registro en la tabla de lectura------------------
+app.post('/registro', (req, res) => {
+    console.log("se usa el S3")
+
+    console.log(req.body.lectura)
+
+    //const {lectura} = req.body
+    
+    console.log(lectura)
+    const query = 'INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVCION) VALUES (DEFAULT,NOW(),"19° 25′ 42″ N","99° 7′ 39″ O",1,629,"Sin observaciones");'
+    // const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
+    conexion.query(query, usuario, (error) => {
+
+        var result = [{
+            ok: false,
+            mensaje: ""
+        }]
+
+        if (error) {
+            result[0].ok = false
+            result[0].mensaje = "Error al conectar con la BBDD"
+            res.json(result)
+        }
+        else {
+
+
+            result[0].ok = true
+            result[0].mensaje = "Se inserto correctamente"
+            res.json(result)
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -198,18 +258,6 @@ app.get('/centros', (req, res) => {
 //S4: ------------------------------------------Recuperar todas las lecturas--------------------------------------
 
 
-
-
-
-
-
-
-
-// ToDo-------------------------Falta  hacer el get usuario por id
-
-
-
-// no esta probada
 app.post('/usuario/add', (req, res) => {
     const usuario = {
         nombre: req.body.nombre,
@@ -246,8 +294,8 @@ app.delete('/usuario/delete/:id', (req, res) => {
     //console.log(id)
     const query = `DELETE FROM usuarios WHERE idUsuarios=${id};`
     conexion.query(query, (error) => {
-        if (error)  console.error(error.message);
-        res.json("Se eliminó correctamente el usuario") 
+        if (error) console.error(error.message);
+        res.json("Se eliminó correctamente el usuario")
     })
 })
 

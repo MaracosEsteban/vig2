@@ -1,16 +1,21 @@
 package com.vigappm3.network
 
 
+import android.graphics.Movie
 import com.vigappm3.model.Usuario
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.vigappm3.model.ConsCentros
 import com.vigappm3.model.ConsUsuarios
+import com.vigappm3.model.GuardarLecturasResp
+import com.vigappm3.model.Lectura
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import retrofit2.Retrofit
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 
@@ -31,16 +36,11 @@ private val retrofit = Retrofit.Builder()
  * Retrofit service object for creating api calls
  */
 interface MarsApiService {
-    @GET("usuarios")
-    suspend fun getUsuarios(): List<Usuario>
 
 
 
-    @GET("users")
-    suspend fun getUsers(): List<ConsUsuarios>
 
-
-    /**
+     /**
      * S1: Leer un usuario en base a su nombre(pueden no existir)
      */
     @GET("usuario/{nombre}")
@@ -54,12 +54,25 @@ interface MarsApiService {
     suspend fun getCenros(): List<ConsCentros>
 
 
-    //S3: Generar un nuevo registro en la tabla  lecturas
+    /**
+     * S3: Genera un nuevo registro enla tabla lecturas
+     */
 
-    //S4. Recuperar todas las lecturas según fechas Seleccionadas
+    @POST("registro")
+    suspend fun crearLectura(@Body lectura:String):List<GuardarLecturasResp>
 
+    /**
+     * S4. Recuperar todas las lecturas según fechas Seleccionadas
+     */
 
 }
+
+
+
+
+
+
+
 
 
 /**

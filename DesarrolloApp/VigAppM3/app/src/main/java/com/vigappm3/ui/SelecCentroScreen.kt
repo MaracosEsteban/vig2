@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun SelecCentroScreen(
+
     onCancelButtonClicked: () -> Unit,
     onSelecCenterClicked: (cen: Centro) -> Unit,
     modifier: Modifier = Modifier,

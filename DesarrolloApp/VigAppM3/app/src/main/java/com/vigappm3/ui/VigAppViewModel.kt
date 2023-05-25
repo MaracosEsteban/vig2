@@ -26,6 +26,10 @@ class VigAppViewModel : ViewModel() {
     var enteredPassword by mutableStateOf("")
         private set
 
+
+    var observaciones by mutableStateOf("")
+    private set
+
     //para guardar los datos del usuario logeado
     var usuarioActual: Usuario = Usuario()
     var okUsuario: Boolean = false
@@ -44,7 +48,11 @@ class VigAppViewModel : ViewModel() {
         // getConsUsuarios()
         //getConsCentros()
         //getListaCentrosToUiState()
+
     }
+
+
+
 
 
     fun updateEnteredName(nameEntered: String) {
@@ -56,10 +64,19 @@ class VigAppViewModel : ViewModel() {
     }
 
 
+    fun updateObserv(obser: String) {
+        this.observaciones=obser
+    }
+
+
+
+
+
     fun login(): Boolean {
         //https://www.youtube.com/watch?v=KqLtW8d8PXY
         //todo solucionar  que hay que precionar dos veces login
         getConsUsuarios()
+
         var result = if (okUsuario) {
             enteredPassword.equals(usuarioActual.CLAVE)
         } else {
@@ -143,6 +160,52 @@ class VigAppViewModel : ViewModel() {
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+    fun guardarLecturas() {
+        var lect =Lectura(ID=-1, FHLOCAL="",LATITUD="",LONGITUD="",USUARIO_ID=usuarioActual.ID,CENTRO_ID=uiState.value.centroSelec.ID, OBSERVACION ="NADA")
+        viewModelScope.launch {
+            println("hola")
+            try {
+                var resp = VigApi.retrofitService.crearLectura("dato que paso en el bodoy")
+//                usuarioActual = resp[0].usuarios[0]
+//                okUsuario = resp[0].ok
+//                mensajeUsuario = resp[0].mensaje
+            } catch (e: IOException) {
+//                okUsuario = false
+//                mensajeUsuario = "IO Exception"
+            } catch (e: HttpException) {
+//                okUsuario = false
+//                mensajeUsuario = "Http Exception"
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

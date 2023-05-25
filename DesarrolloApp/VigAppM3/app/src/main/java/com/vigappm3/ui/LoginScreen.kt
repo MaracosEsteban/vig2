@@ -48,6 +48,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(40.dp))
 
         TextField(
+            singleLine = true,
             label = { Text(stringResource(R.string.user_name)) },
             value = nameEntered,
             onValueChange = onNameChange)

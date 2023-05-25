@@ -17,11 +17,18 @@
     <string name="cancel">Cancelar</string>
     <string name="selec_center">Seleccionar centro</string>
 
+
+
     <!--    Fichar Screen-->
-    <string name="cenro_seleccionado">Cenro seleccionado</string>
+    <string name="cenro_seleccionado">Centro seleccionado</string>
     <string name="observaciones">Observaciones</string>
+    <string name="label_observaciones">Observaciones</string>
+
     <string name="cancel_fichar">Cancelar</string>
     <string name="fichar">Fichar</string>
+
+
+
 
     <!--     Ajustes Screen   -->
     <string name="volver">Volver</string>
@@ -29,8 +36,6 @@
 
     <!--     Registros Screen -->
     <string name="hecho">Hecho</string>
-
-
 
 
 

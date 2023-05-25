@@ -1,14 +1,16 @@
 -- ---------------------------------- BORRAR BBDD ---------------------------------------------------------------------------
 -- drop database if exists vigapp_database;
 
+drop database if exists prueba;
+
 
 
 -- ---------------------------------- CREACION DE LA BBDD -------------------------------------------------------------------
 -- create database vigapp_database;
 -- use vigapp_database;
 
-   -- create database prueba;
-   -- use prueba;
+    create database prueba;
+    use prueba;
 
 
 -- ---------------------------------- DEFINIR USUARIOS Y PERMISOS  ----------------------------------------------------------
@@ -50,6 +52,7 @@ AUTO_INCREMENT=628
 
 
 
+
 CREATE TABLE `lecturas` (
 	`ID` bigint(15)  PRIMARY KEY AUTO_INCREMENT,
 	`FHLOCAL` DATETIME NULL DEFAULT NULL,
@@ -57,6 +60,7 @@ CREATE TABLE `lecturas` (
 	`LONGITUD` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
 	`USUARIO_ID` INT(10),
 	`CENTRO_ID` INT(10) ,
+	`OBSERVCION` TEXT,
     FOREIGN KEY(USUARIO_ID) REFERENCEs usuarios(ID)  ON DELETE restrict ON UPDATE CASCADE,
     foreign key(CENTRO_ID) references centros(ID)  ON DELETE restrict ON UPDATE CASCADE,
     -- PRIMARY KEY (`ID`) USING BTREE,
@@ -78,6 +82,10 @@ AUTO_INCREMENT=628
 
 
 
+
+
+
+
 -- ------------------------------------------------------- CARGA DE DATOS ------------------------------------------------------------------------
 
 
@@ -87,14 +95,11 @@ INSERT INTO usuarios (id,nombre,clave,email) VALUES
 (DEFAULT,"Baltasar","3333","Baltasar2000@hotmail.com");
 
 
-
 INSERT INTO centros (ID,NOMBRE,EMAIL,PASS,CIF,PAIS,CIUDAD,DIRECCION,COD_POSTAL,TEL) VALUES 
 (DEFAULT,"Krunchy-Krunchy","Krunchy@hotmail.com","SecretPass","B-76345879","España","Barcelona","Av de Mayo 55","35100",603272055),
 (DEFAULT,"LifeStyle Dogs","LifeStyleDogs@hotmail.com","SecretPass","B-76000000","España","Madrid","Av  Costa Blanca 20","32123",928123456),
 (DEFAULT,"Versace","Versace@hotmail.com","SecretPass","B-76111111","España","Valencia","Calle de la Reconquista 1","312345",920234566),
-(DEFAULT,"Supra System","SupraSystem@hotmail.com","SecretPass","B-76222222","España","Alicante","Av Primero de mayo","32345",601275098)
-
-
+(DEFAULT,"Supra System","SupraSystem@hotmail.com","SecretPass","B-76222222","España","Alicante","Av Primero de mayo","32345",601275098),
 (DEFAULT,"Donar","Donar@hotmail.com","SecretPass","D-86111122","Argentina","Rosario","Aenida Costa Blanca 25","52345",601275000),
 (DEFAULT,"Lotus","Lotus@hotmail.com","SecretPass","B-76222200","España","Alicante","Avenida Estocolmo 1","39345",601271234),
 (DEFAULT,"Ikea","Ikea@hotmail.com","SecretPass","B-762888222","España","Alicante","Av Primero de mayo","62345",601274232),
@@ -103,28 +108,11 @@ INSERT INTO centros (ID,NOMBRE,EMAIL,PASS,CIF,PAIS,CIUDAD,DIRECCION,COD_POSTAL,T
 
 
 
-INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID) VALUES 
-(DEFAULT,"2223-05-20 23:00:15","19° 25′ 42″ N","99° 7′ 39″ O",1,629),
-(DEFAULT,"2223-05-21 07:00:00","19° 25′ 42″ N","99° 7′ 39″ O",1,629),
-(DEFAULT,"2223-05-15 08:05:00","20° 25′ 42″ N","60° 7′ 39″ O",2,630),
-(DEFAULT,"2223-05-16 17:01:15","20° 25′ 42″ N","60° 7′ 39″ O",2,630);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVCION) VALUES 
+(DEFAULT,"2223-05-20 23:00:15","19° 25′ 42″ N","99° 7′ 39″ O",1,629,"Sin observaciones"),
+(DEFAULT,"2223-05-21 07:00:00","19° 25′ 42″ N","99° 7′ 39″ O",1,629,"Sin observaciones"),
+(DEFAULT,"2223-05-15 08:05:00","20° 25′ 42″ N","60° 7′ 39″ O",2,630,"Sin observaciones"),
+(DEFAULT,"2223-05-16 17:01:15","20° 25′ 42″ N","60° 7′ 39″ O",2,630,"Sin observaciones");
 
 
 
@@ -133,12 +121,12 @@ INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID) VALUES
 -- ------------------------------------------------------- CONSULTAS USADAS EN LA APP -------------------------------------------------------------- 
 
 -- para hacer el login =>
-select * from usuarios where nombre="nombre ingresado";
+-- select * from usuarios where nombre="nombre ingresado";
 
 
 -- para listar los centros =>
 
-select * from centros;
+-- select * from centros;
 
 
 -- para insertar una lectura

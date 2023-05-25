@@ -117,8 +117,8 @@ fun VigApp() {
 
                     onLoginButtonClicked = {
 
-                       // viewModel.getListaCentrosToUiState()
-                       // navController.navigate(VigAppScreen.Menu.name)
+                        // viewModel.getListaCentrosToUiState()
+                        // navController.navigate(VigAppScreen.Menu.name)
                         if (viewModel.login()) {
                             navController.navigate(VigAppScreen.Menu.name)
                         } else {
@@ -177,23 +177,25 @@ fun VigApp() {
                 SelecCentroScreen(
                     viewM = viewModel,
                     onCancelButtonClicked = {
-                       // viewModel.logout()
+                        // viewModel.logout()
                         navController.popBackStack(
                             VigAppScreen.Menu.name,
                             inclusive = false
                         )
                     },
-                    onSelecCenterClicked = { viewModel.actualizarCentro(it)
-                        navController.navigate(VigAppScreen.Fichar.name) })
+                    onSelecCenterClicked = {
+                        viewModel.actualizarCentro(it)
+                        navController.navigate(VigAppScreen.Fichar.name)
+                    })
 
             }
 
-
-
             composable(route = VigAppScreen.Fichar.name) {
                 FicharScreen(
+                    onObservChange = { viewModel.updateObserv(it) },
                     viewM = viewModel,
                     onFichartButtonClicked = {
+                        viewModel.guardarLecturas()
                         navController.popBackStack(
                             VigAppScreen.Menu.name,
                             inclusive = false
@@ -212,6 +214,7 @@ fun VigApp() {
 
             composable(route = VigAppScreen.Registros.name) {
                 RegistrosScreen(onHechoButtonClicked = {
+                    viewModel.guardarLecturas()
                     navController.popBackStack(
                         VigAppScreen.Menu.name,
                         inclusive = false
@@ -227,8 +230,6 @@ fun VigApp() {
 
         }
     }
-
-
 }
 
 
