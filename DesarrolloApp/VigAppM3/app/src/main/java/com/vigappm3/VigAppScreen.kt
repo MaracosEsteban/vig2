@@ -185,6 +185,7 @@ fun VigApp() {
                     },
                     onSelecCenterClicked = {
                         viewModel.actualizarCentro(it)
+                        viewModel.updateObserv("")
                         navController.navigate(VigAppScreen.Fichar.name)
                     })
 

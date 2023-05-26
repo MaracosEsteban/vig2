@@ -8,7 +8,8 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class GuardarLecturasResp(val ok:Boolean,val mensaje:String)
+data class GuardarLecturas(val ok:Boolean,val mensaje:String)
+
 
 
 

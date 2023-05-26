@@ -48,9 +48,7 @@ class VigAppViewModel : ViewModel() {
         // getConsUsuarios()
         //getConsCentros()
         //getListaCentrosToUiState()
-
     }
-
 
 
 
@@ -111,11 +109,17 @@ class VigAppViewModel : ViewModel() {
     }
 
 
+    //------------------------ INTERFACES PARA LOS ESTADOS DE LOS CUATRO SERVICIOS ------------------------------------------------
 
+    sealed interface GuardarLecturasState {
+        data class Success(val resp:List<GuardarLecturas>) : GuardarLecturasState
+        object Error : GuardarLecturasState
+        object Saving : GuardarLecturasState
+    }
 
+// todo hacer la tres interfaces selladas restantes para los demas servicios
 
-
-    //------------------------ Los cuatro servicios para acceder a  la BBDD
+    //------------------------ LOS CUATRO SERVICIOS PARA ACCEDER A AL BASE DE DATOS ------------------------------------------------
 
 
     fun getConsUsuarios() {
@@ -137,10 +141,8 @@ class VigAppViewModel : ViewModel() {
 
 
     /**
-     *
      * todo recordar guardar el id del centro seleccionado
      * todo la consulta me devuelve error pero no la estoy usuando
-     *
      */
     fun getListaCentrosToUiState() {
         var lista = mutableListOf<Centro>()
@@ -165,27 +167,19 @@ class VigAppViewModel : ViewModel() {
 
 
 
-
-
-
-
-
-
     fun guardarLecturas() {
-        var lect =Lectura(ID=-1, FHLOCAL="",LATITUD="",LONGITUD="",USUARIO_ID=usuarioActual.ID,CENTRO_ID=uiState.value.centroSelec.ID, OBSERVACION ="NADA")
+        var guardarLecturasState = GuardarLecturasState.Saving
+        var lect =Lectura(ID=-1, FHLOCAL="fsdfsd",LATITUD="LATITUD",LONGITUD="LONGITUD",USUARIO_ID=usuarioActual.ID,CENTRO_ID=uiState.value.centroSelec.ID, OBSERVACION =this.observaciones)
+        var listita= listOf<Lectura>(lect)
         viewModelScope.launch {
             println("hola")
             try {
-                var resp = VigApi.retrofitService.crearLectura("dato que paso en el bodoy")
-//                usuarioActual = resp[0].usuarios[0]
-//                okUsuario = resp[0].ok
-//                mensajeUsuario = resp[0].mensaje
+                var guardarLecturasStat = VigApi.retrofitService.crearLectura(listita)
             } catch (e: IOException) {
-//                okUsuario = false
-//                mensajeUsuario = "IO Exception"
+                GuardarLecturasState.Error
+
             } catch (e: HttpException) {
-//                okUsuario = false
-//                mensajeUsuario = "Http Exception"
+                GuardarLecturasState.Error
             }
         }
     }

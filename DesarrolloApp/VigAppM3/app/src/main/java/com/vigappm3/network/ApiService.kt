@@ -6,7 +6,7 @@ import com.vigappm3.model.Usuario
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.vigappm3.model.ConsCentros
 import com.vigappm3.model.ConsUsuarios
-import com.vigappm3.model.GuardarLecturasResp
+import com.vigappm3.model.GuardarLecturas
 import com.vigappm3.model.Lectura
 
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -59,11 +59,22 @@ interface MarsApiService {
      */
 
     @POST("registro")
-    suspend fun crearLectura(@Body lectura:String):List<GuardarLecturasResp>
+    suspend fun crearLectura(@Body lectura:List<Lectura>):List<GuardarLecturas>
 
     /**
      * S4. Recuperar todas las lecturas según fechas Seleccionadas
      */
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

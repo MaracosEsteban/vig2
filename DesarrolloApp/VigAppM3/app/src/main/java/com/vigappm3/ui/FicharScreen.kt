@@ -1,9 +1,6 @@
 package com.vigappm3.ui
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,16 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
 import com.vigappm3.R
 import com.vigappm3.model.Centro
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.ComposableInferredTarget
-import org.w3c.dom.Text
 
 
 @ExperimentalMaterial3Api
@@ -48,54 +40,68 @@ fun FicharScreen(
     ) {
 
 
-        Spacer(Modifier.height(16.dp))
-
-        Text(
-            text = stringResource(R.string.cenro_seleccionado),
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            fontWeight = FontWeight.Bold
-        )
-
-        Spacer(Modifier.height(16.dp))
+        Column(modifier = modifier.weight(8f)) {
 
 
+            Spacer(Modifier.height(16.dp))
 
-        TarjetaCompleta(centro = uiState.centroSelec)
+            Text(
+                text = stringResource(R.string.cenro_seleccionado),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                fontWeight = FontWeight.Bold
+            )
 
-        Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(16.dp))
 
+            TarjetaCompleta(centro = uiState.centroSelec)
 
+            Spacer(Modifier.height(16.dp))
 
+            Text(
+                text = stringResource(R.string.observaciones),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                fontWeight = FontWeight.Bold
+            )
 
+            Spacer(Modifier.height(16.dp))
 
-        Text(
-            text = stringResource(R.string.observaciones),
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            fontWeight = FontWeight.Bold
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-
-
-
-
-        OutlinedTextField(value = "sdfsd", onValueChange = {onObservChange})
-// todo completar los paremetro restantes
+            OutlinedTextField(
+                modifier = Modifier
+                    .height(150.dp)
+                    .fillMaxSize()
+                    .padding(dimensionResource(R.dimen.padding_medium)),
+                
+                value = viewM.observaciones,
+                onValueChange = onObservChange
+            )
+        }
 
 
 
         Row(
             modifier = Modifier
+                .weight(2f)
                 .fillMaxWidth()
                 .padding(dimensionResource(R.dimen.padding_medium)),
-            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
-        ) {
-            OutlinedButton(modifier = Modifier.weight(1f), onClick = onCancelButtonClicked) {
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            ) {
+
+
+            OutlinedButton(
+                modifier = Modifier
+                    .padding(dimensionResource(R.dimen.padding_small))
+                    .weight(1f),
+                onClick = onCancelButtonClicked
+            ) {
                 Text(stringResource(R.string.cancel_fichar).uppercase())
             }
+
+
             Button(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(dimensionResource(R.dimen.padding_small)),
                 onClick = onFichartButtonClicked
             ) {
                 Text(stringResource(R.string.fichar).uppercase())
@@ -103,6 +109,11 @@ fun FicharScreen(
         }
     }
 }
+
+
+
+
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -118,38 +129,166 @@ fun TarjetaCompleta(
 
         modifier = Modifier
             .padding(8.dp)
+
             .fillMaxWidth()
 
 
     ) {
         Column(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+            modifier = Modifier.align(Alignment.Start)
+                .padding(16.dp),
 
             ) {
 
             Text(
-                text = centro.NOMBRE,
-                modifier = Modifier.padding(30.dp),
+                //textAlign= TextAlign.Center,
+                text = centro.NOMBRE.trim(),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(16.dp),
 
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.bodySmall
             )
 
+
+
+
+
+
+
             Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    fontWeight=FontWeight.Bold,
+                    fontSize = 15.sp,
+                    text = "País:",
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
                 Text(
                     fontSize = 15.sp,
                     text = centro.PAIS,
-                    modifier = Modifier.padding(12.dp),
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
+
+
+
+
+
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    fontWeight=FontWeight.Bold,
+                    fontSize = 15.sp,
+                    text = "Ciudad:",
+                    modifier = Modifier.padding(2.dp),
                     style = MaterialTheme.typography.bodySmall
                 )
                 Text(
                     fontSize = 15.sp,
                     text = centro.CIUDAD,
-                    modifier = Modifier.padding(12.dp),
+                    modifier = Modifier.padding(2.dp),
                     style = MaterialTheme.typography.bodySmall
                 )
             }
+
+
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    fontWeight=FontWeight.Bold,
+                    fontSize = 15.sp,
+                    text = "Direccion:",
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    fontSize = 15.sp,
+                    text = centro.DIRECCION,
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
+
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    fontWeight=FontWeight.Bold,
+                    fontSize = 15.sp,
+                    text = "Cod. Postal:",
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    fontSize = 15.sp,
+                    text = centro.COD_POSTAL,
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
+
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    fontWeight=FontWeight.Bold,
+                    fontSize = 15.sp,
+                    text = "Teléfono:",
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    fontSize = 15.sp,
+                    text = centro.TEL,
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    fontWeight=FontWeight.Bold,
+                    fontSize = 15.sp,
+                    text = "Email:",
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    fontSize = 15.sp,
+                    text = centro.EMAIL,
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
+
+            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(
+                    fontWeight=FontWeight.Bold,
+                    fontSize = 15.sp,
+                    text = "CIF:",
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    fontSize = 15.sp,
+                    text = centro.CIF,
+                    modifier = Modifier.padding(2.dp),
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }

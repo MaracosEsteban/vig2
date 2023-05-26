@@ -198,38 +198,47 @@ app.get('/centros', (req, res) => {
 
 
 
-
 //S3: ------------------------------------------Generar un registro en la tabla de lectura------------------
 app.post('/registro', (req, res) => {
+
+
     console.log("se usa el S3")
 
-    console.log(req.body.lectura)
+    console.log(req.body)
 
-    //const {lectura} = req.body
+
+
+    const {ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVACION} = req.body[0]
     
-    console.log(lectura)
-    const query = 'INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVCION) VALUES (DEFAULT,NOW(),"19° 25′ 42″ N","99° 7′ 39″ O",1,629,"Sin observaciones");'
-    // const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
-    conexion.query(query, usuario, (error) => {
 
+    //'+'${OBSERVCION}'+'
+
+
+    
+   //const query = `INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVCION) VALUES (DEFAULT,NOW(),'+'${LATITUD}'+','+'${LONGITUD}'+','+'${USUARIO_ID}'+','+'${CENTRO_ID}'+','+'${OBSERVCION}'+');`
+ 
+    const query = `INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVCION) VALUES (DEFAULT,NOW(),'${LATITUD}','${LONGITUD}',${USUARIO_ID},${CENTRO_ID},'${OBSERVACION}');`
+        conexion.query(query, (error) => {
         var result = [{
             ok: false,
             mensaje: ""
         }]
-
         if (error) {
             result[0].ok = false
             result[0].mensaje = "Error al conectar con la BBDD"
             res.json(result)
+            console.log("se proedujo un error")
+            console.log(error)
         }
         else {
-
-
             result[0].ok = true
             result[0].mensaje = "Se inserto correctamente"
             res.json(result)
+            console.log("se inserto correctamente")
         }
     })
+
+    
 })
 
 
