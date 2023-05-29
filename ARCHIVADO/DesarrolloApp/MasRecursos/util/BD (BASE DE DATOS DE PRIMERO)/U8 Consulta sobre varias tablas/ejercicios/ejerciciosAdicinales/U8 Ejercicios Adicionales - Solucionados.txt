@@ -1,0 +1,84 @@
+-- COMERCIO
+
+-- 31. Obtén el nombre de aquellos municipios en los que residen menos de 3 clientes.
+SELECT m.nombre, COUNT(c.codigo) AS num_clientes FROM municipio m
+LEFT JOIN cliente c ON c.municipio = m.codigo
+GROUP BY m.codigo HAVING num_clientes < 3;
+-- 32. Obtén, para cada provincia, el número de clientes que han tenido un descuento del 3% en alguno de sus tickets.
+SELECT p.nombre, COUNT(DISTINCT cliente) FROM ticket t
+INNER JOIN cliente c ON t.cliente = c.codigo
+INNER JOIN municipio m ON c.municipio = m.codigo
+INNER JOIN provincia p ON m.provincia = p.codigo
+WHERE dto = 3
+GROUP BY p.codigo;
+
+-- CITAS
+
+-- 33. Muestra el nombre de usuario, fecha de nacimiento y email de los usuarios que le gustan a emgonzalez.
+SELECT p.nom_usuario, p.fechanac, p.email 
+FROM perfil p 
+INNER JOIN gusta g ON p.nom_usuario = g.nom_usuario_2
+WHERE g.nom_usuario_1 = 'emgonzalez';
+-- 34. Muestra el código de aquellas citas en las que ambos participantes comparten la misma valoración.
+SELECT cita, valoracion FROM encuesta GROUP BY cita, valoracion HAVING COUNT(cita) = 2;
+-- 35. Muestra para todas las citas los nombres de usuario que han asistido, el número de cita y la valoración. Ordena los resultados por nombre de usuario alfabéticamente.
+SELECT nom_usuario, cita, valoracion 
+FROM encuesta e 
+INNER JOIN cita c 
+ON e.cita = c.id ORDER BY nom_usuario ASC;
+-- 36. Muestra el nombre de usuario de aquellos usuarios que practiquen alguna afición todos los meses y que gusten al usuario djrodrigo.
+SELECT p.nom_usuario FROM practica p 
+INNER JOIN gusta g 
+ON p.nom_usuario = g.nom_usuario_2 
+WHERE g.nom_usuario_1 = 'djrodrigo' 
+AND p.frecuencia = 'todos los meses';
+
+-- INSTITUTO
+
+-- 37. Obtén el nombre de cada profesor y la cantidad de asignaturas que imparte cada uno.
+SELECT p.nombre, COUNT(DISTINCT e.asignatura)
+FROM profesor p
+INNER JOIN ensenya e ON e.profesor = p.dni
+GROUP BY p.dni, p.nombre;
+
+-- CINE
+
+-- 38. Obtén el título de las películas junto con su recaudación total.
+SELECT p.titulo, SUM(e.precio_final) AS recaudacion FROM pelicula p
+INNER JOIN sesion s ON s.pelicula = p.id
+INNER JOIN entrada e ON e.sesion = s.id
+GROUP BY p.id;
+-- 39. Obtén el dni de aquellos socios que aún no han comprado ninguna entrada.
+SELECT s.dni FROM socio s
+LEFT JOIN compra c ON c.socio = s.dni
+GROUP BY s.dni HAVING COUNT(c.entrada) = 0;
+SELECT DISTINCT s.dni FROM socio s
+LEFT JOIN compra c ON c.socio = s.dni
+WHERE c.entrada IS NULL;
+-- 40. Obtén el nombre de los cines y la recaudación de cada uno de ellos considerando únicamente las películas de Acción.
+SELECT cine.nombre, SUM(precio_final) FROM pelicula
+INNER JOIN sesion ON sesion.pelicula = pelicula.id
+INNER JOIN entrada ON entrada.sesion = sesion.id
+INNER JOIN sala ON sesion.sala = sala.id
+INNER JOIN cine ON sala.cine = cine.id
+WHERE pelicula.genero = 'Acción'
+GROUP BY cine.id;
+
+
+-- 41. Obtén el título de las películas que se han proyectado en salas con Sonido Dolby Atmos.
+SELECT DISTINCT pelicula.titulo FROM pelicula
+INNER JOIN sesion ON sesion.pelicula = pelicula.id
+INNER JOIN sala ON sesion.sala = sala.id
+INNER JOIN equipa ON equipa.sala = sala.id
+INNER JOIN equipamiento ON equipa.equipamiento = equipamiento.id
+WHERE equipamiento.descripcion = "Sonido Dolby Atmos";
+-- 42. Obtén el número total de entradas vendidas, el número de entradas vendidas a socios y el número de entradas vendidas a no socios.
+SELECT COUNT(*) AS total_entradas, COUNT(compra.socio) AS entradas_socios, COUNT(*) - COUNT(compra.socio) AS entradas_no_socios FROM entrada
+LEFT JOIN compra ON compra.entrada = entrada.id;
+-- 43. Obtén el descuento total en euros que han recibido los diferentes socios. Es decir, la cantidad total en euros que les han descontado sobre
+-- el precio base de todas las entradas que han adquirido.
+SELECT socio.nombre, SUM(sesion.precio_base - entrada.precio_final) AS descuento_total FROM socio
+INNER JOIN compra ON compra.socio = socio.dni
+INNER JOIN entrada ON compra.entrada = entrada.id
+INNER JOIN sesion ON entrada.sesion = sesion.id
+GROUP BY socio.dni;

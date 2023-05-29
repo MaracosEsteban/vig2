@@ -1,0 +1,66 @@
+/* 2. Crea un archivo JSON (puedes utilizar cualquier editor de textos) con los datos de las películas disponibles en una plataforma
+  de streaming. De cada película se quiere conocer su título, género, duración y los actores que participan. De cada actor se quiere
+  conocer su nombre y nacionalidad. Incluye al menos dos películas diferentes con dos actores cada una. Los datos puedes inventártelos. */
+
+[
+  {
+    "titulo": "El viajero",
+    "genero": "Aventura",
+    "duracion": 125,
+    "actores": [
+      {
+        "nombre": "Juan",
+        "nacionalidad": "Española"
+      },
+      {
+        "nombre": "María",
+        "nacionalidad": "Argelina"
+      }
+    ]
+  },
+  {
+    "titulo": "Enemigo Mortal",
+    "genero": "Drama",
+    "duracion": 300,
+    "actores": [
+      {
+        "nombre": "Pedro",
+        "nacionalidad": "Argentino"
+      },
+      {
+        "nombre": "Mario",
+        "nacionalidad": "Uruguayo"
+      }
+    ]
+  }
+
+]
+
+
+
+
+
+
+
+/* solucion del profesor
+
+
+[
+    {
+        "titulo": "Interstellar",
+        "genero": "Ciencia ficción",
+        "duracion": 169,
+        "actores": [
+            {
+                "nombre": "Matthew McGonagiu",
+                "edad": 51,
+                "nacionalidad": "EEUU" 
+            },
+            {
+                "nombre": "Anne Hathaway",
+                "nacionalidad": "EEUU" 
+            }
+
+        ]
+    }
+]*/

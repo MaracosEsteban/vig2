@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION ejercicio27 (cod1 ticket.codigo%TYPE,
+									    cod2 ticket.codigo%TYPE)
+										RETURNS VOID AS $$
+DECLARE
+	cont ticket.codigo%TYPE;
+	num_lineas NUMERIC;
+BEGIN
+	cont = cod1;
+	WHILE cont <= cod2 LOOP
+		SELECT COUNT(*) INTO num_lineas FROM linea_ticket WHERE ticket = cont;
+		RAISE NOTICE 'El ticket % tiene % líneas',cont, num_lineas;
+		cont=cont+1;
+	END LOOP;
+END
+$$ language plpgsql;

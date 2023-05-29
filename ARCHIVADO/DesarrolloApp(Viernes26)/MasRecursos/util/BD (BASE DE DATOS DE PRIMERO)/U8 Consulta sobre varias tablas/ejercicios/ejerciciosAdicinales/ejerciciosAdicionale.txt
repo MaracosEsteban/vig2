@@ -1,0 +1,202 @@
+Base de datos: comercio.
+31. Obtén el nombre de aquellos municipios en los que residen menos de 3 clientes.
+
+
+select m.nombre,count(c.municipio) from cliente c 
+right join municipio m on c.municipio=m.codigo  group by m.nombre having count(*)<3;
+
+SELECT m.nombre, COUNT(c.codigo) AS num_clientes FROM municipio m
+LEFT JOIN cliente c ON c.municipio = m.codigo
+GROUP BY m.codigo HAVING num_clientes < 3;
+
+
+32. Obtén, para cada provincia, el número de clientes que han tenido un descuento del 3% en
+alguno de sus tickets.
+
+select p.nombre,count(distinct cliente)
+from ticket t
+join cliente c on t.cliente=c.codigo
+join municipio m on c.municipio=m.codigo
+join provincia p on m.provincia=p.codigo
+where dto=3
+group by p.nombre;
+
+SELECT p.nombre, COUNT(DISTINCT cliente) FROM ticket t
+INNER JOIN cliente c ON t.cliente = c.codigo
+INNER JOIN municipio m ON c.municipio = m.codigo
+INNER JOIN provincia p ON m.provincia = p.codigo
+WHERE dto = 3
+GROUP BY p.codigo;
+
+
+
+
+
+Base de datos: citas.
+
+
+33. Muestra el nombre de usuario, fecha de nacimiento y email de los usuarios que le gustan a
+emgonzalez.
+
+select p.nom_usuario,p.fechanac,p.email from gusta g
+join perfil p on g.nom_usuario_2=p.nom_usuario
+where nom_usuario_1='emgonzalez';
+
+SELECT p.nom_usuario, p.fechanac, p.email 
+FROM perfil p 
+INNER JOIN gusta g ON p.nom_usuario = g.nom_usuario_2
+WHERE g.nom_usuario_1 = 'emgonzalez';
+
+
+
+
+
+34. Muestra el código de aquellas citas en las que ambos participantes comparten la misma
+valoración.
+
+select e.cita from encuesta e
+join encuesta en 
+on e.cita=en.cita and e.nom_usuario!=en.nom_usuario
+where e.valoracion=en.valoracion
+group by e.cita;
+
+SELECT cita, valoracion FROM encuesta GROUP BY cita, valoracion HAVING COUNT(cita) = 2;                 mirar en el apunte agrupaciones dobles
+
+
+
+
+
+
+
+35. Muestra para todas las citas los nombres de usuario que han asistido, el número de cita y la
+valoración. Ordena los resultados por nombre de usuario alfabéticamente.
+
+elect * from encuesta e order by nom_usuario; mi solucion
+
+
+SELECT nom_usuario, cita, valoracion                        com esta planteado el ejercicio no es necesario hacer el join ,    
+FROM encuesta e                                             seguramente la intención del profesor ere pedir alguna dto de la cita como fecha o lugar
+INNER JOIN cita c 
+ON e.cita = c.id ORDER BY nom_usuario ASC;
+
+
+36. Muestra el nombre de usuario de aquellos usuarios que practiquen alguna afición todos los
+meses y que gusten al usuario djrodrigo.
+Base de datos: instituto.
+
+select nom_usuario_2 from gusta g
+join practica p on g.nom_usuario_2=p.nom_usuario
+where nom_usuario_1='djrodrigo' and frecuencia='todos los meses'
+group by nom_usuario_2;
+
+
+INNER JOIN gusta g 
+ON p.nom_usuario = g.nom_usuario_2        Le faltó agrupar por  nom_usuario porque puede darse el caso que un mismo usuario de los que gusta rodrigo
+WHERE g.nom_usuario_1 = 'djrodrigo'        practique mas de una aficion "todos los meses"
+AND p.frecuencia = 'todos los meses';
+
+37. Obtén el nombre de cada profesor y la cantidad de asignaturas que imparte cada uno.
+
+select p.nombre,count(distinct(e.asignatura)) from profesor p
+join ensenya e on p.dni=e.profesor
+group by p.dni;
+
+SELECT p.nombre, COUNT(DISTINCT e.asignatura)
+FROM profesor p
+INNER JOIN ensenya e ON e.profesor = p.dni
+GROUP BY p.dni, p.nombre;
+
+
+
+Base de datos: cine.
+
+38. Obtén el título de las películas junto con su recaudación total.
+
+select p.titulo,sum(e.precio_final) from pelicula p 
+left join sesion s on p.id=s.pelicula
+left join entrada e on s.id=e.sesion
+group by p.titulo;
+
+SELECT p.titulo, SUM(e.precio_final) AS recaudacion FROM pelicula p
+INNER JOIN sesion s ON s.pelicula = p.id
+INNER JOIN entrada e ON e.sesion = s.id
+GROUP BY p.id;
+
+39. Obtén el DNI de aquellos socios que aún no han comprado ninguna entrada.
+
+select s.dni from socio s
+left join compra c on c.socio=s.dni where c.entrada is null;
+
+SELECT s.dni FROM socio s
+LEFT JOIN compra c ON c.socio = s.dni
+GROUP BY s.dni HAVING COUNT(c.entrada) = 0;
+SELECT DISTINCT s.dni FROM socio s
+LEFT JOIN compra c ON c.socio = s.dni
+WHERE c.entrada IS NULL;
+
+40. Obtén el nombre de los cines y la recaudación de cada uno de ellos considerando
+únicamente las películas de Acción.
+
+select c.nombre,sum(e.precio_final) from cine c
+join sala s on c.id=s.cine
+join sesion ses on s.id=ses.sala
+join pelicula p on ses.pelicula=p.id
+join entrada e on ses.id=e.sesion
+where p.genero='Acción'
+group by c.nombre;
+
+SELECT cine.nombre, SUM(precio_final) FROM pelicula
+INNER JOIN sesion ON sesion.pelicula = pelicula.id
+INNER JOIN entrada ON entrada.sesion = sesion.id
+INNER JOIN sala ON sesion.sala = sala.id
+INNER JOIN cine ON sala.cine = cine.id
+WHERE pelicula.genero = 'Acción'
+GROUP BY cine.id;
+
+
+
+41. Obtén el título de las películas que se han proyectado en salas con Sonido Dolby Atmos.
+
+select p.titulo from pelicula p
+join sesion ses on p.id=ses.pelicula
+join equipa e on ses.sala=e.sala
+join equipamiento miento on e.equipamiento=miento.id
+where miento.descripcion='Sonido Dolby Atmos'
+group by p.titulo;
+
+SELECT DISTINCT pelicula.titulo FROM pelicula
+INNER JOIN sesion ON sesion.pelicula = pelicula.id
+INNER JOIN sala ON sesion.sala = sala.id
+INNER JOIN equipa ON equipa.sala = sala.id
+INNER JOIN equipamiento ON equipa.equipamiento = equipamiento.id
+WHERE equipamiento.descripcion = "Sonido Dolby Atmos";
+
+
+42. Obtén el número total de entradas vendidas, el número de entradas vendidas a socios y el
+número de entradas vendidas a no socios.
+
+select count(*) as TotalEntradas,
+count(c.socio) as TotalVendidasSocios,
+count(*)-count(c.socio) as TotalVendidasNoSocios
+from entrada e
+left join compra c on e.id=c.entrada;
+
+SELECT COUNT(*) AS total_entradas, COUNT(compra.socio) AS entradas_socios, COUNT(*) - COUNT(compra.socio) AS entradas_no_socios FROM entrada
+LEFT JOIN compra ON compra.entrada = entrada.id;
+
+43. Obtén el descuento total en euros que han recibido los diferentes socios. Es decir, la
+cantidad total en euros que les han descontado sobre el precio base de todas las entradas
+que han adquirido.
+select socio.nombre,sum(s.precio_base)-sum(e.precio_final) from compra c
+join entrada e on c.entrada=e.id
+join sesion s on e.sesion=s.id
+join socio on  c.socio=socio.dni
+group by socio.nombre;
+
+SELECT socio.nombre, SUM(sesion.precio_base - entrada.precio_final) AS descuento_total FROM socio
+INNER JOIN compra ON compra.socio = socio.dni
+INNER JOIN entrada ON compra.entrada = entrada.id
+INNER JOIN sesion ON entrada.sesion = sesion.id
+GROUP BY socio.dni;
+
+

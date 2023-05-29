@@ -1,0 +1,17 @@
+CREATE OR REPLACE FUNCTION ejercicio24 (n1 NUMERIC, n2 NUMERIC) RETURNS VOID AS $$
+DECLARE
+BEGIN
+	IF n1 % 2 != 0 THEN
+		n1=n1+1;
+	END IF;
+	LOOP
+		IF n1 % 2 = 0 THEN
+			RAISE NOTICE '%', n1;
+		END IF;
+		IF n1 = n2 THEN
+			EXIT;
+		END IF;
+		n1 = n1 + 1;
+	END LOOP;
+END
+$$ language plpgsql;

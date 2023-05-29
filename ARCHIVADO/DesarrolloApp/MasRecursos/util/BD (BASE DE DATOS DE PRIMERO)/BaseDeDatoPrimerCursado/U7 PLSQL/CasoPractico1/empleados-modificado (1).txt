@@ -1,0 +1,19 @@
+CREATE TABLE tecnicos (
+	dni CHAR(9) PRIMARY KEY,
+	nombre VARCHAR(50),
+	fecha_contratacion DATE,
+	sueldo NUMERIC
+);
+CREATE TABLE comerciales (
+	dni CHAR(9) PRIMARY KEY,
+	nombre VARCHAR(50),
+	fecha_contratacion DATE,
+	sueldo NUMERIC,
+	total_importe NUMERIC DEFAULT 0
+);
+CREATE TABLE ventas (
+	id SERIAL,
+	fecha DATE,
+	importe NUMERIC,
+	comercial CHAR(9) REFERENCES comerciales (dni)
+);

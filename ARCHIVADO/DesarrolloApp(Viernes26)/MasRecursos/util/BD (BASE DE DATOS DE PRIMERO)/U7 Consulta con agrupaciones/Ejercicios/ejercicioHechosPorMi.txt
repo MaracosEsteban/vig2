@@ -1,0 +1,74 @@
+
+
+Base de datos: instituto.
+
+17. Obtener la nota más baja y más alta en la asignatura con código 13.
+
+select max(nota) as NotaMasAlta,min(nota) NotaMasBaja
+ from matricula where asignatura=13;
+
+SELECT MIN(nota), MAX(nota) FROM matricula WHERE asignatura = 13;
+
+
+18. Calcular la nota media de cada asignatura.
+
+select asignatura,avg(nota) from matricula group by asignatura;
+
+SELECT asignatura, AVG(nota) FROM matricula GROUP BY asignatura;
+
+19. Obtén el mayor código de asignatura correspondiente al 1º curso.
+
+select max(codigo) from asignatura where curso=1;
+SELECT MAX(codigo) AS mayor_codigo FROM asignatura WHERE curso = 1;
+
+
+20. Obtén el año medio de incorporación de todos los profesores excepto los que comenzaron
+en 2013.
+
+select avg(anyoi) from profesor where anyoi!=2013;
+SELECT AVG(anyoi) FROM profesor WHERE anyoi != 2013;
+
+21. Obtén la cantidad de alumnos matriculados en la asignatura con código 3.
+
+select count(*) from matricula where asignatura=3;// mi respuesta tambien esta bien a mi parecer
+
+SELECT COUNT(*) AS num_alumnos FROM matricula GROUP BY asignatura HAVING asignatura = 3;
+SELECT COUNT(*) AS num_alumnos FROM matricula WHERE asignatura = 3 GROUP BY asignatura;
+
+
+
+22. Obtén la cantidad de profesores que se incorporaron en el año 2014.
+
+select count(*) from profesor where anyoi= 2014;
+
+SELECT COUNT(*) AS num_profesores FROM profesor WHERE anyoi = 2014;
+
+23. Obtén la cantidad de notas diferentes obtenidas por los alumnos de la asignatura con
+código 1.
+
+select count(distinct nota) as NotasDiferentes from matricula where asignatura=1;
+
+SELECT COUNT(DISTINCT nota) AS notas_diferentes FROM matricula WHERE asignatura = 1;
+
+
+24. Obtén el DNI de cada alumno y la nota que ha obtenido en la asignatura con código 1.
+
+ select alumno as DNI_Alumno, nota from matricula where asignatura=1;
+SELECT alumno, nota FROM matricula WHERE asignatura = 1;
+
+25. Obtén la cantidad de alumnos matriculados por asignatura.
+
+elect asignatura,count(*) from matricula group by asignatura;
+SELECT asignatura, COUNT(*) AS num_alumnos FROM matricula GROUP BY asignatura;
+
+26. Muestra la nota más alta de cada asignatura.
+
+SELECT asignatura, MAX(nota) AS nota_maxima FROM matricula GROUP BY asignatura;
+select asignatura,max(nota) from matricula group by asignatura;
+
+
+27. Obtener la nota media de aquellas asignaturas que tengan matriculados más de 10 alumnos.
+
+select avg(nota) from matricula group by asignatura having count(*)>10;
+
+SELECT asignatura, AVG(nota) FROM matricula GROUP BY asignatura HAVING COUNT(*) > 10;

@@ -1,19 +1,28 @@
 package com.vigappm3.ui
 
+import android.app.PendingIntent.getActivity
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
+import com.vigappm3.VigAppScreen
+import com.vigappm3.model.Centro
+import com.vigappm3.model.ConsUsuarios
+import com.vigappm3.model.GuardarLecturas
+import com.vigappm3.model.Lectura
+import com.vigappm3.model.Usuario
 import com.vigappm3.network.VigApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
-import com.vigappm3.model.*
-import kotlinx.coroutines.flow.update
+import kotlin.properties.Delegates
 
 
 class VigAppViewModel : ViewModel() {
@@ -26,32 +35,20 @@ class VigAppViewModel : ViewModel() {
     var enteredPassword by mutableStateOf("")
         private set
 
-
     var observaciones by mutableStateOf("")
-    private set
+        private set
 
-    //para guardar los datos del usuario logeado
-    var usuarioActual: Usuario = Usuario()
-    var okUsuario: Boolean = false
-    var mensajeUsuario: String = ""
 
-    //para guardar los dato del centro en uso
-    var centroActual: Centro = Centro()
+
 
     // para saber si la lectura de los centros fué exitosa
     var okCentros: Boolean = false
     var mensajeCentros: String = ""
 
 
+
     init {
-        //getListaUsuarios()
-        // getConsUsuarios()
-        //getConsCentros()
-        //getListaCentrosToUiState()
     }
-
-
-
 
     fun updateEnteredName(nameEntered: String) {
         this.enteredName = nameEntered
@@ -61,27 +58,13 @@ class VigAppViewModel : ViewModel() {
         this.enteredPassword = passwordEntered
     }
 
-
     fun updateObserv(obser: String) {
-        this.observaciones=obser
+        this.observaciones = obser
     }
 
-
-
-
-
-    fun login(): Boolean {
-        //https://www.youtube.com/watch?v=KqLtW8d8PXY
-        //todo solucionar  que hay que precionar dos veces login
-        getConsUsuarios()
-
-        var result = if (okUsuario) {
-            enteredPassword.equals(usuarioActual.CLAVE)
-        } else {
-            false
-        }
-        return result
+    fun login() {
     }
+
 
     /**
      *  Elimina toda la información de la sesion usuario, centro , datos en pantalla
@@ -90,9 +73,6 @@ class VigAppViewModel : ViewModel() {
         enteredName = ""
         enteredPassword = ""
 
-        usuarioActual = Usuario()
-        okUsuario = false
-        mensajeUsuario = ""
 
         actualizarCentro(Centro())
 
@@ -102,48 +82,84 @@ class VigAppViewModel : ViewModel() {
     }
 
 
-    fun actualizarCentro(centroActual:Centro){
+    fun actualizarCentro(centroActual: Centro) {
         _uiState.update { currentState ->
             currentState.copy(centroSelec = centroActual)
         }
     }
 
 
-    //------------------------ INTERFACES PARA LOS ESTADOS DE LOS CUATRO SERVICIOS ------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------ LOS CUATRO SERVICIOS PARA ACCEDER A AL BASE DE DATOS CON SUS RESPECTIVAS INERFACES Y VARIABLES DE ESTADO -------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------
 
-    sealed interface GuardarLecturasState {
-        data class Success(val resp:List<GuardarLecturas>) : GuardarLecturasState
-        object Error : GuardarLecturasState
-        object Saving : GuardarLecturasState
+
+    // S1 interface + variable + servicioGuradarlecturas
+
+    sealed interface GetUsuarioState {
+        data class Success(val consUsuarios: List<ConsUsuarios>) : GetUsuarioState
+        data class Error(val mensaje: String) : GetUsuarioState
+        object Reading : GetUsuarioState
     }
 
-// todo hacer la tres interfaces selladas restantes para los demas servicios
+    var getUsuarioState: GetUsuarioState by mutableStateOf(GetUsuarioState.Reading)
+        private set
 
-    //------------------------ LOS CUATRO SERVICIOS PARA ACCEDER A AL BASE DE DATOS ------------------------------------------------
+
+    fun getConsUsuarios(navHostController: NavHostController) {
+        getUsuarioState = GetUsuarioState.Reading
+        //fuente  =>  https://stackoverflow.com/questions/54313839/how-to-set-up-a-listener-for-a-variable-in-kotlin
+        var consUsuario: ConsUsuarios = ConsUsuarios(false, "Error Conexion", listOf(Usuario()))
 
 
-    fun getConsUsuarios() {
+        var flagFinised by Delegates.observable(false) { property, oldValue, newValue ->
+            if (newValue && (consUsuario.ok)) {
+                if (consUsuario.usuarios[0].CLAVE == enteredPassword) {
+
+                   updateEnteredName("La clave coinside")
+                    navHostController.navigate(VigAppScreen.Menu.name)
+                } else {
+                    updateEnteredName("Clave no coinside con el usuario")
+
+                                   }
+            } else {
+                if (consUsuario.mensaje == "Error Conexion") {
+                    updateEnteredName("Error Conexión")
+                } else if (consUsuario.mensaje == "No hay registros") {
+                    updateEnteredName("No hay usuarios con ese nombre")
+                }
+            }
+        }
+
+
+
+
+
         viewModelScope.launch {
+            // getUsuarioState =
             try {
-                var resp = VigApi.retrofitService.getUsuario(enteredName)
-                usuarioActual = resp[0].usuarios[0]
-                okUsuario = resp[0].ok
-                mensajeUsuario = resp[0].mensaje
+                var consultas = VigApi.retrofitService.getUsuario(enteredName)
+                consUsuario = consultas[0]
+                getUsuarioState = GetUsuarioState.Success(consultas)
+
             } catch (e: IOException) {
-                okUsuario = false
-                mensajeUsuario = "IO Exception"
+                GetUsuarioState.Error("IOException")
             } catch (e: HttpException) {
-                okUsuario = false
-                mensajeUsuario = "Http Exception"
+                flagFinised = false
+                GetUsuarioState.Error("HttpException")
+            } finally {
+                flagFinised =
+                    true  //La bandera indica que ya pasó por el try catch independientemente del resultado
             }
         }
     }
 
 
-    /**
-     * todo recordar guardar el id del centro seleccionado
-     * todo la consulta me devuelve error pero no la estoy usuando
-     */
+
+
+    // S2 interface + variable + servicioGuradarlecturas
+
+
     fun getListaCentrosToUiState() {
         var lista = mutableListOf<Centro>()
         viewModelScope.launch {
@@ -164,40 +180,54 @@ class VigAppViewModel : ViewModel() {
     }
 
 
+    // S3 interface + variable + servicioGuradarlecturas
+    sealed interface GuardarLecturasState {
+        data class Success(val resp: List<GuardarLecturas>) : GuardarLecturasState
+        data class Error(val mensaje: String) : GuardarLecturasState
+        object Saving : GuardarLecturasState
+    }
 
-
+    var guardarLecturasState: GuardarLecturasState by mutableStateOf(GuardarLecturasState.Saving)
+        private set
 
     fun guardarLecturas() {
-        var guardarLecturasState = GuardarLecturasState.Saving
-        var lect =Lectura(ID=-1, FHLOCAL="fsdfsd",LATITUD="LATITUD",LONGITUD="LONGITUD",USUARIO_ID=usuarioActual.ID,CENTRO_ID=uiState.value.centroSelec.ID, OBSERVACION =this.observaciones)
-        var listita= listOf<Lectura>(lect)
-        viewModelScope.launch {
-            println("hola")
-            try {
-                var guardarLecturasStat = VigApi.retrofitService.crearLectura(listita)
-            } catch (e: IOException) {
-                GuardarLecturasState.Error
+        var user_id = if (getUsuarioState is GetUsuarioState.Success) {
+            (getUsuarioState as GetUsuarioState.Success).consUsuarios[0].usuarios[0].ID
+        } else {
+            -1
+        }
 
+        guardarLecturasState = GuardarLecturasState.Saving
+        var lect = listOf<Lectura>(
+            Lectura(
+                ID = -1,
+                FHLOCAL = "",
+                LATITUD = "LATITUD",
+                LONGITUD = "LONGITUD",
+                USUARIO_ID = user_id,
+                CENTRO_ID = uiState.value.centroSelec.ID,
+                OBSERVACION = this.observaciones
+            )
+        )
+        viewModelScope.launch {
+            guardarLecturasState = try {
+                // var guardarLecturasStat = VigApi.retrofitService.crearLectura(listita)
+                GuardarLecturasState.Success(VigApi.retrofitService.crearLectura(lect))
+            } catch (e: IOException) {
+                GuardarLecturasState.Error("IOException")
             } catch (e: HttpException) {
-                GuardarLecturasState.Error
+                GuardarLecturasState.Error("HttpException")
             }
         }
     }
 
 
+    // S4 interface + variable + servicioGuradarlecturas
 
 
 
-
-
-
-
-
-
-
-
-
-
+    //La app tine que reuperar todas las lecturas correspondiente al usuario actual que
+    // están entr las fechas indicadas
 
 
 

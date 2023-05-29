@@ -1,0 +1,27 @@
+
+
+CRUD usando MySQL, Express.js, Retrofit, Kotlin y Android Studio Parte 1
+https://www.youtube.com/watch?v=9c-xHCtNeZk&t=19s                                   
+https://www.youtube.com/watch?v=lUN0Ge6atz     o    https://www.youtube.com/watch?v=lUN0Ge6atz4&t=1518s     (mirar minuto 24:36)
+
+
+
+COMO CONECTAR ANDROID STUDIO A LOCALHOST (GUÍA COMPLETA)
+https://www.youtube.com/watch?v=BX3sJbBEdjE
+
+
+
+CÓMO crear un SERVIDOR en Node.JS 🌐 Principios de HTTP 🟢 Curso de Node.JS             => MUY BUENO !!!  ( ES COMO UN CURSO)
+https://www.youtube.com/watch?v=52XZhmLWJzY&t=62s
+
+
+
+
+Cómo conectar tu aplicación de Android a una API con Retrofit y Kotlin
+https://devexperto.com/retrofit-android-kotlin/
+
+
+MySQL 8.0 - Client does not support authentication protocol requested by server; consider upgrading MySQL client
+https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server
+
+

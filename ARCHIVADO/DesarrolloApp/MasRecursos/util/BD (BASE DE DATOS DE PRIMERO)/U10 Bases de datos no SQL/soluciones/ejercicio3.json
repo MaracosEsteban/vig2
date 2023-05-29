@@ -1,0 +1,10 @@
+{
+    "nombre": "Agustina Parranda",
+    "profesion": "Programadora",
+    "edad": 25,
+    "lenguajes": ["PHP", "Javascript", "Dart"],
+    "rangoProfesional": {
+        "aniosDeExperiencia": 12,
+        "nivel": "Senior"
+    }
+}

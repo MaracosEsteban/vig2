@@ -1,0 +1,62 @@
+---- WEB CITAS ----
+
+1.  Muestra el número de mujeres y el número de hombres que sean cristianos/as y que nacieron antes de 1990.
+// Esta pregunta queda invalidada ya que no hay hombres que sean cristianos y que nacieran antes de 1990 por lo que no sale ninguna fila.
+
+2. Cuenta el número de personas que tienen trabajo. No utilices las cláusulas WHERE ni GROUP BY.
+
+SELECT COUNT(trabajo) FROM perfil;
+
+3. Obtener el correo electrónico de aquellos usuarios que no tienen trabajo.
+
+SELECT email FROM perfil WHERE trabajo IS NULL;
+
+4. Obtén el número de citas en las que las valoraciones de los dos asistentes es 'bien'
+// Esta pregunta queda invalidada ya que no se puede resolver sin subconsultas (aún no las hemos dado). El resultado sería:
+SELECT COUNT(*) FROM (SELECT COUNT(*) FROM encuesta WHERE valoracion = 'mal' GROUP BY cita HAVING COUNT(cita) = 2) AS t;
+
+
+---- INSTITUTO ----
+
+5. Muestra los dni de los diferentes profesores que imparten las asignaturas con código 4 y código 7.
+
+SELECT DISTINCT profesor FROM ensenya WHERE asignatura IN (4,7);
+
+6. Muestra el código de las asignaturas, su nota más baja y más alta de aquellas asignaturas en las que la diferencia entre la nota máxima y la mínima es mayor a 3 puntos.
+
+SELECT asignatura, Min(nota), Max(nota) FROM matricula GROUP BY asignatura HAVING Max(nota) - Min(nota) > 3;
+
+7. Obtén el dni y el nombre de aquellos alumnos que nacieron en enero de 1998.
+
+SELECT dni, nombre FROM alumno WHERE fechnac >= '1/1/1998' AND fechnac < '31/1/1998';
+
+8. Mostrar el dni y la nota media de aquellos alumnos cuyo DNI termina con la letra A
+
+SELECT alumno, AVG(nota) FROM matricula GROUP BY alumno HAVING alumno LIKE '%A';
+
+---- COMERCIO ----
+
+9. Obtén el código de cada artículo y el número de líneas de ticket en las que aparece. Contabiliza solo aquellas líneas en las que la cantidad de artículos es superior a 5.
+
+SELECT articulo, COUNT(*) FROM linea_ticket WHERE cant > 5 GROUP BY articulo;
+
+10. Obtén el número de vendedores cuyo código postal comienza por 46.
+
+SELECT COUNT(*) FROM vendedor WHERE cp LIKE '46%';
+
+11. Muestra las fechas en las que hay más de un ticket.
+
+SELECT fecha FROM ticket GROUP BY fecha HAVING COUNT(*) > 1;
+
+12. Muestra todos los datos de aquellos artículos cuyo stock esté entre 20 y 40 unidades (inclusive) y su precio sea superior a 100€.
+
+SELECT * FROM articulo WHERE stock BETWEEN 20 AND 40 AND precio > 100;
+
+
+La corrección se ha hecho marcando cada respuesta con:
+
+V => Correcta
+- => Regular
+X => Mal
+
+Sobre un total de 10 sentencias SQL.

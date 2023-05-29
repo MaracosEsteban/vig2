@@ -1,0 +1,178 @@
+Base de datos: comercio.
+
+
+1. Mostrar toda la información almacenada en la tabla cliente.
+
+select * from cliente;
+
+2. Mostrar el código y nombre de todos los registros almacenados en la tabla vendedor.
+
+select codigo, nombre from vendedor;
+
+3. Mostrar los distintos tipos de IVA aplicados en los tickets.
+
+select distinct iva from ticket;
+
+
+4. Mostrar el código de articulo y el doble del precio de cada artículo. Utiliza un alias en la consulta.
+
+select codigo CodigoArticulo,precio*2 DoblePrecio from articulo;
+
+5. Mostrar el código y nombre de aquellos clientes cuyo código es menor que 5.
+
+select codigo CodigoCliente,nombre NombreCliente from cliente where codigo > 5;
+
+6. Mostrar los distintos IVA aplicados en los tickets de aquellos vendedores cuyo código es mayor o igual a 5.
+
+select distinct iva from ticket where vendedor >= 5;
+
+7. Mostrar el código y descripción de aquellos artículos cuyo stock iguala o supera las 10 unidades
+
+select codigo,descripcion from articulo where stock >= 10;
+
+8. Mostrar el código y fecha de los tickets del vendedor con código 1 a los que se le ha aplicado un 10% de IVA.
+
+select codigo,fecha from ticket where vendedor=1 and iva = 10;
+
+9. Mostrar el código y fecha de los tickets del vendedor con código 1 a las que se le ha aplicado un 10% de IVA o con descuento del 10%.
+
+select codigo,fecha from ticket where vendedor=1 and iva = 10 and dto=10;
+
+
+10. Mostrar el número de línea, el ticket al que pertenece y el importe total (sin aplicar descuentos) de aquellas líneas de ticket cuyo importe total supere los 15 euros. Ten en cuenta que el precio indicado en la tabla linea_ticket es el precio unitario del artículo y que para calcular el importe total de la línea habrá que considerar la cantidad de artículos.
+
+select nlinea,ticket,cant*precio TotalLinea from linea_ticket where cant*precio >15;
+
+
+11. Consultar el código y nombre de aquellos vendedores cuyos códigos se encuentran comprendidos entre 3 y 7. Utiliza el operador BETWEEN.
+
+select codigo,nombre from vendedor where  codigo between 3 and 7;
+
+12. Obtener toda la información correspondiente a los artículos cuyo stock no se encuentre en el rango (stock mínimo, stock mínimo +10). Utiliza el operador BETWEEN.
+
+select * from articulo where stock not between stock_min and stock_min+10;
+
+13. Escribir una expresión que devuelva el código y nombre de los municipios pertenecientes a las provincias con códigos ‘VA’ y ‘AL’. Utiliza el operador IN.
+
+select codigo,nombre from municipio where provincia in ('VA','AL');
+
+14. Mostrar el nombre de todos los municipios cuyo nombre comience por la letra “V”.
+
+select nombre from municipio where nombre like 'V%';
+
+15. Escribir una sentencia que muestre los datos de aquellos tickets sin código de cliente o sin código de vendedor.
+
+
+select * from ticket where vendedor is  null;
+
+16. Escribir una sentencia que muestre la información correspondiente a aquellos vendedores que no tienen jefe.
+
+select * from vendedor where jefe is null;
+
+17. Mostrar los datos de todas las provincias ordenadas por su nombre de forma ascendente.
+
+select * from provincia order by nombre asc;
+
+
+18. Mostrar los datos de todos los municipios ordenados de forma ascendente por su código de provincia y descendente por su nombre de municipio.
+
+select * from municipio order by provincia asc,codigo desc;
+
+
+19. Mostrar el código de artículo y la cantidad de artículos de las líneas del ticket con código 12.
+
+select articulo codigo,cant cantidad from linea_ticket where ticket=12;
+
+
+
+20. Mostrar el código de ticket, número de línea e importe de cada línea aplicando el descuento.
+
+select ticket CodigoTicket,nlinea NumeroLinea,cant*precio*(1-(dto/100)) from linea_ticket;
+
+
+21. Mostrar el código de artículo y el precio de aquellos artículos cuyo precio supera los 2,05 euros y cuyo stock supera las 10 unidades.
+
+select codigo CodigoArticulo, precio PrecioArticulo from articulo
+where precio > 2.05 and stock >10;
+
+
+22. Mostrar el código de artículo y la cantidad de aquellas líneas cuyo descuento es igual a 10 o cuyo precio supera los 100 euros.
+select articulo CodigoArticulo, cant Cantidad from linea_ticket where dto=10 or precio > 100;
+
+23. Obtén los diferentes tipos de descuentos aplicados en los tickets del cliente 19.
+24. Mostrar el código de artículo, la cantidad, el precio unitario y el importe total aplicando el descuento de cada una de las líneas de ticket 12.
+25. Mostrar el código y nombre de aquellos vendedores cuyo jefe tiene el código 1.
+26. Mostrar el código y descripción de aquellos artículos cuyo stock total supera los 500 euros.
+Bases de datos
+Jesús García |http://jgarcia.dev
+27. Mostrar el código, sin que salgan repetidos, de los artículos vendidos en los tickets con
+código inferior a 35.
+28. Código, fecha y descuento de los tickets cuyos códigos se encuentren entre 15 y 26
+inclusive.
+29. Mostrar el código, descripción y precio de los artículos cuyo código comienza por ‘SEG’.
+Base de datos: instituto.
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+Base de datos: citas.
+-----------------------------------------------------------------------------------------------------------------
+
+40. Mostrar el nombre de usuario y el correo de todas las personas registradas cuya profesión
+es “Policía”.
+
+select nom_usuario,email correo from perfil where trabajo='Policia';
+
+
+
+41. Mostrar el nombre de usuario, correo electrónico y sexo de todas las personas registradas
+cuya fecha de nacimiento es anterior al 1 de enero de 1988.
+
+select nom_usuario,email,sexo from perfil where fechanac < '1988-01-01';
+
+
+
+42. Mostrar el número de cita y nombre de usuario que ha respondido “mal” a la encuesta
+correspondiente.
+
+select cita NumeroCita,nom_usuario NombreUsuario from encuesta where valoracion='mal';
+
+
+
+43. Nombres de usuario a los que “djrodrigo” ha indicado que le gusta.
+
+select nom_usuario_2 from gusta where nom_usuario_1='djrodrigo';
+
+
+
+
+44. Códigos de cita en las que ha participado el usuario “vgmartinez”.
+
+select cita as CodigoCita from encuesta where nom_usuario = 'vgmartinez';
+
+45. Nombre de usuario, código de afición y frecuencia con la que se realiza, de todas las
+aficiones cuyo código sea 3, 4, 5 o 6.
+
+select nom_usuario , aficion as CodigoAficion ,frecuencia from practica where aficion in (3,4,5,6);
+
+46. Mostrar las diferentes formaciones de los usuarios registrados, sin que se repitan.
+
+select distinct formacion from formacion;
+
+
+47. Mostrar el nombre de los usuarios cuya letra de NIF es la “L”.
+
+select nom_usuario from usuario where nif like '%L';
+
+
+
+48. Mostrar el nombre completo y teléfono de los usuarios que tienen el apellido “Perez”.
+
+select nombre,telefono from usuario where nombre like '%Perez%';
+
+
+
+49. Mostrar el nombre de usuario de todas las mujeres ateas registradas en la web de citas.
+
+select nom_usuario from perfil where sexo='F' and religion='Ateo';

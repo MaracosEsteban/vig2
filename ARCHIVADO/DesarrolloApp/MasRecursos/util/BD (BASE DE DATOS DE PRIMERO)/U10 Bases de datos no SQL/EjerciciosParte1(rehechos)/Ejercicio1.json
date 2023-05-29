@@ -1,0 +1,54 @@
+/* -- Crea un archivo JSON (puedes utilizar cualquier editor de textos) con los datos de un concesionario. Del concesionario
+-- se quiere conocer su nombre, dirección y número de empleados. También se quiere conocer los datos de los modelos de coche que vende: 
+-- nombre del modelo, colores en los que está disponible y número de puertas. Incluye al menos dos modelos diferentes de coche.
+-- Los datos puedes inventártelos. */
+
+{
+  "nombre": "Coches Marcos",
+  "direccion": {
+    "localidad": "Alicante",
+    "calle": "Buenos Aires",
+    "numero": "125B"
+  },
+  "numeroEmpleados": 42,
+  "modelosVendidos": {
+    "modelo1": {
+      "colores": [
+        "rojo",
+        "verde",
+        "Azul"
+      ],
+      "numeroPuertas": [ 3, 5 ]
+    },
+    "modelo2": {
+      "colores": [
+        "violeta",
+        "amarillo",
+        "roza"
+      ],
+      "numeroPuertas": [ 2, 4 ]
+    }
+  }
+}
+
+/*  resolucion del profesor
+
+{
+  "nombre": "Ruedas SL",
+  "direccion": "Calle Pneumático 3",
+  "numero_empleados": 20,
+  "modelos": [
+    {
+      "nombre": "Fiesta",
+      "colores": [ "rojo", "negro" ],
+      "puertas": [ 3, 5 ]
+    },
+    {
+      "nombre": "Focus",
+      "colores": [ "rojo", "negro" ],
+      "puertas": 5
+    }
+  ]
+}
+
+*/

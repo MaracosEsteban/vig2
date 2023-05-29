@@ -1,0 +1,49 @@
+//Crea un archivo JSON (puedes utilizar cualquier editor de textos) con los datos de las películas disponibles
+//en una plataforma de streaming. De cada película se quiere conocer su título, género, duración y los actores
+//que participan. De cada actor se quiere conocer su nombre y nacionalidad. Incluye al menos dos películas
+//diferentes con dos actores cada una. Los datos puedes inventártelos.
+
+[
+	{
+		"titulo": "La España Vaciada",
+		"genero": "Documental",
+		"duración": 450,
+		"actores": 
+		[
+			{
+				"nombre": "Pepito",
+				"nacionaliad": "Española"
+			},
+
+			{
+				"mombre": "Jesesito",
+				"nacionalidad": "Italiana"
+			}
+
+		]
+	}
+	,
+
+	{
+		"titulo": "AGENTINA Vaciada",
+		"genero": "Documental",
+		"duración": 2500,
+		"actores": [
+			{
+				"nombre": "Pepito3",
+				"nacionaliad": "Española"
+			},
+
+			{
+				"mombre": "Jesesito5",
+				"nacionalidad": "mexico"
+			}
+
+		]
+	}
+
+
+
+
+
+]

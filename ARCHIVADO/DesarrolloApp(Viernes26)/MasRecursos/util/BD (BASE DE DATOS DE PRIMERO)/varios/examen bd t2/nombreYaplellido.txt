@@ -1,0 +1,24 @@
+﻿tención! En el grafo relacional del ejercicio 1 hay un error. En la tabla video hay una columna llamada youtuber que es una clave ajena (FK).
+El grafo indica que la columna es NN y no debería serlo, por tanto, ignorad la restricción NN de esa columna.
+
+
+
+
+-- EJERCICIO 1
+DROP DATABASE IF EXISTS exament2;
+CREATE DATABASE exament2;
+USE exament2;
+
+-- EJERCICIO 2
+
+-- EJERCICIO 3
+
+-- EJERCICIO 4
+
+-- EJERCICIO 5
+
+-- EJERCICIO 6
+
+-- EJERCICIO 7
+
+-- EJERCICIO 8

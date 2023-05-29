@@ -35,6 +35,19 @@
 
 
     <!--     Registros Screen -->
+
+
+
+    <string name="desde">Desde</string>
+
+    <string name="buscar">Buscar</string>
+
+
+    <string name="seleccionar">Seleccionar</string>
+
+
+
+
     <string name="hecho">Hecho</string>
 
 

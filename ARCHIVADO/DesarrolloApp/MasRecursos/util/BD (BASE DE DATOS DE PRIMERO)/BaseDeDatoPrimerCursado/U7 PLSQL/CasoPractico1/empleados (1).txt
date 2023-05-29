@@ -1,0 +1,13 @@
+CREATE TABLE empleados (
+	dni CHAR(9) PRIMARY KEY,
+	nombre VARCHAR(50),
+	fecha_contratacion DATE,
+	sueldo NUMERIC,
+	tipo VARCHAR(10)
+);
+
+INSERT INTO empleados VALUES ('10000000A', 'Juan', '10/02/2018',1200,'técnico');
+INSERT INTO empleados VALUES ('20000000B', 'Sofía', '25/10/2019',1500,'comercial');
+INSERT INTO empleados VALUES ('30000000C', 'Andrés', '02/04/2017',1000,'comercial');
+INSERT INTO empleados VALUES ('40000000D', 'María', '10/02/2018',1400,'técnico');
+INSERT INTO empleados VALUES ('50000000E', 'Jorge', '26/12/2020',1400,'técnico');

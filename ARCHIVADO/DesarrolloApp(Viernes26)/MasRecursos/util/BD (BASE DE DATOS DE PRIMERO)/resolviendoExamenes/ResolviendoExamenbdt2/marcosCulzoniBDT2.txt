@@ -1,0 +1,82 @@
+﻿tención! En el grafo relacional del ejercicio 1 hay un error. En la tabla video hay una columna llamada youtuber que es una clave ajena (FK).
+El grafo indica que la columna es NN y no debería serlo, por tanto, ignorad la restricción NN de esa columna.
+
+
+
+
+-- EJERCICIO 1
+
+
+DROP DATABASE IF EXISTS exament2;
+CREATE DATABASE exament2;
+USE exament2;
+
+
+
+create table youtuber(
+			dni char(9) primary key,
+            nombre varchar(100) not null,
+            numseguidores int,
+            paisresidencia varchar(100) default "Andorra" 
+                      );
+                      
+create table video( 
+			id integer primary key auto_increment,
+            titulo varchar(100) not null unique,
+            duracion integer,
+            fecha date check(fecha > '2005-04-23'),
+            youtuber char(9),
+            foreign key(youtuber) references youtuber(dni)
+            on update cascade
+            on delete set null
+            );    
+            
+
+
+
+-- EJERCICIO 2
+
+update youtuber set numseguidores=numseguidores-1 where paisresidencia='Andorra';
+
+-- EJERCICIO 3
+
+alter table video add column megusta int;
+
+-- EJERCICIO 4
+select alu.nombre,avg(nota) from  alumno alu inner join matricula mat on alu.dni=mat.alumno group by alu.dni having count(asignatura)>4;
+
+-- EJERCICIO 5
+
+select cliente from ticket where vendedor is  null;
+
+-- EJERCICIO 6
+
+
+select * from cliente ;
+select cli.codigo,cli.nombre, sum(lin.cant* lin.precio) from cliente cli 
+join ticket tic on cli.codigo=tic.cliente
+join linea_ticket lin on tic.codigo=lin.ticket group by cli.codigo;
+
+
+
+-- EJERCICIO 7
+
+select * from pelicula pel  where pel.id not in (select sesion.pelicula from sesion);
+
+
+
+-- EJERCICIO 8
+
+select pel.titulo,count(*) from pelicula pel
+join sesion ses on pel.id=ses.pelicula
+join entrada ent on ent.sesion=ses.id
+join compra com on com.entrada=ent.id
+join socio soc on soc.dni=com.socio
+where soc.descuento_actual < 10
+group by soc.dni;
+
+
+
+
+
+

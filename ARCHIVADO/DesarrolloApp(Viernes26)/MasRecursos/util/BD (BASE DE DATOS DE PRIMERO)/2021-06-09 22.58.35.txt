@@ -1,0 +1,44 @@
+﻿@ejemplo case
+declare valor int default 1;
+case valor
+when 1 then
+ 	select 0;
+when 2 then
+	select 1;
+else
+	BEGIN
+	/* RESTO DE LAS INSTRUCCIONES*/
+	END;
+end case;
+
+
+
+
+@ejemplo loop
+declare contador int default =0;
+repetir:loop
+set contador = contador+1;
+ /*grupo de sentencias*/
+if (contador < 10 ) then 
+   iterate repetir;
+end if
+leave repetir;
+end loop repetir;
+
+
+@ejemplo while
+declare contador int default 5;
+
+while(contador>0) do 
+   /*grupo de sentencias*/
+   set contador :=  contador-1;
+end while;
+
+
+@ejemplo repeat
+declare contador int default 0;
+repeat
+   *grupo de sentencias*/
+   set contador := contador
+until (contador >5)
+end repeat;

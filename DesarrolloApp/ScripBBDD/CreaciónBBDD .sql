@@ -18,6 +18,19 @@ drop database if exists prueba;
 -- GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,EXECUTE ON campingarea.* TO 'vigapp'@'localhost';
 
 
+
+
+-- ---------------------------------- EIMINAR TODAS LAS TABLAS  ------------------------------------------------------------
+
+
+drop table usuarios;
+drop table centros;
+drop table lecturas;
+
+
+
+
+
 -- ---------------------------------- CREACION DE TABLAS---------------------------------------------------------------------
 
 
@@ -80,12 +93,6 @@ AUTO_INCREMENT=628
 
 
 
-
-
-
-
-
-
 -- ------------------------------------------------------- CARGA DE DATOS ------------------------------------------------------------------------
 
 
@@ -133,6 +140,46 @@ INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVCIO
 
 
 -- INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID) VALUES (DEFAULT,now(),"19° 25′ 42″ N","99° 7′ 39″ O",1,629);
+
+
+
+SELECT * FROM lecturas;
+
+SELECT * FROM  usuarios;
+
+
+
+SELECT * FROM lecturas WHERE ;
+
+
+
+
+-- Para seleccionar las lecturs de un determinado usuario
+
+SELECT  
+-- emp.nombre AS empleado , dep.nombre AS departamento
+cent.NOMBRE AS NOMBRE_CENTRO,lect.FHLOCAL,lect.OBSERVCION,lect.LATITUD,lect.LONGITUD
+
+FROM
+lecturas AS lect
+INNER JOIN centros AS
+cent ON lect.CENTRO_id = cent.ID
+WHERE lect.USUARIO_ID=2 AND lect.FHLOCAL< "2223-05-15 08:05:01";
+
+
+
+
+
+
+
+
+
+
+--La condición de la fecha
+-- La condicion de usuario
+
+
+
 
 
 

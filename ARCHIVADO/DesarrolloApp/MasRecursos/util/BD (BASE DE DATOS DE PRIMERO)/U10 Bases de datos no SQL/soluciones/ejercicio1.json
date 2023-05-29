@@ -1,0 +1,17 @@
+{
+    "nombre": "Ruedas SL",
+    "direccion": "Calle Pneumático 3",
+    "numero_empleados": 20,
+    "modelos" : [
+        {
+            "nombre": "Fiesta",
+            "colores": ["rojo", "negro"],
+            "puertas": [3,5]
+        },
+        {
+            "nombre": "Focus",
+            "colores": ["rojo", "negro"],
+            "puertas": 5
+        }
+    ]
+}

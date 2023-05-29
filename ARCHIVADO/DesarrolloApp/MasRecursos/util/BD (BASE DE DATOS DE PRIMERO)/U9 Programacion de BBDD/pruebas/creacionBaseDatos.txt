@@ -1,0 +1,195 @@
+
+
+--creacion de un base de datos ejemplo con uns sola tabla, insercion de algunos datos
+create  database alumnos;
+
+
+
+
+-- creacion de la tabla alumno
+use alumnos;
+
+create table alumno(DNI varchar(9),nombre varchar(30),importe decimal,primary key(DNI));
+
+creat table registro(datetime);
+
+
+  INSERT INTO alumno VALUES ('42253370Z','Federico Dalmazo',45.32);
+  INSERT INTO alumno VALUES ('48253370Z','Marioano Pizzioni',80.23);
+  INSERT INTO alumno VALUES ('42257470Z','Ignacio Boch',23.14);
+  INSERT INTO alumno VALUES ('48258970Z','Dante Gergo',42.36);
+  INSERT INTO alumno VALUES ('4824528dZ','Daniel Cartechini',89.25);
+  INSERT INTO alumno VALUES ('48249999A'','Alejandro Erba',89.25);
+
+
+--Creacion de un procedimeento que sume el importe de todos los alumnos
+
+create procedure Sumar
+as
+begin
+
+select sum(importe) Importe_total from alumno;
+
+end;
+
+call Sumar;
+
+--creacion de un procedimiento que sume los 10 primeros números naturales
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sumar10`()
+BEGIN
+
+declare cont int default 1;
+declare acumulado int default 0;
+
+while(cont<11) do
+begin
+set acumulado=acumulado+cont;
+set cont=cont+1;
+end;
+end while;
+select 'El total es', acumulado;
+END
+
+
+call sumar10;
+
+
+
+--creacion de un precedimiento que contienie un cursor
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pruebaCursor`()
+BEGIN
+
+-- declaracion de variables
+declare total int default 0;
+declare  aux int default 0;
+declare var decimal(10,0) default 0;
+declare continuar bool default true;
+
+-- declaracion de un cursor
+declare MiCursor cursor for select importe from alumno where importe>30 and importe <80;
+
+declare continue handler for not found
+begin
+set continuar = false;
+end;
+
+open MiCursor;
+-- se que hay dos filas en este caso no controlo el fin de cursor
+
+while (continuar) do
+
+fetch MiCursor into var;
+if (continuar) then 
+set total=total+var;
+end if;
+
+end while;
+
+
+select 'El importe Total es de ' , total;
+close MiCursor;
+
+
+END
+
+
+
+---creacion de un triger(intenté meterlo en un procedimiento pero no pude hay que ejecuatarlo desd la ventand de querys)
+
+DELIMITER $$
+CREATE TRIGGER nuevo_triger
+BEFORE insert ON alumno
+FOR EACH ROW
+BEGIN
+  IF (NEW.importe < 0) 
+    THEN
+      SET NEW.importe = 0;
+  END IF ;
+END$$
+DELIMITER ;
+show triggers;
+
+
+
+
+
+
+--Creación de un controlador que se ejecutará cuadno no exista la tabla            // revisar
+declare exit handler for sqlstate '42S02'
+begin
+select 'ERROR, La tabla no existe'
+end;
+
+
+call Sumar;
+
+
+
+--------------------------------------------------
+------------------------------------------------
+-------------------------------------------------
+
+
+
+
+							
+--creacion de un procedimiento	que suma los dies primeros números	
+
+create procedure sumar10
+as
+begin
+declare numero int default 1;
+declare acumulado default 0;
+while (numero < 11)
+begin
+set acumulado := acumulado + numero;
+set numero := numero+1;
+end
+end while;
+
+select acumulado;
+end;	
+
+
+create procedure sumar10
+as
+begin
+declare @numero int ;
+declare @acumulado int;
+set @numero = 1;
+while (@numero < 11) do
+begin
+set @acumulado = @acumulado + @numero;
+set @numero = @numero+1;
+end;
+end while;
+
+select @acumulado;
+end;	
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------
+create procedure sumarTres
+as
+begin
+declare @sum1 int, @sum2 int, @sum3 int;
+set @sum1=2;
+set @sum2=4;
+set @sum3=6;
+print @sum1+@sum2+@sum3;
+
+
+end;
+
+							
+execute sumarTres;
+			

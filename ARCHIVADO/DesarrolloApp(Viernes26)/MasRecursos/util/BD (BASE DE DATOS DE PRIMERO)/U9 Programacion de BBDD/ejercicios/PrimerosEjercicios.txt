@@ -1,0 +1,125 @@
+
+Ejercicio 1. Dado el siguiente código descomponlo en sus diferente unidades léxicas.
+------------------------------------------------------------------------------------
+bla bla
+
+
+
+Ejercicio 2. Indica si son correctas o no las siguientes sentencias. Razona la respuesta.
+----------------------------------------------------------------------------------------
+Declare real float; => porque real es una palabra reservada;
+
+
+
+
+
+Ejercicio 3. ¿Qué bucle es el más apropiado para ejecutar sentencias por lo menos una vez?
+------------------------------------------------------------------------------------------
+El más apropiado sería repeat;
+
+repeat
+
+/* de todos maneras las sentencias en esta posición se ejecutarn al menos una ves*/
+
+until(a=a)
+end repeat;
+
+
+Ejercicio 4. ¿Cuál de los siguientes bloques es correcto?
+--------------------------------------------------------
+
+El correcto es el 
+
+b)
+
+bucle:loop
+
+   /*sentencias*/
+end loop bucle;
+
+
+Ejercicio 5. Crea una estructura de código que sume los diez primeros número utilizando WHILE.
+----------------------------------------------------------------------------------------------
+
+declare acumula int default 0;
+declare numero int default 1;
+while (numero >11)
+   begin
+       set acumula :=acumula+numero;
+       set numero :=numero+1;
+   end
+end while
+select acumula;
+
+
+Ejercicio 6. Crea una estructura de código que sume los diez primeros número utilizando REPEAT.
+----------------------------------------------------------------------------------------------
+
+declare acumula int default 0;
+delcare numero int dafault 1;
+repeat 
+    begin
+       set acumula :=acumula + 1;
+       set numero := numero + 1;
+    end
+until(until numero = 11);
+end repeat;
+
+Ejercicio 7. ¿Cuál de los siguientes bucles no está soportado por MySQL?
+------------------------------------------------------------------------
+c) el bucle for
+
+
+Ejercicio 8. ¿Se puede modificar un dato obtenido de un cursor?
+---------------------------------------------------------------
+
+El contenido de un cursor es red only no se puede modificar
+
+
+
+Ejercicio 9 ¿Se peede acceder aleatoriamente a los datos de un cursor?
+----------------------------------------------------------------------
+
+no solo se pueden leer secuencialmente en una direccion.
+
+Indica dos utilizades de un trigger.
+
+
+
+Ejercicio 10 Indica dos utilizades de un trigger.
+-------------------------------------------------
+
+La utilidad de un triger es realizar cualquier  una acccion automaáticamente(mediante el trigere) al hacerh un insercion brrado o modificacion en una
+determinada tabla de una base de datos.
+Los objetivos de esta accion pueden ser variados pero por ejemplo se puede querere llevar un registro de las modificaciones de una tabla, actualizar 
+datos en otra tabla en base a sesas midificaciones.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

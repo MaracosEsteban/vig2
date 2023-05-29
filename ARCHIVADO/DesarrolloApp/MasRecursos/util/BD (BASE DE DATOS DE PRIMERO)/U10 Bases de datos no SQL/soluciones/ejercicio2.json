@@ -1,0 +1,19 @@
+[
+    {
+        "titulo": "Interstellar",
+        "genero": "Ciencia ficción",
+        "duracion": 169,
+        "actores": [
+            {
+                "nombre": "Matthew McGonagiu",
+                "edad": 51,
+                "nacionalidad": "EEUU" 
+            },
+            {
+                "nombre": "Anne Hathaway",
+                "nacionalidad": "EEUU" 
+            }
+
+        ]
+    }
+]

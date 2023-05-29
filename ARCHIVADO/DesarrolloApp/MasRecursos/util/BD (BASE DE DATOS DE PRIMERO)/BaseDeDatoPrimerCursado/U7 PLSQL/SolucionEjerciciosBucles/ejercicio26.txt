@@ -1,0 +1,13 @@
+CREATE OR REPLACE FUNCTION ejercicio26 (precio1 articulo.precio%TYPE,
+									    precio2 articulo.precio%TYPE)
+										RETURNS VOID AS $$
+DECLARE
+	datos RECORD;
+BEGIN
+	FOR datos IN SELECT a.descripcion, a.precio FROM articulo a LOOP
+		IF datos.precio > precio1 AND datos.precio < precio2 THEN
+			RAISE NOTICE '%', datos.descripcion;
+		END IF;
+	END LOOP;
+END
+$$ language plpgsql;

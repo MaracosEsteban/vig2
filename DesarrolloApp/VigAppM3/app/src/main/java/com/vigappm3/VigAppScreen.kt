@@ -115,15 +115,21 @@ fun VigApp() {
                     nameEntered = viewModel.enteredName,
                     onNameChange = { viewModel.updateEnteredName(it) },
 
-                    onLoginButtonClicked = {
+                    onLoginButtonClicked = {        viewModel.getConsUsuarios(navController)
+                        //viewModel.updateEnteredName(viewModel.login().toString())
+
+                        // la ida es que cuando se precione login se establezca un lisener de un avariable del VigAppViewModel
+
+
+
 
                         // viewModel.getListaCentrosToUiState()
                         // navController.navigate(VigAppScreen.Menu.name)
-                        if (viewModel.login()) {
-                            navController.navigate(VigAppScreen.Menu.name)
-                        } else {
-                            // todo Toast.makeText(this@LoginScreen, "hola", Toast.LENGTH_SHORT).show()
-                        }
+//                        if (viewModel.login()) {
+//                            navController.navigate(VigAppScreen.Menu.name)
+//                        } else {
+//                            // todo Toast.makeText(this@LoginScreen, "hola", Toast.LENGTH_SHORT).show()
+//                        }
 
 
 //                        GlobalScope.launch(Dispatchers.Main) {
@@ -132,7 +138,7 @@ fun VigApp() {
 //                            }
 //
 //                            if (viewModel.login()) {
-//                                navController.navigate(VigAppScreen.Menu.name)
+                        //      navController.navigate(VigAppScreen.Menu.name)
 //                            }
 //                        }
 

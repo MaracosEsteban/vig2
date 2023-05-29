@@ -1,0 +1,1 @@
+En esta práctica realizaremos el paso del modelo conceptual al modelo lógico. Habrá que realizar los dos ejercicios adjuntos. El formato de entrega será un archivo PDF.

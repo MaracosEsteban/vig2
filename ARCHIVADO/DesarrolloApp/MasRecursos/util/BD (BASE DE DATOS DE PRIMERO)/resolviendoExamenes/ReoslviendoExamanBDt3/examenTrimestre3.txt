@@ -1,0 +1,451 @@
+
+Pregunta 1
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Las bases de datos relacionales priorizan:
+
+
+a.
+La escalabilidad sobre la velocidad.
+
+
+b.
+La consistencia de los datos sobre la velocidad.       <<============
+
+
+c.
+La velocidad sobre la consistencia de los datos.
+
+
+
+
+
+
+Pregunta 2
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Tenemos una tabla productos con dos columnas: un identificador y un precio. Se han insertado únicamente dos productos.
+ El producto 1 con un precio de 100€ y el producto 2 con un precio de 50€.
+
+Además, se ha creado la siguiente función:
+
+DELIMITER //
+
+CREATE FUNCTION func (precio1 DECIMAL(10,2), precio2 DECIMAL(10,2))
+          RETURNS DECIMAL(10,2) DETERMINISTIC
+BEGIN
+        IF(precio1 < precio2) THEN
+
+
+		RETURN precio1;
+
+	ELSE
+
+		RETURN precio2*2;
+
+    END IF;
+
+END //
+
+DELIMITER ;
+
+Si ejecutamos la siguiente consulta:
+
+SELECT func(precio, 100) FROM productos;
+Podemos afirmar que:
+
+
+a.
+La ejecución de la consulta muestra dos filas, una de ellas con el valor 200 y la otra con el valor 50.  <<============
+
+b.
+La ejecución de la consulta muestra una fila con el valor 50.
+
+
+c.
+La ejecución de la consulta muestra una fila con el valor 100.
+
+
+
+
+
+
+
+Pregunta 3
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Tipo de bases de datos que se basan en una estructura de datos similar a los diccionarios.
+
+
+a.
+Columnar
+
+
+b.
+Clave - Valor                   <<============
+
+
+c.
+Documental
+
+
+
+
+
+
+
+
+Pregunta 4
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Indica cuál es una ventaja de las bases de datos NoSQL.
+
+
+a.
+Aseguran la consistencia e integridad de los datos en todo momento.
+
+
+b.
+Mayor flexibilidad en el esquema.             <<============
+
+
+c.
+Las aplicaciones clientes son más sencillas de implementar.
+
+
+
+
+
+
+
+
+
+Pregunta 5
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+MongoDB es una base de datos...
+
+
+a.
+... no relacional de tipo documental que organiza los documentos dentro de colecciones.
+
+
+b.
+... no relacional de tipo documental que organiza las colecciones dentro de documentos.
+
+
+c.
+... no relacional de tipo clave-valor que organiza los datos en documentos.       <<============ 
+
+
+
+
+
+
+
+
+
+
+Pregunta 6
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Indica cuál de las siguientes afirmaciones es falsa sobre MongoDB.
+
+
+a.
+Se caracteriza por la flexibilidad de esquema y la escalabilidad horizontal.
+
+
+b.
+Se caracteriza por almacenar la información en formato JSON.
+
+
+c.
+Se caracteriza por la flexibilidad de esquema y la escalabilidad vertical.  <<============
+
+
+
+
+
+
+
+
+
+
+Pregunta 7
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Indica cuál de las siguientes afirmaciones es cierta en base al siguiente objeto JSON:
+
+{
+  "departamento":8,
+  "nombredepto":"Ventas",
+  "director": "Juan Rodríguez",
+  "empleados":
+    {
+      "nombre":"Pedro",
+      "apellido":"Fernández"
+    }
+}
+
+
+a.
+Se trata de un objeto JSON válido donde el departamento podría tener múltiples empleados.    /* no tengo ide podría ser la a) o la b) me inclino por la b */
+
+
+b.
+Se trata de un objeto JSON válido donde el departamento solo puede tener un empleado.
+
+
+c.
+Se trata de un objeto JSON inválido.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pregunta 8
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Dado el siguiente objeto JSON indica qué afirmación es cierta:
+
+{
+  "empleados":
+       [ "nombre":"Jorge",
+         "nombre":"Ana", 
+         "nombre":"Pedro"]
+}
+
+
+a.
+El objeto JSON es válido y hace uso de objetos para almacenar los datos de los empleados.
+
+
+b.
+El objeto JSON no es válido.                                                                    <<============
+
+
+c.
+El objeto JSON es válido y hace uso de un array para almacenar los datos de los empleados.
+
+
+
+
+
+
+
+
+Pregunta 9
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Indica qué consulta utilizaríamos en MongoDB para obtener todos los documentos de una colección llamada empleados.
+
+
+a.
+empleados.find()
+
+
+b.
+db.find("empleados")
+
+
+c.
+db.empleados.find()                                      <<============
+
+
+
+
+
+
+
+
+
+
+
+Pregunta 10
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Dado el siguiente trigger:
+
+DELIMITER //
+
+CREATE TRIGGER pregunta_test_1 AFTER INSERT ON productos FOR EACH ROW
+
+	IF(NEW.precio<0) THEN
+
+		SET NEW.precio := 0;
+
+	END IF;
+
+BEGIN
+
+END //
+
+DELIMITER ;
+
+Si intentamos insertar un producto con un precio negativo, podemos afirmar que:
+
+
+a.
+El producto se insertará con el precio negativo.    <<============  //el procedimiento tendría que ser before insert //
+
+
+b.
+El producto se insertará con el precio igual a 0.
+
+
+c.
+No llegará a insertarse el producto.
+
+
+
+
+
+
+
+Pregunta 11
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Podemos llamar a un procedimiento
+
+
+a.
+Mediante la sentencia CALL      <<============
+
+
+b.
+Las otras dos opciones son correctas.
+
+c.
+Desde una sentencia SELECT
+
+
+
+
+
+
+
+
+
+Pregunta 12
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Supongamos que tenemos una tabla productos con dos columnas (id y precio) en el que existen dos productos con un precio superior a 0€. Supongamos también que hemos creado el siguiente trigger:
+
+DELIMITER //
+
+CREATE TRIGGER pregunta_test_2 BEFORE UPDATE ON productos FOR EACH ROW
+
+BEGIN
+
+	IF(NEW.precio<0) THEN
+
+		UPDATE productos SET precio =  0 WHERE id = NEW.id;
+
+	END IF;
+
+END //
+
+DELIMITER ;
+
+¿Qué ocurre si ejecutamos una sentencia UPDATE para que el precio de uno de los productos pase a ser -50€?
+
+
+a.
+El producto en cuestión se modificará y su precio pasará a ser -50€.
+
+
+b.
+El trigger no se ejecutará correctamente.                                          <<============
+
+
+c.
+El producto modificado pasará a tener un precio de 0€.
+
+
+
+
+
+
+
+
+Pregunta 13
+Sin responder aún
+Puntúa como 1,00
+No marcadasMarcar pregunta
+Enunciado de la pregunta
+Dado el siguiente trigger podemos afirmar que:
+
+DELIMITER //
+
+CREATE TRIGGER pregunta_test_3 BEFORE INSERT ON productos FOR EACH ROW
+
+BEGIN
+
+	IF(OLD.precio > NEW.precio) THEN
+
+		SET NEW.precio = OLD.precio;
+
+	END IF;
+
+END //
+
+DELIMITER ;
+
+
+a.
+Nunca se podrá insertar un producto con un precio inferior al anterior.      <<============
+
+
+b.
+La definición del trigger no es correcta.
+
+
+c.
+Nunca se podrá insertar un producto con un precio superior al anterior.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

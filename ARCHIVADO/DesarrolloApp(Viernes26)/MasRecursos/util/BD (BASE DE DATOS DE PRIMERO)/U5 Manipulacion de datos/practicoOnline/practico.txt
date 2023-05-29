@@ -1,0 +1,280 @@
+ 
+EJERCICIO 1
+
+
+CREATE DATABASE practica;
+use practica;
+
+CREATE TABLE ordenador (
+                        id INT AUTO_INCREMENT,
+                        num_serie INT UNIQUE NOT NULL,
+						marca VARCHAR(20) DEFAULT "HP",
+						precio INT,
+						CONSTRAINT precio_ck
+						CHECK (precio > 0),
+						PRIMARY KEY (id) );
+                        
+CREATE TABLE trabajador( dni char(9),
+						nombre VARCHAR(30),
+						ordenador INT,
+						fecha_cont DATETIME,
+						PRIMARY KEY (dni),
+						CONSTRAINT trabajador_oredenador_fk
+						FOREIGN KEY(ordenador)
+						REFERENCES ordenador (id)
+						ON DELETE RESTRICT
+						ON UPDATE SET NULL);
+
+
+
+
+
+
+
+
+EJERCICIO 2
+
+
+
+INSERT INTO ordenador VALUES ( DEFAULT,100,"DELL",700);
+
+INSERT INTO ordenador VALUES ( DEFAULT,200,DEFAULT,100);
+
+
+EJERCICIO 3
+
+INSERT INTO trabajador VLUES ('10000000A','Sonia',2,'20/10/21'),
+                             ('20000000B','Juan',1,'25/10/21');
+
+
+
+
+
+
+
+
+EJERCICIO 4
+
+
+UPDATE ordenador SET precio=precio+50;
+
+
+
+
+
+EJERCICIO 5
+
+
+UPDATE TRABAJADOR SET fecha_cont='31/10/21' WHERE nombre='Juan';
+
+
+
+
+
+
+EJERCICIO 6
+
+C
+
+EJERCICIO 7
+
+D
+
+
+
+
+AclaracionEjercicio7 => Esta respuesta depende de lo que hallamos hecho en el ejercicio 6 como dice si intentamo no me queda claro si hay que borrar 
+al trabajador con DNI 200 o no , si no lo hemos borrado la respuesta correcta es D, pero si lo hemos borrado la respuesta correcta sería C.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                DISEÑO FISICO TRABAJO PRACTICO
+
+
+
+
+CREATE DATABASE practica;
+use practica;
+
+CREATE TABLE ordenador (
+                        id INT AUTO_INCREMENT,
+                        num_serie INT UNIQUE NOT NULL,
+						marca VARCHAR(20) DEFAULT "HP",
+						precio INT,
+						CONSTRAINT precio_ck
+						CHECK (precio > 0),
+						PRIMARY KEY (id) );
+                        
+CREATE TABLE trabajador( dni char(9),
+						nombre VARCHAR(30),
+						ordenador INT,
+						fecha_cont DATETIME,
+						PRIMARY KEY (dni),
+						CONSTRAINT trabajador_oredenador_fk
+						FOREIGN KEY(ordenador)
+						REFERENCES ordenador (id)
+						ON DELETE CASCADE
+						ON UPDATE SET NULL);
+
+
+
+
+
+INSERT INTO ordenador VALUES ( DEFAULT,100,"DELL",700);
+
+INSERT INTO ordenador VALUES ( DEFAULT,200,DEFAULT,100);
+
+
+
+
+
+INSERT INTO trabajador VLUES ('10000000A','Sonia',2,'20/10/21'),
+                             ('20000000B','Juan',1,'25/10/21');
+
+
+UPDATE ordenador SET precio=precio+50;
+
+UPDATE TRABAJADOR SET fecha_cont='31/10/21' WHERE nombre='Juan';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------
+
+
+CREATE DATABASE practica;
+use practica;
+
+CREATE TABLE ordenador (
+                        id INT AUTO_INCREMENT,
+                        num_serie INT UNIQUE NOT NULL,
+			marca VARCHAR(20) DEFAULT "HP",
+			precio INT,
+
+			CONSTRAINT precio_ck
+    			CHECK (precio > 0),
+			PRIMARY KEY (id) );
+
+
+
+
+
+CREATE TABLE trabajador( dni INT,
+			nombre VARCHAR(30),
+			oredenador INT,
+			fecha_cont DATETIME,
+			PRIMARY KEY (dni),
+
+			CONSTRAINT trabajador_oredenador_fk
+			FORING KEY(ordenador)
+			REFERENCE ordenador(id)
+			ON DELETE CASCADE
+			ON UPDATE SET NULL);
+
+
+
+
+
+			
+			
+
+
+
+
+
+
+
+---------------------------------------------------------------------------
+CREATE TABLE departamento (
+  id INT AUTO_INCREMENT,
+  nombre VARCHAR(45) NULL,
+  PRIMARY KEY (id));
+
+
+CREATE TABLE despacho (
+  codigo CHAR(4),
+  telefono VARCHAR(10),
+  PRIMARY KEY (codigo));
+
+
+CREATE TABLE  empleado (
+  id INT AUTO_INCREMENT,
+  nombre VARCHAR(45) NOT NULL,
+  despacho CHAR(4) UNIQUE,
+  departamento INT NOT NULL,
+  salario DECIMAL(10,2) DEFAULT 1200,
+  PRIMARY KEY (id),
+  CONSTRAINT empleado_despacho_fk
+    FOREIGN KEY (despacho)
+    REFERENCES despacho (codigo)
+    ON DELETE CASCADE
+    ON UPDATE SET NULL,
+  CONSTRAINT empleado_departamento_fk  
+    FOREIGN KEY (departamento)
+    REFERENCES departamento (id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE);
+
+
+CREATE TABLE sala_reuniones (
+  codigo CHAR(4),
+  metros DECIMAL(4,1),
+  PRIMARY KEY (codigo)
+);
+
+CREATE TABLE IF NOT EXISTS reserva (
+  id INT AUTO_INCREMENT,
+  empleado INT NOT NULL,
+  sala_reuniones CHAR(4) NOT NULL,
+  fecha_inicio DATETIME,
+  fecha_fin DATETIME,
+  PRIMARY KEY (id),
+  CONSTRAINT reserva_empleado_fk
+    FOREIGN KEY (empleado)
+    REFERENCES empleado (id)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT reserva_sala_reuniones_fk
+    FOREIGN KEY (sala_reuniones)
+    REFERENCES sala_reuniones (codigo)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT fecha_fin_ck
+    CHECK (fecha_fin > fecha_inicio));

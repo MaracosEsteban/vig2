@@ -25,14 +25,15 @@ const conexion = mysql.createConnection(
         password: ''
 
 
-        /*
+        
         // Para ejecutarlo en mi ordenador
+/*
         host: 'localhost',
         database: 'vigapp_database',
         user: 'root',
         password: 'Mc+25156'
-*/
 
+*/
 
 
     }
@@ -128,6 +129,7 @@ app.get('/usuarios', (req, res) => {
 
 //S1:-----------------Leer un usuario en base a su nombre(pueden no existir)------------------------------
 app.get('/usuario/:nombre', (req, res) => {
+    console.log("Se utilizó el servicio S1")
     const { nombre } = req.params
     const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
     conexion.query(query, (error, resultado) => {
@@ -165,6 +167,7 @@ app.get('/usuario/:nombre', (req, res) => {
 //S2: ------------------------------------------Leer todos los centros--------------------------------------
 app.get('/centros', (req, res) => {
     const query = 'SELECT * FROM centros;'
+    console.log("Se utilizo el servicio S2")
     conexion.query(query, (error, resultado) => {
         var result = [{
             ok: false,

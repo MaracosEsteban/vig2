@@ -1,0 +1,132 @@
+1. Crea una base de datos llamada comercio que contenga una colección denominada videojuegos.
+--------------------------------------------------------------------------------------------
+
+
+use comercio
+db.createCollection("videojuegos")
+
+
+a. Inserta los videojuegos que se muestran en la siguiente tabla junto con sus datos asociados.
+------------------------------------------------------------------------------------------------
+
+Intenté insertarlos todos de una sola ves pero me da error cuando copila sentencia en la consola
+
+db.videojuegos.insertMany([
+	{
+		"codigo": 100,
+		"descricion": "MotoGP 21",
+		"precio": 69.95,
+		"stock": 5,
+		"plataformas": [
+			"PS5",
+			"PS4"
+		],
+		"desarrollador": {
+			"nombre": "Milestone",
+			"Sede": "Italia"
+		}
+	},
+
+	{
+		"codigo": 200,
+		"descricion": "Jugment",
+		"precio": 39.95,
+		"stock": 2,
+		"plataformas": "PS5"
+
+	},
+
+
+	{
+		"codigo": 300,
+		"descricion": "Hitman 3",
+		"precio": 69.95,
+		"stock": 3,
+		"plataformas": [
+			"PC",
+			"PS4",
+			"PS5"
+		],
+		"desarrollador": {
+			"nombre": "IO Interactive",
+			"Sede": "Dinamarca"
+		}
+	}
+
+])
+
+
+probare de a un elemento
+
+
+db.videojuegos.insertOne({
+		"codigo": 100,
+		"descricion": "MotoGP 21",
+		"precio": 69.95,
+		"stock": 5,
+		"plataformas": [
+			"PS5",
+			"PS4"
+		],
+		"desarrollador": {
+			"nombre": "Milestone",
+			"sede": "Italia"
+		}
+	})
+
+
+después un segundo elemento
+
+db.videojuegos.insertOne({
+		"codigo": 200,
+		"descricion": "Jugment",
+		"precio": 39.95,
+		"stock": 2,
+		"plataformas": "PS5"
+
+	})
+
+
+y ahora el tercer y último elemento
+
+db.videojuegos.insertOne({
+		"codigo": 300,
+		"descricion": "Hitman 3",
+		"precio": 69.95,
+		"stock": 3,
+		"plataformas": [
+			"PC",
+			"PS4",
+			"PS5"
+		],
+		"desarrollador": {
+			"nombre": "IO Interactive",
+			"sede": "Dinamarca"
+		}
+	})
+
+
+
+b. Modifica el artículo con código 100 para que su precio sea 59,95.
+--------------------------------------------------------------------
+
+db.videojuegos.updateMany({"codigo":100},{$set:{precio:59.95}})
+
+
+
+c. Modifica el artículo con código 200 para añadirle los datos del desarrollador Sega con sede en Japón.
+--------------------------------------------------------------------------------------------------------
+
+
+
+db.videojuegos.updateMany({"codigo":200},{$set:{desarrollador:{"nombre":"Sega","sede":"Japon"}}})
+
+
+d. Elimina el artículo con código 300.
+--------------------------------------
+
+db.videojuegos.deleteMany({"codigo":300})
+
+
+
+

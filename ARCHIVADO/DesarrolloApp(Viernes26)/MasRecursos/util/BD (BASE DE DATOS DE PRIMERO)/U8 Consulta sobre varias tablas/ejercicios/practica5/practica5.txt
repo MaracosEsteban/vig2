@@ -1,0 +1,14 @@
+-- CONSULTA 1
+select count(*) NumoeroTotalDeTikets,count(vendedor) TicketConVendedor from Ticket;
+
+-- CONSULTA 2
+select codigo
+from linea_ticket l join articulo a on l.articulo=a.codigo 
+where a.stock > (a.stock_min+10) group by l.ticket having sum(cant)>1;
+
+
+-- CONSULTA 3
+
+-- CONSULTA 4
+
+-- CONSULTA 5

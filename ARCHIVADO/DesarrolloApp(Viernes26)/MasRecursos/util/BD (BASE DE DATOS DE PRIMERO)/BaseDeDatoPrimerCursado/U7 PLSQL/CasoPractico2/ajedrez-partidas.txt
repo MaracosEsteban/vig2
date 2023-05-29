@@ -1,0 +1,26 @@
+CREATE TABLE partidas (id SERIAL PRIMARY KEY, fecha DATE);
+CREATE TABLE jugador_partida (
+  id SERIAL PRIMARY KEY,
+  partida INTEGER REFERENCES partidas,
+  jugador INTEGER REFERENCES jugadores
+);
+INSERT INTO partidas
+VALUES
+  (1, '10/10/19'),
+  (2, '4/5/18'),
+  (3, '12/9/19'),
+  (4, '6/11/20'),
+  (5, '1/1/20');
+INSERT INTO jugador_partida
+VALUES
+  (1, 1, 1),
+  (2, 1, 2),
+  (3, 2, 1),
+  (4, 4, 5),
+  (5, 2, 3),
+  (6, 3, 5),
+  (7, 2, 6),
+  (8, 4, 4),
+  (9, 4, 5),
+  (10, 3, 5),
+  (11, 5, 7);
