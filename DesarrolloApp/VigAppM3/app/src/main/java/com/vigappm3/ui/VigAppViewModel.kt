@@ -10,7 +10,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.vigappm3.VigAppScreen
 import com.vigappm3.model.Centro
+import com.vigappm3.model.ConsLecturasFiltradas
 import com.vigappm3.model.ConsUsuarios
+import com.vigappm3.model.FiltroLect
 import com.vigappm3.model.GuardarLecturas
 import com.vigappm3.model.Lectura
 import com.vigappm3.model.Usuario
@@ -46,8 +48,24 @@ class VigAppViewModel : ViewModel() {
     var mensajeCentros: String = ""
 
 
+    // -------------------------VARIABLES DE ESTADO DE LOS SERVICIOS--------------------------------------------------------
+    var guardarLecturasState: GuardarLecturasState by mutableStateOf(GuardarLecturasState.Saving)
+        private set
+    var getLecturasFiltradasState: GetLecturasFiltradasState by mutableStateOf(GetLecturasFiltradasState.Recuperando)
+        private set
+
+    var getUsuarioState: GetUsuarioState by mutableStateOf(GetUsuarioState.Reading)
+        private set
+
+
+
+
+
+
+
 
     init {
+        //recuperaLecturasFiltradas()
     }
 
     fun updateEnteredName(nameEntered: String) {
@@ -90,7 +108,7 @@ class VigAppViewModel : ViewModel() {
 
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------
-    //------------------------ LOS CUATRO SERVICIOS PARA ACCEDER A AL BASE DE DATOS CON SUS RESPECTIVAS INERFACES Y VARIABLES DE ESTADO -------------
+    //------------------------ LOS CUATRO SERVICIOS PARA ACCEDER A AL BASE DE DATOS CON SUS RESPECTIVAS INERFACES -----------------------------------
     //-----------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -102,12 +120,13 @@ class VigAppViewModel : ViewModel() {
         object Reading : GetUsuarioState
     }
 
-    var getUsuarioState: GetUsuarioState by mutableStateOf(GetUsuarioState.Reading)
-        private set
+//    var getUsuarioState: GetUsuarioState by mutableStateOf(GetUsuarioState.Reading)
+//        private set
 
 
     fun getConsUsuarios(navHostController: NavHostController) {
-        getUsuarioState = GetUsuarioState.Reading
+
+         getUsuarioState = GetUsuarioState.Reading
         //fuente  =>  https://stackoverflow.com/questions/54313839/how-to-set-up-a-listener-for-a-variable-in-kotlin
         var consUsuario: ConsUsuarios = ConsUsuarios(false, "Error Conexion", listOf(Usuario()))
 
@@ -130,9 +149,6 @@ class VigAppViewModel : ViewModel() {
                 }
             }
         }
-
-
-
 
 
         viewModelScope.launch {
@@ -187,8 +203,8 @@ class VigAppViewModel : ViewModel() {
         object Saving : GuardarLecturasState
     }
 
-    var guardarLecturasState: GuardarLecturasState by mutableStateOf(GuardarLecturasState.Saving)
-        private set
+//    var guardarLecturasState: GuardarLecturasState by mutableStateOf(GuardarLecturasState.Saving)
+//        private set
 
     fun guardarLecturas() {
         var user_id = if (getUsuarioState is GetUsuarioState.Success) {
@@ -223,14 +239,34 @@ class VigAppViewModel : ViewModel() {
 
 
     // S4 interface + variable + servicioGuradarlecturas
+    sealed interface GetLecturasFiltradasState {
+        data class Success(val resp: List<ConsLecturasFiltradas>) : GetLecturasFiltradasState
+        data class Error(val mensaje: String) : GetLecturasFiltradasState
+        object Recuperando : GetLecturasFiltradasState
+    }
 
 
 
-    //La app tine que reuperar todas las lecturas correspondiente al usuario actual que
-    // están entr las fechas indicadas
+    fun recuperaLecturasFiltradas() {
 
+        var user_id = if (getUsuarioState is GetUsuarioState.Success) {
+            (getUsuarioState as GetUsuarioState.Success).consUsuarios[0].usuarios[0].ID
+        } else {
+            -1
+        }
 
+        getLecturasFiltradasState = GetLecturasFiltradasState.Recuperando
 
+        viewModelScope.launch {
+            getLecturasFiltradasState = try {
+                GetLecturasFiltradasState.Success(VigApi.retrofitService.getLecturas(user_id.toString(),"2020-05-15","2030-05-15"))
+            } catch (e: IOException) {
+                GetLecturasFiltradasState.Error("IOException")
+            } catch (e: HttpException) {
+                GetLecturasFiltradasState.Error("HttpException")
+            }
+        }
+    }
 
 
 

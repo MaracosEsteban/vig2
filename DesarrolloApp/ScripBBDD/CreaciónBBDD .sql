@@ -23,9 +23,9 @@ drop database if exists prueba;
 -- ---------------------------------- EIMINAR TODAS LAS TABLAS  ------------------------------------------------------------
 
 
-drop table usuarios;
-drop table centros;
-drop table lecturas;
+-- drop table usuarios;
+-- drop table centros;
+-- drop table lecturas;
 
 
 
@@ -73,7 +73,7 @@ CREATE TABLE `lecturas` (
 	`LONGITUD` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
 	`USUARIO_ID` INT(10),
 	`CENTRO_ID` INT(10) ,
-	`OBSERVCION` TEXT,
+	`OBSERVACION` TEXT,
     FOREIGN KEY(USUARIO_ID) REFERENCEs usuarios(ID)  ON DELETE restrict ON UPDATE CASCADE,
     foreign key(CENTRO_ID) references centros(ID)  ON DELETE restrict ON UPDATE CASCADE,
     -- PRIMARY KEY (`ID`) USING BTREE,
@@ -116,67 +116,50 @@ INSERT INTO centros (ID,NOMBRE,EMAIL,PASS,CIF,PAIS,CIUDAD,DIRECCION,COD_POSTAL,T
 
 
 INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVCION) VALUES 
-(DEFAULT,"2223-05-20 23:00:15","19° 25′ 42″ N","99° 7′ 39″ O",1,629,"Sin observaciones"),
-(DEFAULT,"2223-05-21 07:00:00","19° 25′ 42″ N","99° 7′ 39″ O",1,629,"Sin observaciones"),
-(DEFAULT,"2223-05-15 08:05:00","20° 25′ 42″ N","60° 7′ 39″ O",2,630,"Sin observaciones"),
-(DEFAULT,"2223-05-16 17:01:15","20° 25′ 42″ N","60° 7′ 39″ O",2,630,"Sin observaciones");
+(DEFAULT,"2023-05-20 23:00:15","19° 25′ 42″ N","99° 7′ 39″ O",1,629,"Sin observaciones"),
+(DEFAULT,"2023-05-21 07:00:00","19° 25′ 42″ N","99° 7′ 39″ O",1,629,"Sin observaciones"),
+(DEFAULT,"2023-05-15 08:05:00","20° 25′ 42″ N","60° 7′ 39″ O",2,630,"Sin observaciones"),
+(DEFAULT,"2023-05-17 17:01:28","20° 25′ 42″ N","60° 7′ 39″ O",2,630,"Sin observaciones"),
+(DEFAULT,"2023-05-16 17:01:15","20° 25′ 42″ N","60° 7′ 39″ O",2,630,"Sin observaciones"),
+(DEFAULT,"2023-05-30 17:01:14","20° 25′ 42″ N","60° 7′ 39″ O",3,630,"Sin observaciones"),
+(DEFAULT,"2023-05-31 17:01:15","20° 25′ 42″ N","60° 7′ 39″ O",3,629,"Sin observaciones");
 
 
-
+  DELETE FROM lecturas;
+ 
+ SELECT * FROM lecturas;
 
 
 -- ------------------------------------------------------- CONSULTAS USADAS EN LA APP -------------------------------------------------------------- 
 
--- para hacer el login =>
--- select * from usuarios where nombre="nombre ingresado";
 
 
--- para listar los centros =>
-
--- select * from centros;
+-- Para el servicio 4
 
 
--- para insertar una lectura
-
-
--- INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID) VALUES (DEFAULT,now(),"19° 25′ 42″ N","99° 7′ 39″ O",1,629);
-
-
-
-SELECT * FROM lecturas;
-
-SELECT * FROM  usuarios;
-
-
-
-SELECT * FROM lecturas WHERE ;
-
-
-
-
--- Para seleccionar las lecturs de un determinado usuario
 
 SELECT  
 -- emp.nombre AS empleado , dep.nombre AS departamento
 cent.NOMBRE AS NOMBRE_CENTRO,lect.FHLOCAL,lect.OBSERVCION,lect.LATITUD,lect.LONGITUD
-
 FROM
 lecturas AS lect
 INNER JOIN centros AS
 cent ON lect.CENTRO_id = cent.ID
-WHERE lect.USUARIO_ID=2 AND lect.FHLOCAL< "2223-05-15 08:05:01";
-
-
-
-
-
-
-
+WHERE lect.USUARIO_ID=1 AND lect.FHLOCAL BETWEEN  "2020-05-15" AND "2030-05-15";
 
 
 
 --La condición de la fecha
 -- La condicion de usuario
+
+
+
+
+SELECT cent.NOMBRE AS NOMBRE_CENTRO,lect.FHLOCAL,lect.OBSERVCION,lect.LATITUD,lect.LONGITUD FROM lecturas AS lect INNER JOIN centros AScent ON lect.CENTRO_id = cent.ID WHERE lect.USUARIO_ID=3 AND lect.FHLOCAL BETWEEN  "2020-05-15" AND "2030-05-15";
+
+
+
+
 
 
 
@@ -193,7 +176,7 @@ select * FROM  usuarios;
 
 select * from centros;
 
-select * from lecturas
+select * from lecturas;
 
 
 -- ------------------------------------------------------ Conceptos ---------------------------------------------------------------------------------

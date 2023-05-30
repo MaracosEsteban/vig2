@@ -5,9 +5,11 @@ import android.graphics.Movie
 import com.vigappm3.model.Usuario
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.vigappm3.model.ConsCentros
+import com.vigappm3.model.ConsLecturasFiltradas
 import com.vigappm3.model.ConsUsuarios
 import com.vigappm3.model.GuardarLecturas
 import com.vigappm3.model.Lectura
+import com.vigappm3.model.FiltroLect
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -37,9 +39,6 @@ private val retrofit = Retrofit.Builder()
  */
 interface MarsApiService {
 
-
-
-
      /**
      * S1: Leer un usuario en base a su nombre(pueden no existir)
      */
@@ -62,19 +61,11 @@ interface MarsApiService {
     suspend fun crearLectura(@Body lectura:List<Lectura>):List<GuardarLecturas>
 
     /**
-     * S4. Recuperar todas las lecturas según fechas Seleccionadas
+     * S4. Recuperar todas las lecturas del usuario actual según fechas Seleccionadas
      */
 
-
-
-
-
-
-
-
-
-
-
+    @GET("lecturas/{IdUsuario}/{FechaDesde}/{FechaHasta}")
+    suspend fun getLecturas(@Path("IdUsuario") IdUsuario: String,@Path("FechaDesde") FechaDesde: String,@Path("FechaHasta") FechaHasta: String):List<ConsLecturasFiltradas>
 
 }
 

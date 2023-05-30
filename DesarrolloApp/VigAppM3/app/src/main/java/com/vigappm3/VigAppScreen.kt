@@ -162,7 +162,16 @@ fun VigApp() {
 
                         navController.navigate(VigAppScreen.SelecCentro.name)
                     },
-                    onCheckRecordsClicked = { navController.navigate(VigAppScreen.Registros.name) },
+                    onCheckRecordsClicked = {
+
+
+
+                        // todo no olvidar borrar
+                        viewModel.recuperaLecturasFiltradas()
+
+
+
+                        navController.navigate(VigAppScreen.Registros.name) },
                     onLogoutCliked = {
                         viewModel.logout()
                         navController.popBackStack(
@@ -221,6 +230,7 @@ fun VigApp() {
 
             composable(route = VigAppScreen.Registros.name) {
                 RegistrosScreen(onHechoButtonClicked = {
+
                     viewModel.guardarLecturas()
                     navController.popBackStack(
                         VigAppScreen.Menu.name,

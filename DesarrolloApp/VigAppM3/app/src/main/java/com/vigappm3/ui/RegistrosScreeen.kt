@@ -41,7 +41,7 @@ fun RegistrosScreen(
     onHechoButtonClicked: () -> Unit,
     modifier: Modifier = Modifier.fillMaxSize()
 ) {
-    var CurrentContext=LocalContext.current
+    var CurrentContext = LocalContext.current
 
 
     Column(
@@ -61,25 +61,12 @@ fun RegistrosScreen(
         ) {
 
 
-
-
-
-
-
-
             Spacer(modifier = Modifier.height(20.dp))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
-            ){
-
-
-
-                
-                Text(text = stringResource(R.string.desde))
-
-
+            ) {
 
 
                 Text(text = stringResource(R.string.desde))
@@ -87,13 +74,18 @@ fun RegistrosScreen(
 
 
 
-                
-                Button(onClick = { DatePickerDialog(CurrentContext).show()   }) {
+                Text(text = stringResource(R.string.desde))
+
+
+
+
+
+                Button(onClick = { DatePickerDialog(CurrentContext).show() }) {
                     Text(text = stringResource(R.string.seleccionar))
-                    
+
                 }
 
-            
+
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -143,7 +135,7 @@ fun RegistrosScreen(
 // Calling this function as content
 // in the above function
 @Composable
-fun MyDatePiker(){
+fun MyDatePiker() {
 
     // Fetching the Local Context
     val mContext = LocalContext.current
@@ -173,17 +165,21 @@ fun MyDatePiker(){
     val mDatePickerDialog = DatePickerDialog(
         mContext,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
+            mDate.value = "$mDayOfMonth/${mMonth + 1}/$mYear"
         }, mYear, mMonth, mDay
     )
 
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         // Creating a button that on
         // click displays/shows the DatePickerDialog
         Button(onClick = {
             mDatePickerDialog.show()
-        }, colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF0F9D58)) ) {
+        }, colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF0F9D58))) {
             Text(text = "Open Date Picker", color = Color.White)
         }
 
@@ -194,17 +190,6 @@ fun MyDatePiker(){
         Text(text = "Selected Date: ${mDate.value}", fontSize = 30.sp, textAlign = TextAlign.Center)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 @Preview
