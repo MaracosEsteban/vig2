@@ -9,7 +9,7 @@ import com.vigappm3.model.ConsLecturasFiltradas
 import com.vigappm3.model.ConsUsuarios
 import com.vigappm3.model.GuardarLecturas
 import com.vigappm3.model.Lectura
-import com.vigappm3.model.FiltroLect
+
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -66,6 +66,12 @@ interface MarsApiService {
 
     @GET("lecturas/{IdUsuario}/{FechaDesde}/{FechaHasta}")
     suspend fun getLecturas(@Path("IdUsuario") IdUsuario: String,@Path("FechaDesde") FechaDesde: String,@Path("FechaHasta") FechaHasta: String):List<ConsLecturasFiltradas>
+
+
+    /*
+     body no esta soportado en  @Get => https://stackoverflow.com/questions/29834959/http-get-with-request-body-retrofit
+     */
+
 
 }
 

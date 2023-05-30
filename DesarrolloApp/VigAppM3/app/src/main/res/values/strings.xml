@@ -50,6 +50,9 @@
 
     <string name="hecho">Hecho</string>
 
+    <string name="loading">Cargando registros</string>
+    <string name="loading_failed">Fallo al cargar registros</string>
+
 
 
 

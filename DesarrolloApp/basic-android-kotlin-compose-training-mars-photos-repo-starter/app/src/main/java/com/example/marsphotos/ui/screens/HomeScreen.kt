@@ -35,11 +35,11 @@ fun HomeScreen(
     marsUiState: MarsUiState,
     modifier: Modifier = Modifier
 ) {
-    when (marsUiState) {
-        is MarsUiState.Loading -> LoadingScreen(modifier)
-        is MarsUiState.Success -> ResultScreen(marsUiState.photos, modifier)
-        is MarsUiState.Error -> ErrorScreen(modifier)
-    }
+        when (marsUiState) {
+            is MarsUiState.Loading -> LoadingScreen(modifier)
+            is MarsUiState.Success -> ResultScreen(marsUiState.photos, modifier)
+            is MarsUiState.Error -> ErrorScreen(modifier)
+        }
 }
 
 /**

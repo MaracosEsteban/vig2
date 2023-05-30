@@ -115,12 +115,11 @@ fun VigApp() {
                     nameEntered = viewModel.enteredName,
                     onNameChange = { viewModel.updateEnteredName(it) },
 
-                    onLoginButtonClicked = {        viewModel.getConsUsuarios(navController)
+                    onLoginButtonClicked = {
+                        viewModel.getConsUsuarios(navController)
                         //viewModel.updateEnteredName(viewModel.login().toString())
 
                         // la ida es que cuando se precione login se establezca un lisener de un avariable del VigAppViewModel
-
-
 
 
                         // viewModel.getListaCentrosToUiState()
@@ -165,13 +164,13 @@ fun VigApp() {
                     onCheckRecordsClicked = {
 
 
-
                         // todo no olvidar borrar
                         viewModel.recuperaLecturasFiltradas()
 
 
 
-                        navController.navigate(VigAppScreen.Registros.name) },
+                        navController.navigate(VigAppScreen.Registros.name)
+                    },
                     onLogoutCliked = {
                         viewModel.logout()
                         navController.popBackStack(
@@ -229,14 +228,16 @@ fun VigApp() {
 
 
             composable(route = VigAppScreen.Registros.name) {
-                RegistrosScreen(onHechoButtonClicked = {
+                RegistrosScreen(
+                    viewM = viewModel,
+                    onHechoButtonClicked = {
 
-                    viewModel.guardarLecturas()
-                    navController.popBackStack(
-                        VigAppScreen.Menu.name,
-                        inclusive = false
-                    )
-                })
+                        viewModel.guardarLecturas()
+                        navController.popBackStack(
+                            VigAppScreen.Menu.name,
+                            inclusive = false
+                        )
+                    })
             }
 
 

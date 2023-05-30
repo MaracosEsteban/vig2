@@ -40,12 +40,14 @@ class MarsViewModel : ViewModel() {
     var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
         private set
 
+
     /**
      * Call getMarsPhotos() on init so we can display status immediately.
      */
     init {
         getMarsPhotos()
     }
+
 
     /**
      * Gets Mars photos information from the Mars API Retrofit service and updates the

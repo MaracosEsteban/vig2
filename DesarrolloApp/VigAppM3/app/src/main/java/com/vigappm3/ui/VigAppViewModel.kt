@@ -12,7 +12,7 @@ import com.vigappm3.VigAppScreen
 import com.vigappm3.model.Centro
 import com.vigappm3.model.ConsLecturasFiltradas
 import com.vigappm3.model.ConsUsuarios
-import com.vigappm3.model.FiltroLect
+
 import com.vigappm3.model.GuardarLecturas
 import com.vigappm3.model.Lectura
 import com.vigappm3.model.Usuario
@@ -119,6 +119,7 @@ class VigAppViewModel : ViewModel() {
         data class Error(val mensaje: String) : GetUsuarioState
         object Reading : GetUsuarioState
     }
+
 
 //    var getUsuarioState: GetUsuarioState by mutableStateOf(GetUsuarioState.Reading)
 //        private set
@@ -247,16 +248,14 @@ class VigAppViewModel : ViewModel() {
 
 
 
-    fun recuperaLecturasFiltradas() {
 
+    fun recuperaLecturasFiltradas() {
         var user_id = if (getUsuarioState is GetUsuarioState.Success) {
             (getUsuarioState as GetUsuarioState.Success).consUsuarios[0].usuarios[0].ID
         } else {
             -1
         }
-
         getLecturasFiltradasState = GetLecturasFiltradasState.Recuperando
-
         viewModelScope.launch {
             getLecturasFiltradasState = try {
                 GetLecturasFiltradasState.Success(VigApi.retrofitService.getLecturas(user_id.toString(),"2020-05-15","2030-05-15"))
@@ -267,6 +266,7 @@ class VigAppViewModel : ViewModel() {
             }
         }
     }
+
 
 
 
