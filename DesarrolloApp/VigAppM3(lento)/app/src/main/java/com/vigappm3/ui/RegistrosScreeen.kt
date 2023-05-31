@@ -181,7 +181,7 @@ fun TarjetaConsulta(
 
         Column(
             modifier = Modifier.align(Alignment.CenterHorizontally),
-        ) {
+            ) {
             Row(horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(
                     fontSize = 15.sp,
@@ -254,7 +254,7 @@ fun TarjetaConsulta(
                 label =  { Text("Observaciones") },
                 enabled = true,
                 maxLines = 2,
-                modifier = Modifier.padding(4.dp),
+                        modifier = Modifier.padding(4.dp),
             )
 
 

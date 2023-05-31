@@ -73,7 +73,9 @@ app.get('/', (req, res) => {
 //S1:-----------------Leer un usuario en base a su nombre(pueden no existir)------------------------------
 app.get('/usuario/:nombre', (req, res) => {
     console.log("Se utilizó el servicio S1")
+    
     const { nombre } = req.params
+    console.log(nombre)
     const query = `SELECT * FROM usuarios WHERE NOMBRE ='${nombre}' ;`
     conexion.query(query, (error, resultado) => {
         var result = [{
@@ -149,7 +151,7 @@ app.get('/centros', (req, res) => {
 app.post('/registro', (req, res) => {
     console.log("Se usa el S3")
     const {ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVACION} = req.body[0] // Se desestructura el objeto que paso en req
-    const query = `INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVCION) VALUES (DEFAULT,NOW(),'${LATITUD}','${LONGITUD}',${USUARIO_ID},${CENTRO_ID},'${OBSERVACION}');`
+    const query = `INSERT INTO lecturas (ID,FHLOCAL,LATITUD,LONGITUD,USUARIO_ID,CENTRO_ID,OBSERVACION) VALUES (DEFAULT,NOW(),'${LATITUD}','${LONGITUD}',${USUARIO_ID},${CENTRO_ID},'${OBSERVACION}');`
         conexion.query(query, (error) => {
         var result = [{
             ok: false,
@@ -169,7 +171,6 @@ app.post('/registro', (req, res) => {
             console.log("se inserto correctamente")
         }
     })
-    
 })
 
 
