@@ -40,6 +40,7 @@ import com.vigappm3.R
 //import com.vigappm3.Varios.cambiarFormatoFecha
 import com.vigappm3.model.LecturasFiltradas
 import com.vigappm3.ui.VigAppViewModel.GetLecturasFiltradasState
+import com.vigappm3.varios.cambiarFormatoFecha
 import java.util.Calendar
 import java.util.Date
 
@@ -208,8 +209,8 @@ fun TarjetaConsulta(
                 )
                 Text(
                     fontSize = 15.sp,
-                    text = lectura.FHLOCAL,
-//                    text = cambiarFormatoFecha(lectura.FHLOCAL),
+                  //  text = lectura.FHLOCAL,
+                    text = cambiarFormatoFecha(lectura.FHLOCAL),
                     modifier = Modifier.padding(1.dp),
                     style = MaterialTheme.typography.bodySmall
                 )
