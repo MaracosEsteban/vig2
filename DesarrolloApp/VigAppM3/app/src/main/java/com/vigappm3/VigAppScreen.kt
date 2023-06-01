@@ -229,9 +229,10 @@ fun VigApp() {
 
             composable(route = VigAppScreen.Registros.name) {
                 RegistrosScreen(
+                    onFechaDesdeChange = { viewModel.updateFechaDesde(it) },
+                    onFechaHastaChange = { viewModel.updateFechaHasta(it) },
                     viewM = viewModel,
                     onHechoButtonClicked = {
-
                         viewModel.guardarLecturas()
                         navController.popBackStack(
                             VigAppScreen.Menu.name,

@@ -81,8 +81,6 @@ interface MarsApiService {
 
 
 
-
-
 /**
  * A public Api object that exposes the lazy-initialized Retrofit service
  */

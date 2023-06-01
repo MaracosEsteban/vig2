@@ -41,12 +41,16 @@ import com.vigappm3.R
 import com.vigappm3.model.LecturasFiltradas
 import com.vigappm3.ui.VigAppViewModel.GetLecturasFiltradasState
 import com.vigappm3.varios.cambiarFormatoFecha
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 
 
 @Composable
 fun RegistrosScreen(
+    onFechaDesdeChange: (String) -> Unit,
+    onFechaHastaChange: (String) -> Unit,
     onHechoButtonClicked: () -> Unit,
     modifier: Modifier = Modifier.fillMaxSize(),
     viewM: VigAppViewModel,
@@ -60,11 +64,6 @@ fun RegistrosScreen(
     ) {
 
 
-
-
-
-
-
         Column(
             modifier = Modifier
                 .weight(1.9f)
@@ -76,14 +75,57 @@ fun RegistrosScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = stringResource(R.string.desde))
-                Text(text = stringResource(R.string.desde))
-                Button(onClick = { DatePickerDialog(CurrentContext).show() }) {
+                Text(
+                    text = stringResource(R.string.desde),
+                    modifier = Modifier.padding(6.dp),
+                )
+
+
+                Text(
+                    text = viewM.fechaDesde,
+                    modifier = Modifier.padding(6.dp),
+                )
+
+
+
+
+
+                Button(onClick = {
+
+
+                    // descomponer la fecha que tengo en pantalla
+
+
+                    val formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+                    var MF=LocalDate.parse(viewM.fechaDesde,formatoFecha)
+
+
+                    var year=MF.year
+                    var monthOfYear =MF.monthValue
+                    var dayOfMonth = MF.dayOfMonth
+
+                    DatePickerDialog(
+                        CurrentContext,
+                        0,
+                        { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                            onFechaDesdeChange(LocalDate.of(year, monthOfYear, dayOfMonth).format(formatoFecha).toString());
+//                            onFechaDesdeChange("01-08-2029");
+//                            println(LocalDate.of(year, monthOfYear, dayOfMonth).format(formatoFecha).toString())
+
+
+                            0 },
+                        year,
+                        monthOfYear,
+                        dayOfMonth
+                    ).show()
+
+                }) {
                     Text(text = stringResource(R.string.seleccionar))
                 }
             }
 
             Spacer(modifier = Modifier.height(10.dp))
+
             Button(
                 onClick = onHechoButtonClicked,
             ) {
@@ -209,7 +251,7 @@ fun TarjetaConsulta(
                 )
                 Text(
                     fontSize = 15.sp,
-                  //  text = lectura.FHLOCAL,
+                    //text = lectura.FHLOCAL,
                     text = cambiarFormatoFecha(lectura.FHLOCAL),
                     modifier = Modifier.padding(1.dp),
                     style = MaterialTheme.typography.bodySmall
@@ -232,7 +274,6 @@ fun TarjetaConsulta(
                 )
             }
 
-
             Row(horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(
                     fontSize = 15.sp,
@@ -247,18 +288,14 @@ fun TarjetaConsulta(
                     style = MaterialTheme.typography.bodySmall
                 )
             }
-
-
             OutlinedTextField(
                 value = lectura.OBSERVACION,
                 onValueChange = {},
-                label =  { Text("Observaciones") },
+                label = { Text("Observaciones") },
                 enabled = true,
                 maxLines = 2,
                 modifier = Modifier.padding(4.dp),
             )
-
-
         }
     }
 

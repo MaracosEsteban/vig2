@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalDensity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
@@ -24,6 +25,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.properties.Delegates
 
 
@@ -62,6 +65,17 @@ class VigAppViewModel : ViewModel() {
 
 
 
+    val formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy")// se repite endiferentes pares del proyecto
+
+    var fechaDesde:String by mutableStateOf(LocalDate.now().format(formatoFecha).toString())
+
+    var fechaHasta:String by mutableStateOf(LocalDate.now().format(formatoFecha).toString())
+
+
+
+
+
+
 
 
     init {
@@ -79,6 +93,23 @@ class VigAppViewModel : ViewModel() {
     fun updateObserv(obser: String) {
         this.observaciones = obser
     }
+
+
+    fun updateFechaDesde(fecha: String) {
+        this.fechaDesde = fecha
+        println("se actualizo la afecha a  $fecha")
+    }
+
+
+    fun updateFechaHasta(fecha: String) {
+        this.fechaHasta = fecha
+    }
+
+
+
+
+
+
 
     fun login() {
     }
@@ -266,11 +297,12 @@ class VigAppViewModel : ViewModel() {
             }
         }
     }
-
-
-
-
 }
+
+
+
+
+
 
 
 
