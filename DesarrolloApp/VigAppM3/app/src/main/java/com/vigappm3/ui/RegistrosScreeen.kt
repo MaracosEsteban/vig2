@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -49,6 +48,7 @@ import java.util.Date
 
 @Composable
 fun RegistrosScreen(
+    aplicarCambiosFecha:() -> Unit,
     onFechaDesdeChange: (String) -> Unit,
     onFechaHastaChange: (String) -> Unit,
     onHechoButtonClicked: () -> Unit,
@@ -60,17 +60,21 @@ fun RegistrosScreen(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(5.dp)
     ) {
 
 
         Column(
             modifier = Modifier
-                .weight(1.9f)
+                .weight(2f)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+
+
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
@@ -78,58 +82,101 @@ fun RegistrosScreen(
                 Text(
                     text = stringResource(R.string.desde),
                     modifier = Modifier.padding(6.dp),
+                    fontWeight = FontWeight(600)
                 )
-
-
                 Text(
                     text = viewM.fechaDesde,
                     modifier = Modifier.padding(6.dp),
+                    fontWeight = FontWeight(600)
                 )
-
-
-
-
-
-                Button(onClick = {
-
-
+                Button(
+                    modifier = Modifier.padding(6.dp),
+                    onClick = {
                     // descomponer la fecha que tengo en pantalla
-
-
                     val formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-                    var MF=LocalDate.parse(viewM.fechaDesde,formatoFecha)
-
-
-                    var year=MF.year
-                    var monthOfYear =MF.monthValue
+                    var MF = LocalDate.parse(viewM.fechaDesde, formatoFecha)
+                    var year = MF.year
+                    var monthOfYear = MF.monthValue
                     var dayOfMonth = MF.dayOfMonth
-
                     DatePickerDialog(
                         CurrentContext,
                         0,
                         { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                            onFechaDesdeChange(LocalDate.of(year, monthOfYear, dayOfMonth).format(formatoFecha).toString());
-//                            onFechaDesdeChange("01-08-2029");
-//                            println(LocalDate.of(year, monthOfYear, dayOfMonth).format(formatoFecha).toString())
-
-
-                            0 },
+                            onFechaDesdeChange(
+                                LocalDate.of(year, monthOfYear, dayOfMonth).format(formatoFecha)
+                                    .toString()
+                            );
+                            0
+                        },
                         year,
                         monthOfYear,
                         dayOfMonth
                     ).show()
-
                 }) {
-                    Text(text = stringResource(R.string.seleccionar))
+                    Text(text = "Cambiar")
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+
+
+
+
+
+
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Hasta",
+                    modifier = Modifier.padding(6.dp),
+                    fontWeight = FontWeight(600)
+                )
+                Text(
+                    text = viewM.fechaHasta,
+                    modifier = Modifier.padding(6.dp),
+                    fontWeight = FontWeight(600)
+                )
+                Button(
+                    modifier = Modifier.padding(6.dp),
+                    onClick = {
+                        // descomponer la fecha que tengo en pantalla
+                        val formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+                        var MF = LocalDate.parse(viewM.fechaHasta, formatoFecha)
+                        var year = MF.year
+                        var monthOfYear = MF.monthValue
+                        var dayOfMonth = MF.dayOfMonth
+                        DatePickerDialog(
+                            CurrentContext,
+                            0,
+                            { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                                onFechaHastaChange(
+                                    LocalDate.of(year, monthOfYear, dayOfMonth).format(formatoFecha)
+                                        .toString()
+                                );
+                                0
+                            },
+                            year,
+                            monthOfYear,
+                            dayOfMonth
+                        ).show()
+                    }) {
+                    Text(text = "Cambiar")
+                }
+            }
+
+
+
+
+
+
+          //  Spacer(modifier = Modifier.height(10.dp))
 
             Button(
-                onClick = onHechoButtonClicked,
+                onClick = aplicarCambiosFecha,
             ) {
-                Text(stringResource(R.string.buscar))
+                Text("Aplicar cambios")
             }
         }
 
@@ -139,7 +186,7 @@ fun RegistrosScreen(
 
 
 
-        Column(modifier = Modifier.weight(7.5f)) {
+        Column(modifier = Modifier.weight(7.4f)) {
             when (viewM.getLecturasFiltradasState) {
                 is GetLecturasFiltradasState.Recuperando -> LoadingScreen(modifier)
                 is GetLecturasFiltradasState.Success -> ResultScreen(

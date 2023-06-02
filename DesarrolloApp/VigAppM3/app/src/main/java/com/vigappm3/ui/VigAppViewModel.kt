@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.properties.Delegates
 
@@ -65,11 +66,15 @@ class VigAppViewModel : ViewModel() {
 
 
 
-    val formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy")// se repite endiferentes pares del proyecto
+    val formatoFechaBBDD = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
-    var fechaDesde:String by mutableStateOf(LocalDate.now().format(formatoFecha).toString())
 
-    var fechaHasta:String by mutableStateOf(LocalDate.now().format(formatoFecha).toString())
+
+    val formatoFechaPantalla = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+
+    var fechaDesde:String by mutableStateOf(LocalDate.now().minusYears(1).format(formatoFechaPantalla).toString())
+
+   var fechaHasta:String by mutableStateOf(LocalDate.now().format(formatoFechaPantalla).toString())
 
 
 
@@ -97,7 +102,7 @@ class VigAppViewModel : ViewModel() {
 
     fun updateFechaDesde(fecha: String) {
         this.fechaDesde = fecha
-        println("se actualizo la afecha a  $fecha")
+//        println("se actualizo la afecha a  $fecha")
     }
 
 
@@ -281,6 +286,27 @@ class VigAppViewModel : ViewModel() {
 
 
     fun recuperaLecturasFiltradas() {
+
+        // leer las fechas en formato String que están en pantalla y llevarlas al formato string para usuarlas enla bbdd
+
+        //todo llevar todas las conversiones de fecha a una libreria
+
+
+        val formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatoFechaBBDD2 = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+        var fechaDesdeLocalDate = LocalDate.parse(this.fechaDesde, formatoFecha)
+        var fechaDesdeString=fechaDesdeLocalDate.format(formatoFechaBBDD2).toString()
+
+        var fechaHastaLocalDate = LocalDate.parse(this.fechaHasta, formatoFecha)
+        var fechaHastaString=fechaHastaLocalDate.format(formatoFechaBBDD2).toString()
+
+
+
+
+
+
+
         var user_id = if (getUsuarioState is GetUsuarioState.Success) {
             (getUsuarioState as GetUsuarioState.Success).consUsuarios[0].usuarios[0].ID
         } else {
@@ -289,7 +315,8 @@ class VigAppViewModel : ViewModel() {
         getLecturasFiltradasState = GetLecturasFiltradasState.Recuperando
         viewModelScope.launch {
             getLecturasFiltradasState = try {
-                GetLecturasFiltradasState.Success(VigApi.retrofitService.getLecturas(user_id.toString(),"2020-05-15","2030-05-15"))
+//                GetLecturasFiltradasState.Success(VigApi.retrofitService.getLecturas(user_id.toString(),FehaaDesdeStringBBDD, FehaaHastaStringBBDD))
+                GetLecturasFiltradasState.Success(VigApi.retrofitService.getLecturas(user_id.toString(),fechaDesdeString, fechaHastaString))
             } catch (e: IOException) {
                 GetLecturasFiltradasState.Error("IOException")
             } catch (e: HttpException) {

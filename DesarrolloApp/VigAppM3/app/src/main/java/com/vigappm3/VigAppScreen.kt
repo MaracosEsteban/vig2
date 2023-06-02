@@ -73,6 +73,7 @@ fun VigAppBar(
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VigApp() {
     //Create NavController
@@ -165,7 +166,7 @@ fun VigApp() {
 
 
                         // todo no olvidar borrar
-                        viewModel.recuperaLecturasFiltradas()
+                      //  viewModel.recuperaLecturasFiltradas()
 
 
 
@@ -229,11 +230,13 @@ fun VigApp() {
 
             composable(route = VigAppScreen.Registros.name) {
                 RegistrosScreen(
+                    aplicarCambiosFecha = { viewModel.recuperaLecturasFiltradas() },
+
                     onFechaDesdeChange = { viewModel.updateFechaDesde(it) },
                     onFechaHastaChange = { viewModel.updateFechaHasta(it) },
                     viewM = viewModel,
                     onHechoButtonClicked = {
-                        viewModel.guardarLecturas()
+                        //viewModel.guardarLecturas()
                         navController.popBackStack(
                             VigAppScreen.Menu.name,
                             inclusive = false
